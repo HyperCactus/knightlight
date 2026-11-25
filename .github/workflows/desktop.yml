@@ -142,6 +142,7 @@ jobs:
           retention-days: 14
 
   publish:
+    if: github.ref == 'refs/heads/main'
     name: Publish complete signed release
     needs: [prepare, desktop]
     runs-on: ubuntu-24.04
@@ -169,6 +170,13 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           COMMIT: ${{ github.sha }}
         run: |
-          gh release create "v$VERSION" --repo "$REPOSITORY" --target "$COMMIT" --draft --title "Knightlight $VERSION" --notes-file release/INSTALL.md
+          DRAFT=$(gh release view "v$VERSION" --repo "$REPOSITORY" --json isDraft --jq .isDraft 2>/dev/null || true)
+          if [ "$DRAFT" = false ]; then
+            echo "Release already published; leaving immutable assets unchanged"
+            exit 0
+          fi
+          if [ "$DRAFT" != true ]; then
+            gh release create "v$VERSION" --repo "$REPOSITORY" --target "$COMMIT" --draft --title "Knightlight $VERSION" --notes-file release/INSTALL.md
+          fi
           gh release upload "v$VERSION" release/* --repo "$REPOSITORY" --clobber
           gh release edit "v$VERSION" --repo "$REPOSITORY" --draft=false --latest
