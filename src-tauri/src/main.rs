@@ -86,13 +86,25 @@ fn main() {
                 .inner_size(1360.0, 920.0)
                 .min_inner_size(800.0, 600.0)
                 .initialization_script(if smoke {
-                    // Test-only: silence HTML audio before any app script runs,
-                    // and keep Web Audio contexts suspended. No preference changes.
-                    "window.__nativeErrors=[];addEventListener('error',e=>__nativeErrors.push(e.message));addEventListener('unhandledrejection',e=>__nativeErrors.push(String(e.reason)));HTMLMediaElement.prototype.play=async function(){this.muted=true};for(const n of ['AudioContext','webkitAudioContext'])if(window[n])window[n].prototype.resume=async function(){};"
+                    include_str!("smoke-init.js")
                 } else { "" })
                 .on_page_load(move |window, payload| {
                     if smoke && payload.event() == tauri::webview::PageLoadEvent::Finished {
-                        let _ = window.eval("setTimeout(async()=>{try{if(__nativeErrors.length)throw Error(__nativeErrors.join('; '));if(!document.querySelector('#puzzle-board'))throw Error('Board missing');const r=await fetch('/api/data');if(!r.ok)throw Error('Backend unavailable');const d=await r.json();if(d.games.length)throw Error('Test profile contains personal games');location.href='knightlight-smoke://passed'}catch(e){location.href='knightlight-smoke://failed/'+encodeURIComponent(e.message)}},2500)");
+                        #[cfg(target_os = "linux")]
+                        {
+                            let muted_window = window.clone();
+                            let _ = window.with_webview(move |webview| {
+                                use webkit2gtk::WebViewExt;
+                                webview.inner().set_is_muted(true);
+                                assert!(webview.inner().is_muted());
+                                let _ = muted_window.eval(format!(
+                                    "window.__nativeAudioMuted=true;\n{}",
+                                    include_str!("smoke-check.js")
+                                ));
+                            });
+                        }
+                        #[cfg(not(target_os = "linux"))]
+                        let _ = window.eval(include_str!("smoke-check.js"));
                     }
                 })
                 .on_download(|webview, event| {
@@ -167,9 +179,14 @@ fn main() {
             #[cfg(target_os = "linux")]
             if smoke {
                 window.with_webview(|webview| {
-                    use webkit2gtk::WebViewExt;
+                    use webkit2gtk::{SettingsExt, WebViewExt};
                     webview.inner().set_is_muted(true);
                     assert!(webview.inner().is_muted());
+                    // Synthetic test input lacks a trusted user gesture. This
+                    // exception applies only to the verified-muted test view.
+                    if let Some(settings) = webview.inner().settings() {
+                        settings.set_media_playback_requires_user_gesture(false);
+                    }
                     println!("Native test webview mute verified");
                 })?;
             }

@@ -45,7 +45,7 @@ Build on the OS and architecture being packaged. Install [Rust stable](https://r
 On Ubuntu/Zorin/Debian, install build headers first:
 
 ```bash
-sudo apt install build-essential libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf python3-venv
+sudo apt install build-essential libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf python3-venv gstreamer1.0-plugins-base gstreamer1.0-plugins-good
 ```
 
 Then, from the repository (use `python3.11` instead of `python` if necessary):

@@ -33,6 +33,8 @@ with tempfile.TemporaryDirectory(prefix="knightlight-native-") as directory:
             ports = []
             for iteration in range(2):
                 env = {**os.environ, "DISPLAY": ":" + number, "KNIGHTLIGHT_PROFILE": str(profile),
+                       "XDG_DATA_HOME": str(Path(directory) / "xdg-data"),
+                       "XDG_CACHE_HOME": str(Path(directory) / "xdg-cache"),
                        "KNIGHTLIGHT_DESKTOP_SMOKE": "1", "WEBKIT_DISABLE_DMABUF_RENDERER": "1"}
                 with (Path(directory) / f"run-{iteration}.log").open("w+") as log:
                     app = subprocess.Popen(["dbus-run-session", "--", str(args.binary.resolve())],
@@ -66,7 +68,7 @@ with tempfile.TemporaryDirectory(prefix="knightlight-native-") as directory:
                             app.terminate()
                             app.wait(timeout=10)
             assert ports[0] == ports[1], "Local storage origin changed on normal relaunch"
-            print("PASS: native webview loads UI/board/backend twice; audio mute verified; settings and origin survive relaunch; disposable profile only")
+            print("PASS: native Training navigation, 64-square board, Web Audio and coach playback twice; audio mute verified; settings and origin survive relaunch; disposable profile only")
         finally:
             display.terminate()
             display.wait(timeout=5)

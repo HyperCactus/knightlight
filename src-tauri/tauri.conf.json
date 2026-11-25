@@ -29,6 +29,9 @@
       "resources/": "resources/"
     },
     "linux": {
+      "appimage": {
+        "bundleMediaFramework": true
+      },
       "deb": {
         "depends": [
           "libwebkit2gtk-4.1-0",
@@ -36,7 +39,9 @@
           "libayatana-appindicator3-1",
           "libasound2t64",
           "libgomp1",
-          "libstdc++6"
+          "libstdc++6",
+          "gstreamer1.0-plugins-base",
+          "gstreamer1.0-plugins-good"
         ]
       }
     },
