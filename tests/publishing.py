@@ -17,8 +17,15 @@ def module(name):
 release = module('release-manifest')
 prepare = module('prepare-release')
 public = module('public-source')
+setup = module('setup-desktop')
 
 class Publishing(unittest.TestCase):
+    def test_engine_architecture_uses_apples_supported_target(self):
+        self.assertEqual(setup.engine_arch('darwin', 'arm64'), 'apple-silicon')
+        self.assertEqual(setup.engine_arch('darwin', 'x86_64'), 'x86-64')
+        self.assertEqual(setup.engine_arch('linux', 'aarch64'), 'armv8')
+        self.assertEqual(setup.engine_arch('win32', 'AMD64'), 'x86-64')
+
     def test_complete_manifest_and_version_binding(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)

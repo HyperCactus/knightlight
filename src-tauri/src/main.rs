@@ -205,6 +205,8 @@ fn main() {
             if let tauri::RunEvent::ExitRequested { code, api, .. } = event {
                 if (code.is_none() || code == Some(0)) && updates::install_on_exit(app) {
                     api.prevent_exit();
+                } else {
+                    chess_study::runtime::shutdown_workers();
                 }
             }
         });

@@ -1,7 +1,7 @@
 use sha2::{Digest, Sha256};
 use std::{
     io::{BufRead, BufReader, Write},
-    process::{Child, ChildStdin, Stdio},
+    process::{ChildStdin, Stdio},
     sync::mpsc::{self, Receiver},
     time::Duration,
 };
@@ -89,7 +89,7 @@ pub fn warm(app: &crate::Shared) {
     });
 }
 pub struct Speech {
-    child: Child,
+    _child: crate::runtime::WorkerProcess,
     input: ChildStdin,
     output: Receiver<String>,
 }
@@ -117,7 +117,7 @@ impl Speech {
             }
         });
         Ok(Self {
-            child,
+            _child: crate::runtime::track_worker(child),
             input,
             output,
         })
@@ -138,13 +138,6 @@ impl Speech {
             return Err(e.to_string());
         }
         Ok(value)
-    }
-}
-
-impl Drop for Speech {
-    fn drop(&mut self) {
-        let _ = self.child.kill();
-        let _ = self.child.wait();
     }
 }
 

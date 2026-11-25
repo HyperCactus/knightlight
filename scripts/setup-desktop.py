@@ -44,13 +44,19 @@ def extract(url, target):
     return archive
 
 
+def engine_arch(system, machine):
+    if machine.lower() in ("arm64", "aarch64"):
+        return "apple-silicon" if system == "darwin" else "armv8"
+    return "x86-64"
+
+
 def stockfish():
     source = BUILD / "stockfish-source"
     archive = extract("https://codeload.github.com/official-stockfish/Stockfish/tar.gz/refs/tags/sf_16", source)
     # Keep complete matching source alongside the distributable, including its NNUE net.
     executable = source / "src" / ("stockfish.exe" if os.name == "nt" else "stockfish")
     if not executable.exists():
-        arch = "armv8" if platform.machine().lower() in ("arm64", "aarch64") else "x86-64"
+        arch = engine_arch(sys.platform, platform.machine())
         compiler = "mingw" if os.name == "nt" else "clang" if sys.platform == "darwin" else "gcc"
         make = shutil.which("make") or shutil.which("mingw32-make")
         if not make:

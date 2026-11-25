@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::{
     io::{BufRead, BufReader, Write},
-    process::{Child, ChildStdin, Stdio},
+    process::{ChildStdin, Stdio},
     sync::mpsc::{self, Receiver},
     time::{Duration, Instant},
 };
@@ -21,7 +21,7 @@ pub fn available() -> bool {
         && crate::runtime::worker_available("opponent")
 }
 pub struct Opponent {
-    child: Child,
+    _child: crate::runtime::WorkerProcess,
     input: ChildStdin,
     lines: Receiver<String>,
 }
@@ -45,7 +45,7 @@ impl Opponent {
             }
         });
         Ok(Self {
-            child,
+            _child: crate::runtime::track_worker(child),
             input,
             lines,
         })
@@ -72,12 +72,6 @@ impl Opponent {
             }
         }
         Err("Human opponent timed out".into())
-    }
-}
-impl Drop for Opponent {
-    fn drop(&mut self) {
-        let _ = self.child.kill();
-        let _ = self.child.wait();
     }
 }
 

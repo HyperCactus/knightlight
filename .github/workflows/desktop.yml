@@ -85,6 +85,16 @@ jobs:
         run: |
           "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
           "C:\msys64\usr\bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+      - name: Cache Rust dependencies and native build outputs
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git/db
+            src-tauri/target/release
+          key: ${{ runner.os }}-${{ runner.arch }}-rust-${{ hashFiles('Cargo.lock', 'src-tauri/Cargo.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-rust-${{ hashFiles('Cargo.lock', 'src-tauri/Cargo.lock') }}-
       - name: Rust toolchain
         run: rustup toolchain install stable --profile minimal --component clippy
       - run: rustup default stable
@@ -99,8 +109,6 @@ jobs:
         run: python scripts/setup-desktop.py --use-exported-model
       - name: Rust regression tests
         run: cargo test --locked
-      - name: Build browser edition
-        run: cargo build --release --locked
       - name: Rust lint
         run: cargo clippy --locked --all-targets -- -D warnings
       - name: Collect matching copyleft source

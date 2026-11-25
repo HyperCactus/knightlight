@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::{
     collections::BTreeMap,
     io::{BufRead, BufReader, Write},
-    process::{Child, ChildStdin, Stdio},
+    process::{ChildStdin, Stdio},
     sync::mpsc::{self, Receiver},
     time::Duration,
 };
@@ -13,7 +13,7 @@ pub struct Evaluation {
     pub pv: Vec<String>,
 }
 pub struct Engine {
-    child: Child,
+    child: crate::runtime::WorkerProcess,
     input: ChildStdin,
     lines: Receiver<String>,
 }
@@ -57,7 +57,7 @@ impl Engine {
             }
         });
         let mut e = Self {
-            child,
+            child: crate::runtime::track_worker(child),
             input,
             lines,
         };
@@ -163,8 +163,7 @@ fn parse_evaluations(lines: &[String]) -> Result<Vec<Evaluation>, String> {
 impl Drop for Engine {
     fn drop(&mut self) {
         let _ = self.send("quit");
-        let _ = self.child.kill();
-        let _ = self.child.wait();
+        self.child.stop();
     }
 }
 
