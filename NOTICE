@@ -1,0 +1,35 @@
+Knightlight
+Copyright 2026 Knightlight contributors
+
+Original Knightlight source and artwork are licensed under Apache License 2.0
+(LICENSE), except the third-party works and adaptations listed below.
+
+This is not an Apache-only binary distribution. The Rust applications link
+shakmaty and pgn-reader (GPL-3.0-or-later); the combined executables are
+redistributed under GPL-3.0-or-later, with the original Apache grants retained.
+See licenses/GPL-3.0.txt and each dependency's original copyright notices.
+
+Maia-3 by CSSLab is AGPL-3.0-or-later. scripts/opponent.py,
+scripts/desktop_opponent.py and scripts/export-desktop-opponent.py are
+integration/adaptation code distributed under AGPL-3.0-or-later. The upstream
+source, unchanged model card, adapter source and license accompany installers.
+The upstream model card refers to the Maia-3 repository for weights terms.
+See licenses/AGPL-3.0.txt and docs/DESKTOP-NOTICES.md.
+
+Stockfish, Piper, python-chess, eSpeak NG and phonemizer retain their GPL
+licenses. They run as separate local workers. Matching copyleft component
+source archives accompany public installers; runtime package metadata and
+copyright/license texts are installed in resources/notices/.
+
+Kokoro weights: Apache-2.0, by hexgrad/Kokoro contributors; kokoro-onnx: MIT.
+ONNX Runtime, Python, NumPy and other runtime libraries retain their own
+licenses. See vendor/KOKORO-NOTICE.md and installed runtime notices.
+
+The optional Piper Lessac model has separate dataset/voice terms and is
+excluded from public release installers. Local builds may use an existing
+separately downloaded copy. It is not relicensed by this repository.
+
+Chess piece SVGs under static/pieces/ are third-party artwork. Their original
+license and attribution are retained in that directory.
+Lichess puzzles and opening names are CC0; data/PUBLIC-PUZZLES.md and
+ data/openings/ retain their source attribution. No personal games are included.

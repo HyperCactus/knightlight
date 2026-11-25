@@ -1,0 +1,163 @@
+name: Desktop installers
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: desktop-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - id: version
+        run: echo "version=0.2.${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+  model:
+    name: Export and verify portable opponent
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+      - run: python scripts/setup-desktop.py --model-only
+      - run: vendor/maia-env/bin/python scripts/export-desktop-opponent.py
+      - run: vendor/maia-env/bin/python tests/desktop-policy.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Knightlight-opponent-model
+          path: |
+            vendor/maia-model/maia3-5m.onnx
+            vendor/maia-model/desktop-config.json
+            vendor/maia-model/desktop-policy-reference.json
+          if-no-files-found: error
+          retention-days: 14
+  desktop:
+    needs: [prepare, model]
+    env:
+      MACOSX_DEPLOYMENT_TARGET: '14.0'
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Linux x64
+            runner: ubuntu-24.04
+            bundles: deb,appimage
+          - name: Windows x64
+            runner: windows-latest
+            bundles: nsis
+          - name: macOS Apple Silicon
+            runner: macos-15
+            bundles: app,dmg
+          - name: macOS Intel
+            runner: macos-15-intel
+            bundles: app,dmg
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+      - name: Linux native dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev librsvg2-dev patchelf
+      - name: Windows engine compiler
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+          "C:\msys64\usr\bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+      - name: Rust toolchain
+        run: rustup toolchain install stable --profile minimal --component clippy
+      - run: rustup default stable
+      - run: npm ci
+      - uses: actions/download-artifact@v8
+        with:
+          name: Knightlight-opponent-model
+          path: vendor/maia-model/
+      - name: Set release version
+        run: python scripts/prepare-release.py ${{ needs.prepare.outputs.version }}
+      - name: Prepare offline engines and voices
+        run: python scripts/setup-desktop.py --use-exported-model
+      - name: Rust regression tests
+        run: cargo test --locked
+      - name: Build browser edition
+        run: cargo build --release --locked
+      - name: Rust lint
+        run: cargo clippy --locked --all-targets -- -D warnings
+      - name: Collect matching copyleft source
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            vendor/speech-env/Scripts/python scripts/collect-release-sources.py
+          else
+            vendor/speech-env/bin/python scripts/collect-release-sources.py
+          fi
+      - name: Build native installers
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ''
+        run: python scripts/build-desktop.py --public-release --use-exported-model --bundles ${{ matrix.bundles }}
+      - name: Verify frozen workers and packaged resources silently
+        run: python tests/desktop-package.py
+      - name: Verify native window and settings across relaunch (muted)
+        if: runner.os == 'Linux'
+        run: python tests/desktop-window.py
+      - name: Signed updater regression tests
+        run: cargo test --locked --manifest-path src-tauri/Cargo.toml
+      - name: Desktop lint
+        run: cargo clippy --locked --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Knightlight-${{ matrix.runner }}
+          path: dist/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+
+  publish:
+    name: Publish complete signed release
+    needs: [prepare, desktop]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: Knightlight-*
+          path: artifacts
+      - name: Install signature verification dependency
+        run: python -m pip install cryptography==46.0.7
+      - name: Gather installer files without collisions
+        run: |
+          mkdir release
+          find artifacts -type f \( -name '*.exe' -o -name '*.deb' -o -name '*.AppImage' -o -name '*.dmg' -o -name '*.sig' -o -name '*.tar.gz' \) -exec cp -n {} release/ \;
+          cp docs/DESKTOP.md release/INSTALL.md
+          cp LICENSE NOTICE release/
+          python scripts/release-manifest.py release --version '${{ needs.prepare.outputs.version }}' --repo '${{ github.repository }}' --commit '${{ github.sha }}'
+      - name: Publish installers and updater endpoint together
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+          REPOSITORY: ${{ github.repository }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          gh release create "v$VERSION" --repo "$REPOSITORY" --target "$COMMIT" --draft --title "Knightlight $VERSION" --notes-file release/INSTALL.md
+          gh release upload "v$VERSION" release/* --repo "$REPOSITORY" --clobber
+          gh release edit "v$VERSION" --repo "$REPOSITORY" --draft=false --latest

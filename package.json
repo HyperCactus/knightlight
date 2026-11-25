@@ -1,0 +1,39 @@
+{
+  "name": "chess-study-browser-checks",
+  "private": true,
+  "scripts": {
+    "test:browser": "node tests/board-isolated.cjs",
+    "test:studio": "node tests/studio.cjs",
+    "test:learning": "node tests/learning.cjs",
+    "test:history": "node tests/history.cjs",
+    "test:experience": "node tests/experience.cjs",
+    "test:review": "node tests/review.cjs",
+    "test:coach-audit": "vendor/maia-env/bin/python tests/coach-audit.py",
+    "test:game-flow": "node tests/game-flow.cjs",
+    "test:puzzle-bank": "vendor/maia-env/bin/python tests/puzzle-bank-audit.py",
+    "test:puzzle-variety": "node tests/puzzle-variety.cjs",
+    "test:coach-controls": "node tests/coach-controls.cjs",
+    "test:puzzle-flow": "node tests/puzzle-flow.cjs",
+    "test:assist": "node tests/assist.cjs",
+    "test:perspective": "node tests/perspective.cjs",
+    "test:frontend-regressions": "node tests/frontend-regressions.cjs",
+    "test:backend-regressions": "node tests/backend-regressions.cjs",
+    "test:learning-regressions": "node tests/learning-regressions.cjs",
+    "test:performance": "node tests/performance.cjs",
+    "test:regressions": "npm run test:frontend-regressions && npm run test:backend-regressions && npm run test:learning-regressions",
+    "test:review-pacing": "node tests/review-pacing.cjs",
+    "test:app-install": "python3 tests/launcher.py && node tests/app-icons.cjs",
+    "test:preferences": "node tests/preferences.cjs",
+    "test:speech-latency": "node tests/speech-latency.cjs",
+    "test:opponent-startup": "node tests/opponent-startup.cjs",
+    "desktop:build": "python3 scripts/build-desktop.py",
+    "desktop:dev": "tauri dev",
+    "test:desktop": "python3 tests/desktop-package.py",
+    "test:publishing": "python3 tests/publishing.py"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.12.6",
+    "playwright": "^1.56.0"
+  },
+  "license": "Apache-2.0"
+}

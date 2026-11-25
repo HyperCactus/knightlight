@@ -1,0 +1,172 @@
+# Knightlight
+
+A local Rust chess coach built around your own games, with an offline desktop edition and an optional browser edition.
+
+[Download the latest desktop release](https://github.com/HyperCactus/knightlight/releases/latest).
+
+Original source is **Apache 2.0**. Bundled GPL/AGPL components retain their licenses; compiled applications have additional copyleft terms. See [NOTICE](NOTICE).
+
+## Desktop app (Windows, macOS, Linux)
+
+[Installation instructions and native builds](docs/DESKTOP.md) cover Windows installers, macOS disk images for Intel and Apple Silicon, and Linux DEB/AppImage packages. The desktop edition includes its own Rust backend, Stockfish, neural voices, human opponent, and offline puzzles. No Rust or Python installation is needed to use a packaged app. Settings and games are stored in a persistent per-user profile, separate from the installed application.
+
+Build on your platform with `python scripts/setup-desktop.py` followed by `python scripts/build-desktop.py` after installing the prerequisites in the guide. Installers appear in `dist/`. The **Desktop installers** GitHub Actions workflow builds each platform natively. Windows/macOS artifacts require those native jobs; they cannot be validated by the local Linux build alone.
+
+## Browser edition (secondary option)
+
+On this Linux desktop, open **Knightlight** from system search (search “Knightlight” or “chess”), or double-click the **Knightlight** desktop shortcut. The launcher starts the local server when needed, then opens your default browser. Repeated clicks reuse the running server. It keeps running when you close the browser, and starts again from the shortcut after a reboot; it is not enabled at login.
+
+To install or refresh these per-user shortcuts, including after moving this folder:
+
+```bash
+python3 scripts/install-desktop.py
+```
+
+You can also run `~/.local/bin/knightlight` from a terminal. Use `--no-browser` to start the server alone. The installed service can be stopped with `systemctl --user stop knightlight.service`; its logs are available through `journalctl --user -u knightlight.service`. The launcher leaves another application using port 3000 untouched and reports the conflict.
+
+The web app includes a favicon, an Apple touch icon and regular/maskable home-screen icons. On a mobile browser where the app is reachable, use its **Add to Home Screen** action. This installs the Knightlight name and icon; gameplay still needs the Rust server. The current server accepts only localhost connections, so a phone cannot reach this computer's app directly. Remote/mobile hosting requires a separate server configuration; the icon does not change that access policy or add offline gameplay.
+
+The authored mark is in `static/icons/knightlight.svg`. Rebuild its PNG/ICO exports with `python3 scripts/generate-icons.py` (system librsvg, PyGObject, pycairo and Pillow). [Web app icon metadata](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/icons) supplies separate regular and maskable assets.
+
+## Start from source
+
+```bash
+cd knightlight
+source "$HOME/.cargo/env"
+cargo run --release
+```
+
+For a fresh checkout, first install Rust and Stockfish and run the desktop setup instructions to prepare local models. Keep the server running while using the app. The browser interface is HTML/CSS/JavaScript; chess rules, analysis, coaching, learning, and persistence are handled by Rust. Small persistent Python workers run Kokoro/Piper's ONNX voices and Maia-3's human move model on CPU.
+
+## Play and learn
+
+- **Overview:** your daily goal ring, learning XP and level, milestones, record, weighted rating, actionable weaknesses, and a short daily session.
+- **Training:** 100,000 distinct offline Lichess puzzles plus suitable opportunities from your own games. Fresh mode remembers opened and skipped positions across restarts. Sessions target your weaker themes while mixing patterns and difficulty, with equivalent strong answers accepted. Each exercise ends when the critical idea is resolved, within five player moves. Choose a focus, use visual hints, inspect diagrams, or listen to the explanation. A weekly activity chart and pattern library show what is becoming familiar. Daily sessions can pause for reply prediction; a recall question helps consolidate the rule.
+- **Settings:** a full page for voice choice, speech speed and volume, automatic diagrams, three sound categories and effects volume, daily goals, prediction pauses, coach feedback, opponent pace, appearance, board colors, coordinates, legal move markers, motion, and text size. Preferences save locally to disk and restore before the interface starts, including after a browser/server restart or when switching between localhost and 127.0.0.1. Existing browser choices migrate automatically; a browser cache retains pending changes if a save fails. The save status reports when changes have reached disk. Bot difficulty, rating and style are saved too.
+- **Play & coach:** leave difficulty on Adaptive or set an opponent rating from 400 to 2,400 with the slider. Choose varied, balanced, attacking, or positional play. Coach mode grades moves quietly. It automatically explains mistakes, blunders, new short forced mates, promotions, and forks/pins after the opening; routine opening moves stay quiet. **Explain this move** opens a synchronized explanation on request, or a silent visual lesson when muted. Its diagrams return to the live board on completion; selecting a piece interrupts automatic coaching immediately. “Help me think” shows a suggestion; “Show better move” pauses the board to explore the alternative.
+- **Game review:** choose any imported or saved practice game. **Play review** advances through every half-move, animates the moving piece (and rook when castling), waits for narration and reading time, and supports pause/resume. **Start guided review** starts at the first move and explains your turning points while retaining the intervening moves. Use single steps, the position scrubber, the move list, the graph, or previous/next key-move controls. A jump first shows the position before the selected move, then animates it. Arrow keys step; Space plays/pauses when focus is outside a control. Review uses a default 1.4-second base reading pause and 280 ms move animations. Backend complexity scoring varies the reading pause from 0.7 seconds for routine opening development, forced replies and straightforward recaptures to 2.8 seconds for the most demanding moves. Tactical motifs, evaluation changes, promotion, quiet positional plans and multi-move consequences add reading time; good moves can be complex too. Narration finishes naturally before the pause. Choose the review reading pace in Settings. Jump to your mistakes and blunders, inspect the best move, and play through the opponent's strongest reply. “Listen” reads the explanation using the local neural voice. Turning-point cards summarize the game; “Practice this moment” takes a mistake directly into training. Explanation cards open diagrams with an outlined source piece, gold attack targets, teal controlled squares (including empty pawn diagonals), and dashed pin lines. Every arrow endpoint is highlighted, and the active diagram is reasserted when its speech starts or resumes. “Visual lesson” walks through one idea at a time; “Listen” synchronizes local speech with the diagrams, dimming unrelated pieces and highlighting the current focus. Move-quality strips show grades and evaluation changes.
+
+The bot pauses naturally before replying; choose an unhurried, natural, or brisk pace in Settings. Your moves and the opponent’s replies share smooth 280 ms animations, including castling, promotion, en passant, and take-backs. Board redraws preserve moving piece elements, so status updates cannot cut an animation short. Reduced-motion settings are respected. Moves have separate capture/check cues. Navigation, switches, hints, and selections have quiet interface sounds, and learning rewards have a short chime. Each sound category and its volume can be controlled separately. Effects become quieter while the coach speaks.
+
+**Stay in the game.** Opponent settings start collapsed, and New game/Resign live under **More options**. During an explanation, the board footer offers **Back to game** or **Back to practice**; Escape also returns immediately. Desktop lesson controls sit beside the board. Captions stay below it, and entering or leaving an explanation preserves its position and legal moves. Canceling speech also prevents queued narration from reopening that lesson.
+
+**After the finish.** Wins, losses and draws get distinct completion screens and sound cues. The saved game’s full analysis adds a concise spoken recap, move-quality statistics and a takeaway with a shortcut to its key move. Recaps recognize a sustained lead, a comeback, missed chances, queen-free endgames and the actual final position; a long-endgame checkmate is mentioned only when the recorded game supports it. The result appears immediately while analysis finishes. Voice follows the existing mute setting. **Play again** starts a fresh game; **Back to board** lets you inspect the final position.
+
+**Contextual explanations.** Sound moves are explained using the move actually played; meaningful mistakes compare the opponent’s opportunity with the better plan. Board-derived reasons include escaping an attack, opening a bishop’s diagonal, using an open file, advancing a passed pawn, and bringing the king toward a pawn. Immediate tactical threats take priority over general positional comments. For a supported payoff several moves ahead, a short engine continuation animates smoothly as one visual sequence, followed by a single summary of what it achieves. The summaries check the resulting material and replay every move; they do not turn a raw attack count into a promised win. Review automatically skips routine opening commentary and avoids repeating the same nearby plan; explicit **Explain this move** and **Visual lesson** remain available at any move.
+
+**Spoken coaching is on by default.** The labeled **Coach on / Coach muted** button always stays within reach. Speech-speed controls live only in Settings, keeping playback controls uncluttered. Browsers require an initial user interaction before audio can start; narration begins as you use the app, and a clear Enable audio prompt appears if the browser still blocks it. Significant review moves and completed training positions automatically pair short voice clips with the matching diagrams. Automatic diagrams are interruptible and return to the original board without a dismiss step. Coach and Training explanations return to the playable position automatically after the final spoken step, including explanations opened from evidence cards. Muted explanations advance at a reading pace, with pause/resume and step controls. Review visual lessons retain manual stepping. Use Settings to preview Heart (American), Michael (American), Emma (British), or the lighter Lessac/Piper voice. Speed changes apply immediately to playback from 0.75× to 1.5× with pitch preservation. Separate speech/effects volume controls are available. Dark mode is the default; light and system themes are available.
+
+Practice games are saved automatically after each move, with a visible save status. In-progress games appear in history immediately; finishing or resigning updates the same entry. Use **Review this game** to open its analysis at any point, or **New game** to start another session. The current position and move history are restored after a browser refresh in the same browser, including an interrupted bot turn. Resigning records a completed practice result and offers **Play again** and **Review game**. It works during a coach diagram and while the bot is thinking; late replies from the old game are discarded. Completed results are stored separately from diagram display state. Take-back restores the position before your last turn.
+
+Use **Assist on/off** beside any board (or in Settings) to show board control: teal for your pieces, coral for the opponent, and split colour where both sides control a square. Pawn diagonals and blocked lines are calculated in Rust; this overlay shows control, including defended squares, rather than available moves. Team colours stay the same when you flip the board. In puzzles, three consecutive incorrect moves enable temporary assistance for that puzzle. A correct move resets the miss streak. You can switch assistance off immediately; automatic assistance does not change your saved preference or carry into the next puzzle.
+
+During **Play review** or **Guided review**, the coach occasionally invites you to play an important response from your opponent’s side. The board fades to their orientation, the coach explains your objective, and you can click or drag a reply. Try another idea, reveal the response, or continue at any time. After finding the idea, return to your side and follow the original game. **Play the opponent’s response** is also available at selected moves. These exercises never change the saved game, your rating or puzzle rewards.
+
+Selection checks the opponent’s best replies with fresh three-candidate engine analysis at depth 15–18. It favors missed tactical opportunities and precise defensive resources, rejects forced replies, ambiguous positions, hopeless defences, obvious mates in one and routine opening moves, and normally chooses one challenge per game. Games of at least 64 plies can have two, separated by at least 16 plies. Repeated positions and challenges already shown in the current review session are skipped. **Opponent’s perspective in review** in Settings turns automatic challenges off. API details are in [the perspective challenge contract](docs/PERSPECTIVE-API.md).
+
+## What the algorithms do
+
+**Analysis and explanations.** Stockfish 16 analyzes imported/saved games at depth 10 and live coaching at depth 11. Recommendations that expose a queen or carry a large immediate exchange cost receive an additional depth-14 search. Older cached reviews selectively recheck those recommendations on load. Bound-only UCI scores and scores for a different final move are rejected. Each review includes evaluations before and after the move, a centipawn-loss grade, the best continuation, and the opponent's reply. Explanations use facts from those positions and lines: captures, checks, promotions, castling, forced mates, newly attacked targets, central-square control, and development from a starting square. Quiet moves without a stronger supported observation get a short piece-relocation description. Repeated generic positional paragraphs are omitted. Cached reviews regenerate their prose and evidence from the stored engine results. Spoken lessons explicitly introduce possible replies ("Now your opponent can…"), alternatives ("A better option would have been…"), and suggestions before explaining their diagrams. Lessons reserve room for both the reply and the alternative, and use the correct perspective when reviewing the opponent’s moves. Capture warnings use legal moves, including pinned-piece and king-safety rules. A bounded local exchange search distinguishes queen trades from hanging pieces. Risky exchanges include animated recapture and response diagrams; genuine forcing sacrifices show the engine continuation. Dashed gold arrows show pressure, solid gold arrows show legal recaptures, and blue arrows show defenders or continuation moves. The explanations are generated from structured rules, not a general-purpose language model.
+
+**Personal learning.** An online logistic-regression model learns whether a position is likely to cause you a loss of at least 100 centipawns. Ten position features, stochastic gradient descent, and L2 regularization keep it small. Position/move examples are deduplicated. Predicted error risk helps rank personal exercises; practice outcomes determine when they return.
+
+See [the teaching design and research references](docs/TEACHING.md) for the learning methods behind these interactions.
+
+**Fresh puzzles and optional review.** Fresh mode is the default and does not automatically repeat previously opened boards, including skipped puzzles. **Review learned positions** deliberately revisits studied patterns. Unaided success schedules reviews at 1, 3, 7, 14 and 30 days; hints/retries reset the interval. Repeating a board on the same day cannot advance its box twice. Recommendations favor historical errors and material losses in each theme, mix motifs, and use a difficulty band around your practice rating. A daily session contains at most ten positions. Puzzles receive a three-candidate engine check at depth 15–18 and must have a clear idea; heavily lost, forced-loss and ambiguous positions are excluded. Answers receive fresh depth-16 analysis and deeper checks when necessary. A cached best move is never accepted unconditionally. Equivalent strong alternatives and all immediate mates remain valid. The exercise ends when the tactic is resolved rather than forcing unrelated follow-up moves.
+
+**History-weighted score.** The displayed practice rating is a date-weighted moving average of completed game-history samples: `score = Σ(sample × weight) / Σ(weight)`, where `weight = 2^(−days_since_latest_game / 14)`. A game played 14 days earlier contributes half as much as a game played today. Dates played determine the weights, so importing an old file later does not make its games recent. Imported games contribute your `WhiteElo` or `BlackElo`; if only the opponent rating is available, a provisional performance sample uses opponent rating +400 for a win, unchanged for a draw, or −400 for a loss. Games without a valid date, completed result, or usable rating remain in the library but do not affect the score. With no samples, it is provisionally 1,000.
+
+For each completed bot game, a new sample is calculated with FOCALORS-style Elo: `sample = R + round(K × (score − expected))`, with `expected = 1 / (1 + 10^((opponent − R)/400))`, K=40 for the first 30 rated bot games and K=20 afterward. Here R is the current weighted rating; wins score 1, draws 0.5, losses 0. The sample is stored once per session, then included in the weighted history. Unfinished games do not change your rating. Adaptive estimates your current practice strength from up to 12 completed bot games, weighted by recency and the opponents you faced, with the broader history score as a stabilizing prior. It chooses a target 100 points above that estimate, bounded to 400–2,400. Winning streaks raise the next challenge more quickly; losses ease it. Without completed bot games, it starts 100 points above the history score. The opponent's rating is fixed for a game; setting changes apply to the next game. Coached games also count. This local practice score is not calibrated to Chess.com, FIDE, or another rating pool.
+
+**Human-like opponent.** Maia-3 5M predicts human move probabilities conditioned on player/opponent rating. A persistent CPU worker preserves move history and uses two inference threads. It warms in the background at startup. Bundled Maia policies cover all 20 legal first moves plus common second-turn positions across six rating levels (198 policies); cached probabilities interpolate between rating levels and retain varied legal replies while the worker loads. Once ready, live Maia takes over. A cache miss during loading uses the Stockfish fallback so an unusual opening can also proceed. Rust samples legal candidates, with modest attacking/positional preferences. Varied style is chosen once per game. The first local check measured about 90 ms for warm policy inference; cold startup takes longer and timings depend on the position and machine. If the model is unavailable, Stockfish supplies a sampled fallback, identified in the UI. Maia's outcome predictions are never used as Stockfish evaluations for grading. Difficulty is an estimate rather than a guarantee of a particular win rate.
+
+**Public data.** 3,865 named Lichess opening variations identify openings locally. They supply names and continuations, not played-game win statistics. The [public practice pack](data/PUBLIC-PUZZLES.md) contains 100,000 distinct rated, tagged positions with source IDs and game URLs. No account or network call is needed during play.
+
+**Local neural speech.** Kokoro-82M uses the same quantized ONNX model on CPU, with four inference threads, three installed voice embeddings, and one persistent model instance. A warm-up check generated 6.5 seconds of audio in about 3 seconds on this machine; performance varies with text, hardware, and contention. The community export's float speed input is adapted explicitly to the kokoro-onnx 0.4.9 API. Voice selection is allowlisted. Piper/ Lessac remains available as a lightweight option and a fallback if the Kokoro model files are absent. No cloud speech or browser remote voice is used.
+
+Clips are cached by normalized request text and voice; up to 512 files are retained. Cached clips bypass inference even while the worker is busy. The saved selected voice is warmed in the background at startup, including a ready-to-play “Your move.” clip. Longer explanations begin on a complete sentence or natural clause while the rest prepares, and likely next lessons prefetch during review pauses and board animations. Short explanations keep their natural phrasing. See [the measured CPU/GPU comparison and first-playback results](reports/SPEECH-LATENCY.md); the GPU was slower with this unchanged model, so CPU inference remains enabled. Diagram changes show their starting position and animate the explained move, with a short hold between ideas. Text is capped at 1,800 bytes per request. The UI cancels obsolete playback, supports pause during synthesis, and preserves matching board highlights as you change speed. Changing tabs or leaving a page stops narration.
+
+**Learning rewards.** Distinct positions earn 15 XP for an unaided continuation, 10 XP for guided/retried work, or 5 XP for studying a reveal. A correct recall can add 5 XP. Completion and recall rewards each apply once per position per Brisbane day, including across server restarts. Repeated sessions/request retries cannot farm XP. A learning level requires 150 XP and is separate from the game-history rating. The daily goal counts distinct positions; choose 3, 5, or 10. Milestones recognize a first position, five different positions, delayed retrieval, and a three-day streak. Historical card/streak records are retained; the XP system starts tracking rewards when these features are used.
+
+**Limits.** Depth-limited evaluations and grading are approximate. Review “move quality” is this app's average exponential centipawn-loss score, not Chess.com's accuracy formula. Tactical diagrams describe board geometry and legal engine lines; they are teaching heuristics rather than proof of a positional plan. The practice board handles checkmate, stalemate, insufficient material, the fifty-move threshold, and threefold repetition when the full game history is supplied.
+
+## Files and settings
+
+In **Game review**, use **Import PGN** to choose one or more files without restarting. **Export all games** and **Export selected game** download standard PGNs, including bot games. Imports preserve headers and the legal main line, skip duplicates, and report invalid games. Comments and variations are not retained in exports. Files are limited to 128 MB, 100,000 games per file, and 600 plies per game, allowing larger exported libraries to be restored. Separate bot sessions remain separate even when their moves match. You can also put `.pgn` files in the project directory and restart. The most frequent player name is selected automatically; override with `CHESS_PLAYER='YourName' cargo run --release`.
+
+- `data/reviews/`: cached full-game analyses.
+- `data/learning.json`: model weights, training examples seen, and puzzle attempts.
+- `data/sessions/`: individual saved practice games, dates, and rating samples. Each move updates only its session record.
+- `data/sessions.json`: legacy practice archive; retained unchanged and overlaid by newer session records.
+- `data/imports.json`: games imported through the interface.
+- `data/library-order.json`: stable game identity order across imports and practice sessions.
+- `data/practice.json`: card schedules, outcomes, daily activity, XP, and reward deduplication.
+- `data/preferences.json`: saved interface, audio, learning and opponent settings, with a preceding-record `.bak` backup.
+- `data/puzzle-bank.json`: the 100,000-position offline CC0 bank.
+- `data/public-puzzles.json`: the small fallback pack.
+- `data/audio/`: cached local speech.
+- `data/openings/`: public opening reference.
+- `data/bot-openings.json`: bundled Maia opening policies generated from standard positions; rebuild with `vendor/maia-env/bin/python scripts/cache-bot-openings.py`.
+- `vendor/stockfish/`: Stockfish binary and package license documentation.
+- `vendor/voices/`: Piper local neural voice and its model card.
+- `vendor/kokoro/`: quantized Kokoro model, installed voice embeddings, and retained model/license cards.
+- `vendor/maia3/`, `vendor/maia-env/`, `vendor/maia-model/`: opponent library, CPU environment, and 5M weights.
+- Browser local storage: the active game, a preferences cache and any pending preference changes.
+
+History writes retain a `.bak` copy of the preceding record and use atomic replacement. If a history file cannot be read, startup reports the affected path and preserves the original instead of starting with an empty library. Stop the app, copy the affected file somewhere safe, and restore its known-good `.bak` before restarting. Keep external backups of the full `data/` directory and exported PGNs; the preceding-record backup is not a complete backup policy.
+
+The app binds to loopback and rejects foreign Host/Origin headers. `PORT=3001` changes the port. `STOCKFISH=/path/to/stockfish` selects another engine. Browser preferences store theme, sound, speech, style, and difficulty.
+
+To recreate both local voice engines and the installed voice choices, run `bash scripts/setup-voice.sh`. It installs CPU ONNX inference, the pinned community Kokoro model, voice embeddings, and Piper/ Lessac. See [the Kokoro source and retained notices](vendor/KOKORO-NOTICE.md).
+
+To recreate the human opponent environment, run `bash scripts/setup-opponent.sh`. This installs CPU PyTorch, the pinned upstream Maia-3 source, and the 5M weights.
+
+See [the audit fixes and validation record](reports/AUDIT-FIXES.md) for persistence safeguards, concurrency regressions, and optimization details.
+
+## Verification
+
+```bash
+cargo test
+cargo build --release
+npm run test:app-install # isolated launcher/install checks and muted desktop/mobile icon checks
+npm run test:preferences # muted relaunch, storage clearing, migration and save-failure checks
+npm run test:speech-latency # silent synthesis and muted first-playback timings
+npm run test:opponent-startup # cached cold-start replies, live handoff and result-driven difficulty
+npm install
+npx playwright install chromium
+npm run test:browser  # disposable server, library/cache copy, private test progress
+npm run test:studio   # isolated reviews, bot, speech, audio, and mobile checks
+npm run test:learning # isolated continuation, schedules, Elo, diagrams, and recovery checks
+npm run test:history  # date weighting, PGN interchange, autosaving, restart and mobile checks
+npm run test:experience # voices, auto narration, settings, XP, mobile and interruption checks
+npm run test:review-pacing # backend move-complexity pacing, recaptures, bounds and old-cache refresh
+npm run test:review # playback clock, move animations, seeks, resignation and late-reply regression checks
+npm run test:game-flow # interruption recovery, board stability, result summaries and mobile return controls
+npm run test:coach-controls # fixed transcript space and first-click actions during speech, desktop/mobile
+npm run test:puzzle-flow # default daily prediction, automatic replies, feedback, narration and recovery
+npm run test:assist # team control maps, 3-miss help, manual overrides, persistence and diagram safety
+npm run test:perspective # opposite-side review, legal replies, narration, cancellation and unchanged history
+npm run test:regressions # audit regressions: persistence, async transitions, narration and teaching
+npm run test:performance # full-bank queue timings and incremental saves with a 1,000-game archive
+npm run test:puzzle-bank # 100,000-board uniqueness, sampled answer quality and persistent fresh queues
+npm run test:puzzle-variety # muted browser: skips, reload, theme focus and deliberate review
+cargo clippy --all-targets -- -D warnings
+```
+
+Use `CHESS_TEST_BROWSER=/path/to/chromium` to use an existing browser. The studio suite verifies reviews, legal alternatives, mate explanations, public opening matches, model training, manual/varied bot behavior, neural speech and its cache, the thinking delay, audio, coach previews, saved-game review, and mobile layout. The board suite covers click/drag/touch, continuation training, hints, take-back, and promotion. The learning suite checks alternative mates for both colors, rejected moves, idempotency, schedule/rating persistence across restart, the Elo formula, repetition, human-model behavior, diagrams, review-to-practice navigation, the rating slider, refresh recovery, and mobile overflow. The history suite checks date-based weighting independent of import order, invalid/duplicate PGNs, header-preserving exports, browser file controls, bot autosaving, distinct sessions, rating persistence, and mobile controls. The experience suite synthesizes every installed voice, checks cache/validation, default automatic synchronized narration, live speed, mute and interruption, settings persistence, reward/goal deduplication, restart persistence, and all five mobile pages. Automated browser tests launch with `--mute-audio`: they verify playback state without playing through your speakers. The review suite checks ordered timed playback, pause/resume, castling and reverse animation, scrubber/key-move seeks, resignation during thinking/diagrams, and starting another game. All browser suites use disposable state and leave your real practice history untouched.
+
+## Sources and credits
+
+See [the open-source implementation review](docs/OPEN-SOURCE-REVIEW.md) for source-backed ideas from FOCALORS, Maia-3, chess-coach, and Lichess, with proposed priorities and validation criteria.
+
+- [Lichess opening database](https://github.com/lichess-org/chess-openings): CC0; original README is in `data/openings/`.
+- [Maia-3](https://github.com/CSSLab/maia3): AGPL-3.0 inference library; [weight source and retained notices](vendor/MAIA-NOTICE.md).
+- [FOCALORS](https://github.com/Inuway/Focalors): reference for the standard Elo update and K-factor schedule.
+- [Lichess puzzle database](https://database.lichess.org/#puzzles): CC0; selected pack and provenance are included.
+- [Stockfish](https://github.com/official-stockfish/Stockfish): GPLv3; binary package documentation is bundled in `vendor/stockfish/usr/share/doc/stockfish/`.
+- [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M): Apache-2.0 model; [community ONNX conversion](https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX) and [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx) (MIT). Local source, revision, and voice notices are in `vendor/KOKORO-NOTICE.md`.
+- [Piper](https://github.com/OHF-Voice/piper1-gpl): GPLv3. [Lessac voice model card](https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/lessac/medium/MODEL_CARD) describes the voice dataset and its license.
+- Cburnett chess pieces by Colin M. L. Burnett, via [Lichess](https://github.com/lichess-org/lila/blob/master/COPYING.md), GPLv2+. Unmodified SVG sources, notice, and license are in `static/pieces/`.
+- DM Sans and DM Serif Display are requested from Google Fonts, with local font fallbacks. Chess data and spoken text remain local.
+
+Coaching audit: `vendor/maia-env/bin/python tests/coach-audit.py` plays six disposable game scenarios (two mating fixtures, two Maia-3 opponents, two mixed Stockfish games, with generated games capped at 48 plies) and independently checks recommendations, capture arrows and continuations using python-chess. It also samples relevant positions from existing reviews read-only. Results are saved to `reports/coach-audit.json`. No audio is requested.

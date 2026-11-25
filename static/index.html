@@ -1,0 +1,1369 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-view="overview">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111715" />
+    <title>Knightlight · Your personal chess coach</title>
+    <meta name="application-name" content="Knightlight" />
+    <meta name="apple-mobile-web-app-title" content="Knightlight" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="icon" href="/favicon.svg?v=1" type="image/svg+xml" />
+    <link rel="icon" href="/icons/icon-32.png?v=1" type="image/png" sizes="32x32" />
+    <link rel="alternate icon" href="/favicon.ico?v=1" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1" sizes="180x180" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/experience.css?v=32" />
+  </head>
+  <body>
+    <div class="app">
+      <aside>
+        <a class="brand" href="#overview" aria-label="Knightlight — Overview"
+          ><span class="brand-mark"
+            ><img src="/icons/knightlight.svg" alt="" width="38" height="38" /></span
+          ><span
+            >knight<span class="brand-light">light</span
+            ><small>THE PERSONAL TRAINING ROOM</small></span
+          ></a
+        >
+        <div class="side-label">YOUR WORKSPACE</div>
+        <nav aria-label="Main navigation">
+          <button class="nav active" data-page="overview">
+            <span>◫</span> Overview</button
+          ><button class="nav" data-page="puzzles">
+            <span>◇</span> Training</button
+          ><button class="nav" data-page="play">
+            <span>♘</span> Play & coach</button
+          ><button class="nav" data-page="games">
+            <span>▤</span> Game review
+          </button>
+          <button class="nav" data-page="settings">
+            <span>⚙</span> Settings
+          </button>
+        </nav>
+        <div class="sidebar-progress">
+          <div class="progress-emblem" aria-hidden="true">♞</div>
+          <span class="eyebrow">YOUR LEARNING JOURNEY</span
+          ><strong id="side-level">Level 1 · Getting started</strong>
+          <div class="xp-track"><i id="side-xp-fill"></i></div>
+          <small id="side-xp">0 / 150 XP to the next level</small
+          ><span class="streak-label" id="side-streak"
+            >A little practice, every day.</span
+          >
+        </div>
+        <div class="side-bottom">
+          <span class="live-dot"></span> RUNNING LOCALLY<small
+            >Analysis, learning & voice on your computer.</small
+          >
+        </div>
+      </aside>
+      <main>
+        <header>
+          <div>
+            <span class="eyebrow">YOUR PERSONAL CHESS WORKSPACE</span>
+            <h1 id="title">Your next good move.</h1>
+          </div>
+          <div class="header-actions">
+            <button
+              id="voice-toggle"
+              class="header-control enabled"
+              aria-label="Mute coach voice"
+              aria-pressed="true"
+            >
+              <span aria-hidden="true">◖♪</span
+              ><span id="voice-toggle-label">Coach on</span>
+            </button>
+            <button
+              id="sound-toggle"
+              class="header-control"
+              aria-label="Mute sound effects"
+              aria-pressed="true"
+            >
+              <span aria-hidden="true">♫</span
+              ><span id="sound-toggle-label">Sounds on</span>
+            </button>
+            <button
+              id="settings-open"
+              class="header-control"
+              aria-label="Open settings"
+            >
+              <span aria-hidden="true">⚙</span><span>Settings</span>
+            </button>
+            <div class="profile">
+              <span class="avatar">♙</span>
+              <div>
+                <strong id="username">Loading…</strong
+                ><small>PERSONAL WORKSPACE</small>
+              </div>
+            </div>
+          </div>
+        </header>
+        <section id="overview" class="page active">
+          <div class="hero">
+            <div class="hero-copy">
+              <span class="kicker">YOUR NEXT CHAPTER</span>
+              <h2>Good habits.<br /><em>Better chess.</em></h2>
+              <p>
+                Your coach turns moments from your games into a clear path
+                forward. One idea at a time.
+              </p>
+              <div class="hero-actions">
+                <button class="primary" id="hero-puzzles">
+                  Continue learning <span>→</span></button
+                ><button class="secondary" id="hero-play">
+                  Play a practice game
+                </button>
+              </div>
+            </div>
+            <div class="journey-card">
+              <span class="eyebrow">TODAY’S SMALL WIN</span>
+              <div class="goal-ring" id="goal-ring">
+                <strong id="goal-count">0 / 5</strong><span>positions</span>
+              </div>
+              <h3 id="goal-title">Make room for a discovery.</h3>
+              <p id="goal-copy">
+                Try a short session. Hints count as learning, too.
+              </p>
+              <div class="journey-stats">
+                <span id="journey-xp">0 XP today</span
+                ><span id="journey-streak">0 day streak</span>
+              </div>
+            </div>
+          </div>
+          <div class="mission-strip">
+            <div class="mission-orbit" aria-hidden="true">◎</div>
+            <div>
+              <span class="eyebrow">YOUR DAILY PRACTICE</span>
+              <h3 id="daily-headline">A little focus goes a long way.</h3>
+              <p id="daily-subline">
+                Short sessions. Familiar mistakes. Lasting patterns.
+              </p>
+            </div>
+            <button class="primary" id="start-daily">
+              Start my session <span>→</span>
+            </button>
+          </div>
+          <div class="achievements-panel">
+            <div>
+              <span class="eyebrow">SMALL WINS THAT ADD UP</span>
+              <h3>Your milestones</h3>
+            </div>
+            <div id="achievement-list" class="achievement-list"></div>
+          </div>
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">YOUR PROGRESS</span>
+              <h3>A clearer picture of your game.</h3>
+            </div>
+            <span class="status-pill" id="analysis-status"
+              >Reading your games…</span
+            >
+          </div>
+          <div class="stats">
+            <article>
+              <span>GAMES IN YOUR LIBRARY</span
+              ><strong id="stat-games">—</strong
+              ><small>Imported & practice games</small>
+            </article>
+            <article>
+              <span>WINS / DRAWS / LOSSES</span
+              ><strong id="stat-record">—</strong
+              ><small>Every game is a lesson</small>
+            </article>
+            <article>
+              <span>PERSONAL POSITIONS</span><strong id="stat-puzzles">—</strong
+              ><small>Prioritized for your training</small>
+            </article>
+            <article>
+              <span>MOVES LEARNED FROM</span><strong id="stat-samples">—</strong
+              ><small>Your adaptive learning model</small>
+            </article>
+          </div>
+          <div class="overview-bottom">
+            <div class="panel">
+              <span class="eyebrow">WHERE TO FOCUS</span>
+              <h3>Your training compass.</h3>
+              <p id="insight-text">
+                Your coach is studying your games. Your strongest training
+                opportunities will appear here.
+              </p>
+              <div id="weakness-chart" class="weakness-chart"></div>
+              <button class="text-button" id="overview-games">
+                Review a game →
+              </button>
+            </div>
+            <div class="panel learning-panel">
+              <span class="eyebrow">BUILT AROUND YOUR PLAY</span>
+              <h3>A coach that learns.</h3>
+              <p>
+                A compact local model learns which positions give you trouble.
+                Your training priorities and adaptive opponent update as you
+                play.
+              </p>
+              <div class="feature-row">
+                <span>◈</span>
+                <div>
+                  <strong>Engine-backed insight</strong
+                  ><small
+                    >Move grades, consequences, and clear alternatives</small
+                  >
+                </div>
+              </div>
+              <div class="feature-row">
+                <span>♬</span>
+                <div>
+                  <strong>A voice beside the board</strong
+                  ><small id="voice-status"
+                    >Local neural speech · ready when you are</small
+                  >
+                </div>
+              </div>
+              <div class="feature-row">
+                <span>▤</span>
+                <div>
+                  <strong>Opening reference</strong
+                  ><small id="database-status"
+                    >Lichess public opening database</small
+                  >
+                </div>
+              </div>
+              <div class="rating-journey">
+                <div>
+                  <span class="eyebrow">HISTORY-WEIGHTED SCORE</span
+                  ><strong id="practice-rating">1,000</strong>
+                </div>
+                <span id="rating-confidence" class="status-pill"
+                  >PROVISIONAL</span
+                >
+                <div
+                  id="rating-history"
+                  aria-label="Practice rating history"
+                ></div>
+                <p class="fine">
+                  Newer games count more · 14-day half-life. Bot results
+                  contribute Elo-adjusted samples. A local practice estimate.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="puzzles" class="page">
+          <div class="page-intro">
+            <div>
+              <span class="eyebrow">PERSONAL TRAINING</span>
+              <h2>Train your next instinct.</h2>
+              <p>Find the move. Understand why. Remember it next time.</p>
+            </div>
+            <div class="counter" id="puzzle-counter">POSITION —</div>
+          </div>
+          <div class="learning-status">
+            <span class="learning-status-icon">✦</span
+            ><strong id="learning-xp">0 XP today</strong
+            ><span id="learning-goal">0 / 5 daily goal</span
+            ><span class="learning-status-note"
+              >Progress through practice, not perfection.</span
+            >
+          </div>
+          <div class="training-hub">
+            <div>
+              <span class="eyebrow">FOCUSED PRACTICE</span
+              ><strong id="session-heading">Your personal training room</strong
+              ><small id="session-caption"
+                >Choose a focus or start your daily session.</small
+              >
+            </div>
+            <label
+              >Focus<select id="training-focus" aria-label="Training focus">
+                <option value="all">All weaknesses</option>
+              </select></label
+            >
+            <label class="prediction-toggle"
+              ><input type="checkbox" id="predict-replies" checked /> Pause to
+              predict replies</label
+            ><button class="secondary" id="training-daily">
+              Daily session
+            </button>
+            <div class="session-meter" aria-label="Session progress">
+              <span id="session-fill"></span>
+            </div>
+          </div>
+          <div id="session-complete" class="session-complete" hidden>
+            <span class="eyebrow">SESSION COMPLETE</span>
+            <h3>Good work. Let it settle.</h3>
+            <p id="session-result"></p>
+            <button class="secondary" id="practice-again">
+              Explore more positions →
+            </button>
+          </div>
+          <div class="workspace">
+            <div class="board-column">
+              <div class="player-strip">
+                <span class="mini-avatar">♟</span>
+                <div>
+                  <strong id="puzzle-board-title">Your move</strong
+                  ><small id="puzzle-board-objective"
+                    >Find the idea before you play.</small
+                  >
+                </div>
+              </div>
+              <div
+                id="puzzle-board"
+                class="board"
+                aria-label="Puzzle chessboard"
+              ></div>
+              <div class="board-footer">
+                <span id="puzzle-turn">Preparing your position…</span
+                ><button class="text-button" id="puzzle-flip">↻ Flip</button>
+              </div>
+              <div class="board-guide">
+                Click a piece to see its moves, or drag to play.
+              </div>
+              <div class="assist-toolbar" aria-label="Board assist">
+                <button
+                  class="secondary assist-toggle"
+                  id="puzzle-assist"
+                  aria-pressed="false"
+                  title="Show squares controlled by each side"
+                >
+                  ◎ Assist off
+                </button>
+                <span
+                  class="assist-legend"
+                  aria-label="Teal: your control. Coral: opponent control. Split: both sides."
+                >
+                  <span><i class="assist-swatch you"></i>You</span>
+                  <span><i class="assist-swatch opponent"></i>Opponent</span>
+                  <span><i class="assist-swatch both"></i>Both</span>
+                </span>
+              </div>
+            </div>
+            <div class="panel training-coach">
+              <div class="coach-identity">
+                <span class="coach-avatar">♞</span>
+                <div>
+                  <strong>Your coach</strong
+                  ><small>One idea. Then it’s your move.</small>
+                </div>
+                <span class="coach-live">LOCAL</span>
+              </div>
+              <div class="panel-heading">
+                <span class="eyebrow">YOUR NEXT DISCOVERY</span
+                ><button class="text-button" id="puzzle-listen">
+                  ♬ Listen
+                </button>
+              </div>
+              <div class="coach-stage" id="puzzle-coach-stage">
+                <div class="coach-stage-content">
+                  <h3 id="puzzle-theme">Preparing positions</h3>
+                  <p id="puzzle-detail">
+                    Your games are being analyzed locally.
+                  </p>
+                  <div class="drill-objective">
+                    <span class="objective-icon">◎</span>
+                    <div>
+                      <small>YOUR OBJECTIVE</small
+                      ><strong id="drill-objective"
+                        >Find a strong continuation</strong
+                      >
+                    </div>
+                  </div>
+                  <div
+                    id="drill-steps"
+                    class="drill-steps"
+                    aria-label="Continuation progress"
+                  ></div>
+                  <div class="divider"></div>
+                  <div
+                    id="puzzle-message"
+                    class="message"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    Find the best move.
+                  </div>
+                </div>
+                <div id="prediction-card" class="teaching-card" hidden></div>
+              </div>
+              <div class="actions">
+                <button class="secondary" id="hint">Get a hint</button
+                ><button class="secondary" id="solution">
+                  Show me the move</button
+                ><button class="primary" id="next-puzzle">
+                  Skip position →
+                </button>
+              </div>
+              <p class="fine">
+                Solve the critical moves against the strongest replies. The
+                puzzle ends when the idea is resolved. Hints and retries help
+                you learn; unaided success grows your review interval.
+              </p>
+              <div
+                id="reward-banner"
+                class="reward-banner"
+                role="status"
+                hidden
+              ></div>
+              <div id="puzzle-assessment" class="move-assessment"></div>
+              <div id="puzzle-evidence" class="evidence-list"></div>
+              <div id="reflection-card" class="teaching-card" hidden></div>
+              <button class="text-button" id="puzzle-return" hidden>
+                ↩ Return to practice position
+              </button>
+              <div class="training-receipt" id="training-receipt" hidden></div>
+            </div>
+          </div>
+          <div class="practice-bottom">
+            <div class="panel">
+              <span class="eyebrow">THE LAST SEVEN DAYS</span>
+              <div id="practice-week" class="practice-week"></div>
+              <p class="fine" id="practice-streak">
+                Every repetition makes a pattern easier to notice.
+              </p>
+            </div>
+            <div class="panel">
+              <span class="eyebrow">YOUR PATTERN LIBRARY</span>
+              <div id="theme-library" class="theme-library"></div>
+              <button class="secondary" id="training-review">
+                Review learned positions
+              </button>
+            </div>
+          </div>
+        </section>
+        <section id="play" class="page">
+          <div class="page-intro">
+            <div>
+              <span class="eyebrow">YOUR SPARRING PARTNER</span>
+              <h2>A practice game. A patient coach.</h2>
+              <p>
+                Try an idea. Hear the feedback. Keep playing at your own pace.
+              </p>
+            </div>
+            <div class="status-pill" id="bot-level">
+              ADAPTIVE · LEARNING YOUR LEVEL
+            </div>
+          </div>
+          <details id="match-settings" class="match-settings" open>
+            <summary>
+              <span
+                ><strong>Opponent & coach</strong
+                ><small id="match-settings-label"
+                  >Adaptive difficulty · coach enabled</small
+                ></span
+              ><span class="match-settings-action"
+                >Customize <span aria-hidden="true">⌄</span></span
+              >
+            </summary>
+            <div class="panel settings-panel match-setup">
+              <div class="panel-heading">
+                <span class="eyebrow">YOUR OPPONENT</span
+                ><span class="subtle-icon">⚙</span>
+              </div>
+              <div class="field-row">
+                <label for="difficulty">Difficulty</label
+                ><select id="difficulty">
+                  <option value="auto">
+                    Adaptive · a little above your rating
+                  </option>
+                  <option value="manual">Choose a rating</option>
+                </select>
+              </div>
+              <div class="rating-control">
+                <div>
+                  <label for="bot-rating">Opponent rating</label
+                  ><output id="bot-rating-value" for="bot-rating">1,050</output>
+                </div>
+                <input
+                  id="bot-rating"
+                  type="range"
+                  min="400"
+                  max="2400"
+                  step="50"
+                  value="1050"
+                  aria-label="Opponent rating"
+                />
+                <div class="range-labels">
+                  <span>400 · Beginner</span><span>2,400 · Expert</span>
+                </div>
+                <p class="fine" id="rating-mode-note">
+                  Adaptive follows your local practice rating.
+                </p>
+              </div>
+              <div class="field-row">
+                <label for="play-style">Play style</label
+                ><select id="play-style">
+                  <option value="varied">Varied · a fresh mix</option>
+                  <option value="balanced">Balanced</option>
+                  <option value="attacking">
+                    Attacking · initiative & captures
+                  </option>
+                  <option value="positional">
+                    Positional · activity & structure
+                  </option>
+                </select>
+              </div>
+              <div class="toggle-row">
+                <div>
+                  <strong>Coach mode</strong
+                  ><small>Important moments, or whenever you ask</small>
+                </div>
+                <label class="switch"
+                  ><input
+                    type="checkbox"
+                    id="coach-enabled"
+                    checked
+                    aria-label="Coach mode" /><span></span
+                ></label>
+              </div>
+            </div>
+          </details>
+          <div class="workspace">
+            <div class="board-column">
+              <div class="player-strip">
+                <span class="mini-avatar">♞</span>
+                <div>
+                  <strong id="bot-name">Your adaptive opponent</strong
+                  ><small id="bot-style-label"
+                    >Varied play · thoughtful pace</small
+                  >
+                </div>
+                <span id="thinking-indicator" class="thinking" hidden
+                  ><i></i><i></i><i></i
+                ></span>
+              </div>
+              <div class="board-with-eval">
+                <div class="eval-rail" aria-label="Position evaluation">
+                  <div id="play-eval-fill" class="eval-white"></div>
+                  <span id="play-eval-label">0.0</span>
+                </div>
+                <div
+                  id="play-board"
+                  class="board"
+                  aria-label="Practice chessboard"
+                ></div>
+              </div>
+              <div class="board-footer">
+                <span id="play-turn">White to move · You</span
+                ><button class="text-button" id="play-flip">↻ Flip</button>
+              </div>
+              <div class="board-guide">
+                Click or drag to move · Legal destinations appear when selected
+              </div>
+              <div class="assist-toolbar" aria-label="Board assist">
+                <button
+                  class="secondary assist-toggle"
+                  id="play-assist"
+                  aria-pressed="false"
+                  title="Show squares controlled by each side"
+                >
+                  ◎ Assist off
+                </button>
+                <span
+                  class="assist-legend"
+                  aria-label="Teal: your control. Coral: opponent control. Split: both sides."
+                >
+                  <span><i class="assist-swatch you"></i>You</span>
+                  <span><i class="assist-swatch opponent"></i>Opponent</span>
+                  <span><i class="assist-swatch both"></i>Both</span>
+                </span>
+              </div>
+              <div
+                id="history-save-status"
+                class="history-save-status"
+                role="status"
+                aria-live="polite"
+              >
+                Your game will be saved to history as you play.
+              </div>
+              <div class="play-toolbar">
+                <button class="secondary" id="take-back" disabled>
+                  ↶ Take back</button
+                ><button class="secondary" id="review-current">
+                  Review this game
+                </button>
+                <details class="game-options" id="game-options">
+                  <summary>
+                    More options <span aria-hidden="true">⌄</span>
+                  </summary>
+                  <div>
+                    <button class="secondary" id="new-game">New game</button>
+                    <button class="text-button" id="resign-game">Resign</button>
+                  </div>
+                </details>
+              </div>
+            </div>
+            <div class="coach-column">
+              <div class="panel coach-panel">
+                <div class="coach-identity">
+                  <span class="coach-avatar">♞</span>
+                  <div>
+                    <strong>Let’s think it through.</strong
+                    ><small>Quiet guidance · help when it matters</small>
+                  </div>
+                </div>
+                <div class="panel-heading">
+                  <span class="eyebrow">YOUR COACH</span
+                  ><button
+                    id="coach-speak"
+                    class="secondary"
+                    aria-label="Explain this move"
+                    disabled
+                  >
+                    ✦ Explain this move
+                  </button>
+                </div>
+                <div class="coach-stage" id="play-coach-stage">
+                  <div class="coach-stage-content">
+                    <div id="play-grade" class="grade-tag neutral">
+                      LET’S PLAY
+                    </div>
+                    <div
+                      id="play-message"
+                      class="message"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      Your turn. Take your time.
+                    </div>
+                    <p id="coach-explanation" class="coach-copy">
+                      Play at your pace. I’ll explain important moments; you can
+                      ask about any move.
+                    </p>
+                  </div>
+                </div>
+                <div class="actions">
+                  <button class="primary" id="coach-hint">Help me think</button
+                  ><button class="secondary" id="coach-best" disabled>
+                    Show better move</button
+                  ><button class="primary" id="coach-resume" hidden>
+                    Return to game
+                  </button>
+                </div>
+                <div id="coach-assessment" class="move-assessment"></div>
+                <div id="coach-evidence" class="evidence-list"></div>
+                <p id="opponent-source" class="fine">
+                  Local human move model · Maia-3
+                </p>
+                <p id="play-opening" class="opening-note">
+                  Opening reference will appear as you play.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="games" class="page">
+          <div class="page-intro">
+            <div>
+              <span class="eyebrow">UNDERSTAND YOUR CHESS</span>
+              <h2>Find your turning points.</h2>
+              <p>
+                Walk through your game, explore alternatives, and find the
+                turning points.
+              </p>
+            </div>
+            <div class="counter" id="game-count"></div>
+          </div>
+          <div class="library-toolbar">
+            <button class="primary" id="import-pgn">＋ Import PGN</button
+            ><a
+              class="secondary download-link"
+              id="export-library"
+              href="/api/games/pgn"
+              download
+              >↓ Export all games</a
+            ><a
+              class="secondary download-link"
+              id="export-game"
+              href="/api/games/0/pgn"
+              download
+              >↓ Export selected game</a
+            ><input
+              type="file"
+              id="pgn-files"
+              accept=".pgn,application/x-chess-pgn,text/plain"
+              multiple
+              hidden
+            /><span id="library-status" role="status" aria-live="polite"></span>
+          </div>
+          <details id="import-details" class="import-details" hidden>
+            <summary>Import details</summary>
+            <ul id="import-messages"></ul>
+          </details>
+          <label class="review-picker"
+            >CHOOSE A GAME<select
+              id="review-select"
+              aria-label="Choose a game to review"
+            ></select
+          ></label>
+          <div class="review-journey">
+            <div>
+              <span class="eyebrow">GUIDED GAME REVIEW</span
+              ><strong id="guided-caption"
+                >Learn from the moments that changed your game.</strong
+              >
+            </div>
+            <button class="primary" id="guided-review">
+              Start guided review →</button
+            ><button class="secondary" id="guided-next" hidden>
+              Next lesson →</button
+            ><button class="text-button" id="guided-exit" hidden>
+              Exit guide
+            </button>
+          </div>
+          <div
+            id="review-story"
+            class="review-story"
+            aria-label="Game turning points"
+          ></div>
+          <div class="workspace review-workspace">
+            <div class="board-column">
+              <div class="player-strip">
+                <span class="mini-avatar">▤</span>
+                <div>
+                  <strong id="review-title">Game review</strong
+                  ><small id="review-subtitle">Preparing your game…</small>
+                </div>
+                <span id="review-ply" class="counter"></span>
+              </div>
+              <div class="board-with-eval">
+                <div class="eval-rail" aria-label="Position evaluation">
+                  <div id="review-eval-fill" class="eval-white"></div>
+                  <span id="review-eval-label">0.0</span>
+                </div>
+                <div
+                  id="game-board"
+                  class="board"
+                  aria-label="Game replay chessboard"
+                ></div>
+              </div>
+              <div class="assist-toolbar" aria-label="Board assist">
+                <button
+                  class="secondary assist-toggle"
+                  id="game-assist"
+                  aria-pressed="false"
+                  title="Show squares controlled by each side"
+                >
+                  ◎ Assist off
+                </button>
+                <span
+                  class="assist-legend"
+                  aria-label="Teal: your control. Coral: opponent control. Split: both sides."
+                >
+                  <span><i class="assist-swatch you"></i>You</span>
+                  <span><i class="assist-swatch opponent"></i>Opponent</span>
+                  <span><i class="assist-swatch both"></i>Both</span>
+                </span>
+              </div>
+              <div
+                class="review-transport"
+                aria-label="Review playback controls"
+              >
+                <div class="review-position-caption">
+                  <strong id="replay-label">Starting position</strong
+                  ><span id="review-playback-status" role="status"
+                    >Ready to review</span
+                  >
+                </div>
+                <div class="review-transport-buttons">
+                  <button
+                    class="secondary"
+                    id="first-move"
+                    aria-label="Go to start"
+                    title="Go to start"
+                  >
+                    ⇤</button
+                  ><button
+                    class="secondary"
+                    id="prev-move"
+                    aria-label="Previous move"
+                    title="Previous move"
+                  >
+                    ←</button
+                  ><button
+                    class="primary"
+                    id="review-play"
+                    aria-label="Play review"
+                    aria-pressed="false"
+                  >
+                    <span aria-hidden="true">▶</span> Play review</button
+                  ><button
+                    class="secondary"
+                    id="next-move"
+                    aria-label="Next move"
+                    title="Next move"
+                  >
+                    →</button
+                  ><button
+                    class="secondary"
+                    id="last-move"
+                    aria-label="Go to end"
+                    title="Go to end"
+                  >
+                    ⇥
+                  </button>
+                </div>
+                <label class="review-scrubber"
+                  ><span class="sr-only">Review position</span
+                  ><input
+                    id="review-position"
+                    type="range"
+                    min="0"
+                    max="1"
+                    value="0"
+                    step="1"
+                    aria-label="Review position"
+                /></label>
+                <div class="review-key-controls">
+                  <button class="text-button" id="previous-key">
+                    ← Previous key move</button
+                  ><button class="text-button" id="next-key">
+                    Next key move →
+                  </button>
+                </div>
+              </div>
+              <div
+                id="eval-chart"
+                class="eval-chart"
+                aria-label="Game evaluation chart"
+              ></div>
+              <div class="chart-legend">
+                <span>White advantage ↑</span
+                ><span>Click the graph to jump to a move</span>
+              </div>
+            </div>
+            <div class="coach-column">
+              <div class="review-summary">
+                <div>
+                  <strong id="review-accuracy">—</strong
+                  ><span>MOVE QUALITY</span>
+                </div>
+                <div>
+                  <strong id="review-mistakes">—</strong><span>MISTAKES</span>
+                </div>
+                <div>
+                  <strong id="review-blunders">—</strong><span>BLUNDERS</span>
+                </div>
+              </div>
+              <div class="panel coach-panel">
+                <div class="panel-heading">
+                  <span class="eyebrow">MOVE INSIGHT</span
+                  ><button id="review-speak" class="text-button">
+                    ✦ Explain this move
+                  </button>
+                </div>
+                <div class="coach-stage" id="game-coach-stage">
+                  <div class="coach-stage-content">
+                    <div id="review-grade" class="grade-tag neutral">
+                      STARTING POSITION
+                    </div>
+                    <h3 id="review-move-title">Let’s take a closer look.</h3>
+                    <p id="review-explanation" class="coach-copy">
+                      Choose a game to begin your review.
+                    </p>
+                    <button
+                      class="practice-link"
+                      id="review-perspective"
+                      hidden
+                    >
+                      Play the opponent’s response →
+                    </button>
+                  </div>
+                  <div id="perspective-card" class="perspective-card" hidden>
+                    <span id="perspective-label" class="eyebrow"
+                      >PLAY THE OTHER SIDE</span
+                    >
+                    <h3 id="perspective-title">Find their response.</h3>
+                    <p
+                      id="game-message"
+                      class="perspective-copy"
+                      role="status"
+                      aria-live="polite"
+                    ></p>
+                    <div class="perspective-actions">
+                      <button id="perspective-continue" class="primary">
+                        Skip · continue review →
+                      </button>
+                      <button id="perspective-reveal" class="secondary">
+                        Show the response
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div id="review-assessment" class="move-assessment"></div>
+                <button id="review-lesson" class="practice-link">
+                  ◉ Visual lesson <span>Explore step by step →</span>
+                </button>
+                <div id="review-evidence" class="evidence-list"></div>
+                <button class="text-button" id="review-restore" hidden>
+                  ↩ Return to the played position
+                </button>
+                <div class="actions">
+                  <button class="secondary" id="review-best">
+                    Show best move</button
+                  ><button class="secondary" id="review-reply">
+                    Why this matters</button
+                  ><button class="secondary" id="review-blunder">
+                    Next turning point ↗
+                  </button>
+                </div>
+                <div id="variation" class="variation" hidden>
+                  <span class="eyebrow" id="variation-title"
+                    >ENGINE CONTINUATION</span
+                  >
+                  <div id="variation-moves"></div>
+                  <button class="text-button" id="variation-close">
+                    Return to played position ↩
+                  </button>
+                </div>
+                <button class="practice-link" id="practice-moment">
+                  ◎ Practice this moment <span>→</span>
+                </button>
+                <div id="review-opening" class="opening-note"></div>
+              </div>
+              <div class="panel move-panel">
+                <span class="eyebrow">MOVE BY MOVE</span>
+                <div id="move-list" class="move-list"></div>
+              </div>
+            </div>
+          </div>
+          <details class="archive-details">
+            <summary>Browse your library</summary>
+            <div id="game-list" class="game-list"></div>
+          </details>
+        </section>
+        <section id="settings" class="page">
+          <div class="page-intro">
+            <div>
+              <span class="eyebrow">MAKE YOURSELF AT HOME</span>
+              <h2>Your coach. Your pace.</h2>
+              <p>Changes save automatically on this browser.</p>
+            </div>
+            <span class="status-pill" id="settings-saved" role="status"
+              >All changes saved</span
+            >
+          </div>
+          <div class="settings-layout">
+            <nav class="settings-nav" aria-label="Settings categories">
+              <a href="#voice-settings">Voice & coaching</a
+              ><a href="#sound-settings">Sounds</a
+              ><a href="#learning-settings">Learning</a
+              ><a href="#board-settings">Board & appearance</a
+              ><a href="#data-settings">Your games</a>
+            </nav>
+            <div class="settings-content">
+              <article class="settings-card" id="voice-settings">
+                <div class="settings-heading">
+                  <span class="setting-icon">◖♪</span>
+                  <div>
+                    <h3>A voice beside the board</h3>
+                    <p>Natural local narration, paired with the position.</p>
+                  </div>
+                </div>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Automatic spoken coaching</strong
+                    ><small
+                      >Hear explanations in reviews, training, and coach
+                      mode.</small
+                    ></span
+                  ><input type="checkbox" id="pref-voice" class="setting-check"
+                /></label>
+                <div class="setting-row">
+                  <label for="pref-voice-name"
+                    ><strong>Coach voice</strong
+                    ><small
+                      >Three Kokoro voices, plus the lightweight Piper
+                      option.</small
+                    ></label
+                  ><select id="pref-voice-name">
+                    <option value="af_heart">Heart · warm American</option>
+                    <option value="am_michael">Michael · calm American</option>
+                    <option value="bf_emma">Emma · British</option>
+                    <option value="piper">Lessac · lightweight Piper</option>
+                  </select>
+                </div>
+                <div class="setting-row">
+                  <label for="pref-speed"
+                    ><strong>Speaking speed</strong
+                    ><small
+                      >Change it even while your coach is talking.</small
+                    ></label
+                  >
+                  <div class="setting-range">
+                    <input
+                      type="range"
+                      id="pref-speed"
+                      min="0.75"
+                      max="1.5"
+                      step="0.05"
+                    /><output id="speed-value" for="pref-speed">1×</output>
+                  </div>
+                </div>
+                <div class="setting-row">
+                  <label for="pref-voice-volume"
+                    ><strong>Voice volume</strong
+                    ><small
+                      >Separate from move and interface sounds.</small
+                    ></label
+                  >
+                  <div class="setting-range">
+                    <input
+                      type="range"
+                      id="pref-voice-volume"
+                      min="0"
+                      max="100"
+                      step="5"
+                    /><output id="voice-volume-value">85%</output>
+                  </div>
+                </div>
+                <div class="voice-preview">
+                  <span id="voice-preview-status" role="status"
+                    >Listen before choosing your voice.</span
+                  ><button class="primary" id="preview-voice">
+                    ▶ Preview voice
+                  </button>
+                </div>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Show diagrams while speaking</strong
+                    ><small
+                      >Highlight the pieces and threats, then return to your
+                      position.</small
+                    ></span
+                  ><input
+                    id="pref-auto-diagrams"
+                    class="setting-check"
+                    type="checkbox"
+                /></label>
+              </article>
+              <article class="settings-card" id="sound-settings">
+                <div class="settings-heading">
+                  <span class="setting-icon">♫</span>
+                  <div>
+                    <h3>Sound that helps you follow</h3>
+                    <p>Gentle cues for actions, discoveries, and progress.</p>
+                  </div>
+                </div>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Sound effects</strong
+                    ><small>Master switch for all non-voice audio.</small></span
+                  ><input id="pref-sound" class="setting-check" type="checkbox"
+                /></label>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Interface sounds</strong
+                    ><small
+                      >Navigation, hints, switches, and selections.</small
+                    ></span
+                  ><input
+                    id="pref-ui-sounds"
+                    class="setting-check"
+                    type="checkbox"
+                /></label>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Move sounds</strong
+                    ><small
+                      >Different cues for moves, captures, and checks.</small
+                    ></span
+                  ><input
+                    id="pref-move-sounds"
+                    class="setting-check"
+                    type="checkbox"
+                /></label>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Learning celebrations</strong
+                    ><small
+                      >A soft chime for a completed position or
+                      achievement.</small
+                    ></span
+                  ><input
+                    id="pref-rewards"
+                    class="setting-check"
+                    type="checkbox"
+                /></label>
+                <div class="setting-row">
+                  <label for="pref-sound-volume"
+                    ><strong>Effects volume</strong></label
+                  >
+                  <div class="setting-range">
+                    <input
+                      id="pref-sound-volume"
+                      type="range"
+                      min="0"
+                      max="100"
+                      step="5"
+                    /><output id="sound-volume-value">50%</output>
+                  </div>
+                </div>
+                <button class="secondary" id="preview-sounds">
+                  ♫ Preview sounds
+                </button>
+              </article>
+              <article class="settings-card" id="learning-settings">
+                <div class="settings-heading">
+                  <span class="setting-icon">◎</span>
+                  <div>
+                    <h3>Build a learning rhythm</h3>
+                    <p>A little challenge, with room to think.</p>
+                  </div>
+                </div>
+                <div class="setting-row">
+                  <label for="pref-goal"
+                    ><strong>Daily goal</strong
+                    ><small
+                      >Distinct positions; repeats don’t fill your goal
+                      twice.</small
+                    ></label
+                  ><select id="pref-goal">
+                    <option value="3">Gentle · 3 positions</option>
+                    <option value="5">Steady · 5 positions</option>
+                    <option value="10">Focused · 10 positions</option>
+                  </select>
+                </div>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Pause to predict replies</strong
+                    ><small
+                      >In daily sessions, choose a defensive candidate before
+                      seeing the reply.</small
+                    ></span
+                  ><input
+                    id="pref-predict"
+                    class="setting-check"
+                    type="checkbox"
+                /></label>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Coach feedback during games</strong
+                    ><small
+                      >Grade moves quietly. Explain mistakes and key moments
+                      automatically, or ask about any move.</small
+                    ></span
+                  ><input id="pref-coach" class="setting-check" type="checkbox"
+                /></label>
+                <div class="setting-row">
+                  <label for="pref-pace"
+                    ><strong>Opponent’s thinking pace</strong
+                    ><small
+                      >Includes a short natural pause before each move.</small
+                    ></label
+                  ><select id="pref-pace">
+                    <option value="calm">Unhurried</option>
+                    <option value="normal">Natural</option>
+                    <option value="brisk">Brisk</option>
+                  </select>
+                </div>
+                <div class="setting-row">
+                  <label for="pref-review-pace"
+                    ><strong>Review reading pace</strong
+                    ><small
+                      >Base reading time. Simple moves use half; complex moves
+                      use up to twice this pause. Narration finishes
+                      first.</small
+                    ></label
+                  ><select id="pref-review-pace">
+                    <option value="800">Brisk · 0.8 seconds</option>
+                    <option value="1400">Comfortable · 1.4 seconds</option>
+                    <option value="2250">Unhurried · 2.25 seconds</option>
+                  </select>
+                </div>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Opponent’s perspective in review</strong>
+                    <small
+                      >Occasionally pause at a key moment so you can play an
+                      important reply from the other side.</small
+                    ></span
+                  >
+                  <input
+                    id="pref-review-challenges"
+                    class="setting-check"
+                    type="checkbox"
+                /></label>
+                <div class="learning-note">
+                  Earn 15 XP for independent practice, 10 XP for working through
+                  an idea, and 5 XP for studying a reveal. Rewards apply once
+                  per position each day. Learning levels celebrate practice;
+                  they are separate from your chess rating.
+                </div>
+              </article>
+              <article class="settings-card" id="board-settings">
+                <div class="settings-heading">
+                  <span class="setting-icon">◫</span>
+                  <div>
+                    <h3>A board that feels like yours</h3>
+                    <p>
+                      Clear pieces, comfortable type, and motion you control.
+                    </p>
+                  </div>
+                </div>
+                <div class="setting-row">
+                  <label for="pref-theme"><strong>Appearance</strong></label
+                  ><select id="pref-theme">
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+                    <option value="system">Follow system</option>
+                  </select>
+                </div>
+                <div class="setting-row">
+                  <label for="pref-board"><strong>Board colors</strong></label
+                  ><select id="pref-board">
+                    <option value="sage">Sage</option>
+                    <option value="walnut">Walnut</option>
+                    <option value="slate">Slate</option>
+                  </select>
+                </div>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Board coordinates</strong
+                    ><small
+                      >Show file and rank labels around the squares.</small
+                    ></span
+                  ><input
+                    id="pref-coordinates"
+                    class="setting-check"
+                    type="checkbox"
+                /></label>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Legal move markers</strong
+                    ><small
+                      >Show available destinations when you select a
+                      piece.</small
+                    ></span
+                  ><input id="pref-legal" class="setting-check" type="checkbox"
+                /></label>
+                <label class="setting-row"
+                  ><span
+                    ><strong>Assist mode</strong>
+                    <small
+                      >Subtle team colours show board control. You can also
+                      toggle this beside any board.</small
+                    ></span
+                  >
+                  <input id="pref-assist" class="setting-check" type="checkbox"
+                /></label>
+                <div class="setting-row">
+                  <label for="pref-motion"><strong>Motion</strong></label
+                  ><select id="pref-motion">
+                    <option value="system">Follow system preference</option>
+                    <option value="full">Smooth animations</option>
+                    <option value="reduced">Reduce motion</option>
+                  </select>
+                </div>
+                <div class="setting-row">
+                  <label for="pref-text"><strong>Text size</strong></label
+                  ><select id="pref-text">
+                    <option value="comfortable">Comfortable</option>
+                    <option value="large">Larger</option>
+                  </select>
+                </div>
+              </article>
+              <article class="settings-card" id="data-settings">
+                <div class="settings-heading">
+                  <span class="setting-icon">▤</span>
+                  <div>
+                    <h3>Your games stay yours</h3>
+                    <p>Import games or take your library with you as PGN.</p>
+                  </div>
+                </div>
+                <div class="settings-data-actions">
+                  <button class="primary" id="settings-import">
+                    Import games</button
+                  ><a
+                    class="secondary download-link"
+                    href="/api/games/pgn"
+                    download
+                    >Export all games</a
+                  ><button class="secondary" id="settings-library">
+                    Open game library →
+                  </button>
+                </div>
+                <p class="fine">
+                  Bot games save automatically. Voice and chess analysis run
+                  locally on this computer. Preferences are stored in this
+                  browser.
+                </p>
+                <button class="text-button" id="reset-preferences">
+                  Restore default preferences
+                </button>
+              </article>
+            </div>
+          </div>
+        </section>
+        <footer>
+          <span
+            ><span class="live-dot"></span> LOCAL ANALYSIS · PERSONAL LEARNING ·
+            NEURAL VOICE</span
+          ><a href="https://github.com/HyperCactus/knightlight" target="_blank" rel="noopener noreferrer" aria-label="Knightlight source code and licenses">KNIGHTLIGHT · SOURCE</a>
+        </footer>
+        <div id="toast" role="status" aria-live="polite" hidden></div>
+      </main>
+    </div>
+    <dialog id="promotion">
+      <h3>Choose your promotion</h3>
+      <p>Which piece would you like?</p>
+      <div id="promotion-options"></div>
+      <small>Press Escape to cancel.</small>
+    </dialog>
+    <div id="audio-unlock" class="audio-unlock" role="status" hidden>
+      <span>Your coach is ready. Enable audio to hear the explanation.</span
+      ><button class="primary" id="enable-audio">Enable audio</button
+      ><button class="text-button" id="dismiss-audio">Keep muted</button>
+    </div>
+    <dialog
+      id="game-over-dialog"
+      class="game-over-dialog"
+      aria-labelledby="game-result-title"
+      aria-describedby="game-result-copy"
+    >
+      <div id="game-result" class="game-result" role="status" hidden>
+        <button
+          id="close-game-result"
+          class="text-button result-close"
+          aria-label="Back to board"
+        >
+          ×
+        </button>
+        <div id="game-result-symbol" class="result-symbol" aria-hidden="true">
+          ♔
+        </div>
+        <span class="eyebrow" id="game-result-label">GAME COMPLETE</span>
+        <h2 id="game-result-title">Game over</h2>
+        <p id="game-result-copy"></p>
+        <div id="game-result-stats" class="result-stats"></div>
+        <p id="game-result-takeaway" class="result-takeaway" hidden></p>
+        <p id="game-result-status" class="fine" aria-live="polite"></p>
+        <div class="result-actions">
+          <button class="primary" id="play-again">New game</button>
+          <button class="secondary" id="review-finished">
+            Review key moments →
+          </button>
+        </div>
+        <button class="text-button" id="retry-game-summary" hidden>
+          Retry game summary
+        </button>
+        <button class="text-button" id="result-back-board">
+          Back to board
+        </button>
+      </div>
+    </dialog>
+    <script src="/api/preferences/bootstrap.js"></script>
+    <script src="/preferences.js?v=32"></script>
+    <script src="/motion.js?v=32"></script>
+    <script src="/assist.js?v=32"></script>
+    <script src="/app.js?v=32"></script>
+    <script src="/studio.js?v=32"></script>
+    <script src="/learning.js?v=32"></script>
+    <script src="/lessons.js?v=32"></script>
+    <script src="/library.js?v=32"></script>
+    <script src="/experience.js?v=32"></script>
+    <script src="/review.js?v=32"></script>
+    <script src="/perspective.js?v=32"></script>
+    <script src="/ending.js?v=32"></script>
+  </body>
+</html>

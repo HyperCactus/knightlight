@@ -1,0 +1,356 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Chess Study perspective challenges",
+    "version": "1.0.0",
+    "description": "Additive same-repository API. Localhost and origin checks inherited from the application. No additional authentication. Attempts have no persistent side effects."
+  },
+  "paths": {
+    "/api/reviews/{id}/perspectives": {
+      "get": {
+        "operationId": "preparePerspectives",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Up to two engine-verified challenges, possibly none. No further page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "items",
+                    "next_cursor"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "maxItems": 2,
+                      "items": {
+                        "$ref": "#/components/schemas/Challenge"
+                      }
+                    },
+                    "next_cursor": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Existing error envelope; HTTP status identifies the failure class.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Existing error envelope; HTTP status identifies the failure class.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Existing error envelope; HTTP status identifies the failure class.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reviews/{id}/perspectives/{ply}/moves": {
+      "post": {
+        "operationId": "answerPerspective",
+        "description": "Stateless, safe to retry. Equivalent strong legal alternatives may be accepted. Recomputed engine analysis can differ slightly across requests. Never alters games, ratings or rewards.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "ply",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "uci": {
+                    "type": "string",
+                    "description": "Legal UCI move, required unless reveal is true."
+                  },
+                  "reveal": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "uci"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "reveal"
+                    ],
+                    "properties": {
+                      "reveal": {
+                        "const": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Checked response with board and visual/narrative feedback.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Answer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Existing error envelope; HTTP status identifies the failure class.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Existing error envelope; HTTP status identifies the failure class.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Existing error envelope; HTTP status identifies the failure class.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Existing error envelope; HTTP status identifies the failure class.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Challenge": {
+        "type": "object",
+        "required": [
+          "ply",
+          "kind",
+          "fen",
+          "side",
+          "intro",
+          "objective"
+        ],
+        "properties": {
+          "ply": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "One-based reviewed move after which the opponent responds."
+          },
+          "kind": {
+            "enum": [
+              "punish",
+              "defend"
+            ]
+          },
+          "fen": {
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "white",
+              "black"
+            ]
+          },
+          "intro": {
+            "type": "string"
+          },
+          "objective": {
+            "type": "string"
+          }
+        }
+      },
+      "Board": {
+        "type": "object",
+        "required": [
+          "fen",
+          "legal",
+          "turn",
+          "check",
+          "outcome",
+          "threats"
+        ],
+        "properties": {
+          "fen": {
+            "type": "string"
+          },
+          "legal": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "turn": {
+            "enum": [
+              "white",
+              "black"
+            ]
+          },
+          "check": {
+            "type": "boolean"
+          },
+          "outcome": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "threats": {
+            "type": "object",
+            "description": "Canonical position and white/black controlled-square arrays; same as /api/board."
+          }
+        }
+      },
+      "ReviewMove": {
+        "type": "object",
+        "description": "Existing ReviewMove representation from /api/reviews: before/after FEN, UCI/SAN, grade, explanation, engine continuations and visual evidence.",
+        "required": [
+          "uci",
+          "san",
+          "grade",
+          "explanation",
+          "evidence"
+        ],
+        "properties": {
+          "uci": {
+            "type": "string"
+          },
+          "san": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "string"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "Answer": {
+        "type": "object",
+        "required": [
+          "accepted",
+          "revealed",
+          "board",
+          "feedback"
+        ],
+        "properties": {
+          "accepted": {
+            "type": "boolean"
+          },
+          "revealed": {
+            "type": "boolean"
+          },
+          "board": {
+            "$ref": "#/components/schemas/Board"
+          },
+          "feedback": {
+            "$ref": "#/components/schemas/ReviewMove"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "message"
+            ],
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

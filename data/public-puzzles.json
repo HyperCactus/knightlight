@@ -1,0 +1,2803 @@
+[
+  {
+    "id": "00008",
+    "fen": "r6k/pp2r2p/4Rp1Q/3p4/8/1N1P2b1/PqP3PP/7K w - - 0 25",
+    "moves": [
+      "e6e7",
+      "b2b1",
+      "b3c1",
+      "b1c1",
+      "h6c1"
+    ],
+    "rating": 1819,
+    "theme": "Material & captures",
+    "tags": [
+      "crushing",
+      "hangingPiece",
+      "long",
+      "middlegame"
+    ],
+    "game_url": "https://lichess.org/game/787zsVup/black#48"
+  },
+  {
+    "id": "0000D",
+    "fen": "5rk1/1p3ppp/pq1Q1b2/8/8/1P3N2/P4PPP/3R2K1 b - - 3 27",
+    "moves": [
+      "f8d8",
+      "d6d8",
+      "f6d8"
+    ],
+    "rating": 1433,
+    "theme": "Endgame technique",
+    "tags": [
+      "advantage",
+      "endgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/F8M8OS71#53"
+  },
+  {
+    "id": "0000H",
+    "fen": "r4rk1/pp3ppp/8/2bqp2Q/3N4/P2Bn2P/1PPN1P2/R1B2RK1 b - - 0 15",
+    "moves": [
+      "d5g2"
+    ],
+    "rating": 1032,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "mate",
+      "mateIn1",
+      "middlegame",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/EwHRkfas#29"
+  },
+  {
+    "id": "0008Q",
+    "fen": "8/5R2/1p2P3/p4r2/P6p/1P3Pk1/4K3/8 b - - 2 64",
+    "moves": [
+      "f5e5",
+      "e2f1",
+      "e5e6"
+    ],
+    "rating": 1392,
+    "theme": "Endgame technique",
+    "tags": [
+      "advantage",
+      "endgame",
+      "rookEndgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/MQSyb3KW#127"
+  },
+  {
+    "id": "000Pw",
+    "fen": "6k1/5p1p/4p3/4q3/3n4/2Q3P1/PP1N1P1P/6K1 b - - 3 37",
+    "moves": [
+      "d4e2",
+      "g1f1",
+      "e2c3"
+    ],
+    "rating": 1514,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "endgame",
+      "fork",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/au2lCK5o#73"
+  },
+  {
+    "id": "000Sa",
+    "fen": "2Q2bk1/5p1p/p5p1/2p3P1/4B3/7P/qPr2P2/2K4R w - - 0 33",
+    "moves": [
+      "e4c2",
+      "a2a1",
+      "c2b1"
+    ],
+    "rating": 1565,
+    "theme": "Endgame technique",
+    "tags": [
+      "advantage",
+      "endgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/lTTa9lwd/black#64"
+  },
+  {
+    "id": "000Zo",
+    "fen": "4r3/1k6/pp3P2/1b5p/3R1p2/P1R2P2/1P4PP/6K1 b - - 0 35",
+    "moves": [
+      "e8e1",
+      "g1f2",
+      "e1f1"
+    ],
+    "rating": 1363,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "endgame",
+      "mate",
+      "mateIn2",
+      "operaMate",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/n8Ff742v#69"
+  },
+  {
+    "id": "000hf",
+    "fen": "r1bq3r/pp1nbkp1/2p1p2p/8/2BP4/1PN3P1/P3QP1P/3R1RK1 w - - 0 20",
+    "moves": [
+      "e2e6",
+      "f7f8",
+      "e6f7"
+    ],
+    "rating": 1395,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/71ygsFeE/black#38"
+  },
+  {
+    "id": "000lC",
+    "fen": "3r3r/pQNk1ppp/1qnR1n2/1B6/8/8/PPP3PP/5R1K b - - 0 19",
+    "moves": [
+      "d7d6",
+      "b7b6",
+      "a7b6"
+    ],
+    "rating": 1325,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "hangingPiece",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/vaqz2bx6#37"
+  },
+  {
+    "id": "000o3",
+    "fen": "8/2p5/3k2p1/1p1P1p2/1P3P2/3K2Pp/7P/8 w - - 2 44",
+    "moves": [
+      "d3d4",
+      "g6g5",
+      "f4g5"
+    ],
+    "rating": 959,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "endgame",
+      "pawnEndgame",
+      "short",
+      "zugzwang"
+    ],
+    "game_url": "https://lichess.org/game/BAY91mF3/black#86"
+  },
+  {
+    "id": "000pA",
+    "fen": "5rk1/5pp1/7p/3p4/1KpPn3/4PPP1/1P2N1P1/r4R1R b - - 0 24",
+    "moves": [
+      "f8b8"
+    ],
+    "rating": 1008,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "endgame",
+      "mate",
+      "mateIn1",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/3dA5upN3#47"
+  },
+  {
+    "id": "000rO",
+    "fen": "3R4/8/8/KB2b3/1p6/1P2k3/3p4/8 b - - 0 58",
+    "moves": [
+      "e5c7",
+      "a5b4",
+      "c7d8"
+    ],
+    "rating": 1110,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "endgame",
+      "fork",
+      "master",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/tzeeBEc2#115"
+  },
+  {
+    "id": "000rZ",
+    "fen": "2kr1b1r/p1p2pp1/2pqN3/7p/6n1/2NPB3/PPP2PPP/R2Q1RK1 b - - 0 13",
+    "moves": [
+      "d6h2"
+    ],
+    "rating": 638,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "kingsideAttack",
+      "mate",
+      "mateIn1",
+      "oneMove",
+      "opening"
+    ],
+    "game_url": "https://lichess.org/game/seIMDWkD#25"
+  },
+  {
+    "id": "0017R",
+    "fen": "r2qk2r/pp2ppbp/1n1p2p1/3P4/2n5/2NBBP1P/PP3P2/R2QK2R w KQkq - 0 13",
+    "moves": [
+      "d3c4",
+      "b6c4",
+      "d1a4",
+      "d8d7",
+      "a4c4"
+    ],
+    "rating": 1494,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "advantage",
+      "fork",
+      "long",
+      "middlegame"
+    ],
+    "game_url": "https://lichess.org/game/ol84k0z4/black#24"
+  },
+  {
+    "id": "0018P",
+    "fen": "5R2/1p6/p1p1k3/2P1r3/2K3p1/2P1p1P1/1P5P/8 w - - 2 45",
+    "moves": [
+      "f8e8",
+      "e6f5",
+      "e8e5",
+      "f5e5",
+      "c4d3",
+      "e5d5",
+      "d3e3",
+      "a6a5",
+      "e3f4",
+      "d5c4",
+      "f4g4"
+    ],
+    "rating": 1906,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "endgame",
+      "exposedKing",
+      "rookEndgame",
+      "veryLong"
+    ],
+    "game_url": "https://lichess.org/game/Xg1Gtfjr/black#88"
+  },
+  {
+    "id": "001Oo",
+    "fen": "6k1/4p1bp/6p1/1p1pP3/qPpPp3/2P1P3/Q2B1KPP/8 w - - 3 24",
+    "moves": [
+      "a2a4",
+      "b5a4",
+      "b4b5",
+      "g8f7",
+      "b5b6"
+    ],
+    "rating": 2078,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "endgame",
+      "long",
+      "quietMove"
+    ],
+    "game_url": "https://lichess.org/game/8IKs77O9/black#46"
+  },
+  {
+    "id": "001Wz",
+    "fen": "6k1/5ppp/r1p5/p1n1rP2/8/2P2N1P/2P3P1/3R2K1 w - - 0 22",
+    "moves": [
+      "d1d8",
+      "e5e8",
+      "d8e8"
+    ],
+    "rating": 1118,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "backRankMate",
+      "endgame",
+      "mate",
+      "mateIn2",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/84RH3LaP/black#42"
+  },
+  {
+    "id": "001aK",
+    "fen": "6k1/5p2/4p3/P1B5/2P4P/4Pnp1/Rb2r3/5K2 w - - 0 34",
+    "moves": [
+      "f1e2",
+      "g3g2",
+      "e3e4",
+      "f3d4",
+      "e2f2"
+    ],
+    "rating": 2052,
+    "theme": "Material & captures",
+    "tags": [
+      "crushing",
+      "endgame",
+      "hangingPiece",
+      "long",
+      "quietMove"
+    ],
+    "game_url": "https://lichess.org/game/Epr0AiEh/black#66"
+  },
+  {
+    "id": "001cr",
+    "fen": "8/3B2pp/p5k1/6P1/1ppp1K2/8/1P6/8 w - - 0 39",
+    "moves": [
+      "d7e8"
+    ],
+    "rating": 1531,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "bishopEndgame",
+      "endgame",
+      "mate",
+      "mateIn1",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/7FFNwibw/black#76"
+  },
+  {
+    "id": "001kG",
+    "fen": "rnbq3r/1p3kpp/p4n2/2b5/2pNP3/2N5/PPP3PP/R1BQ1RK1 w - - 2 12",
+    "moves": [
+      "d1h5",
+      "f7g8",
+      "h5c5"
+    ],
+    "rating": 1941,
+    "theme": "Pins",
+    "tags": [
+      "advantage",
+      "opening",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/xXAEaVto/black#22"
+  },
+  {
+    "id": "001m3",
+    "fen": "7r/6k1/2b1Rp2/8/P1N3p1/5nP1/5P2/Q4K2 b - - 0 38",
+    "moves": [
+      "h8h1",
+      "f1e2",
+      "h1a1"
+    ],
+    "rating": 1455,
+    "theme": "Endgame technique",
+    "tags": [
+      "advantage",
+      "endgame",
+      "short",
+      "skewer"
+    ],
+    "game_url": "https://lichess.org/game/LELOz22f#75"
+  },
+  {
+    "id": "001om",
+    "fen": "5r1k/pp4pp/5p2/1BbQp1r1/7K/7P/1PP3P1/3R3R b - - 3 26",
+    "moves": [
+      "c5f2",
+      "g2g3",
+      "f2g3"
+    ],
+    "rating": 1016,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "morphysMate",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/VWOIWtIh#51"
+  },
+  {
+    "id": "001pC",
+    "fen": "r4rk1/pp3ppp/3b4/2p1pPB1/7N/2PP3n/PP4PP/R2Q2RK b - - 0 18",
+    "moves": [
+      "h3f2"
+    ],
+    "rating": 800,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "mate",
+      "mateIn1",
+      "middlegame",
+      "oneMove",
+      "smotheredMate"
+    ],
+    "game_url": "https://lichess.org/game/d04UP3XD#35"
+  },
+  {
+    "id": "001w5",
+    "fen": "1rb3k1/q4rP1/4p2p/3p3p/3P1P2/2P5/2QK3P/3R2R1 w - - 1 30",
+    "moves": [
+      "c2h7",
+      "g8h7",
+      "g7g8q"
+    ],
+    "rating": 1034,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "advancedPawn",
+      "attraction",
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "promotion",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/0e1vxAEn/black#58"
+  },
+  {
+    "id": "001wR",
+    "fen": "6nr/p4p1p/k1p5/1p6/1QN5/2P1P3/4KPqP/8 w - - 0 27",
+    "moves": [
+      "b4a5",
+      "a6b7",
+      "c4d6",
+      "b7b8",
+      "a5d8"
+    ],
+    "rating": 1170,
+    "theme": "Endgame technique",
+    "tags": [
+      "endgame",
+      "long",
+      "mate",
+      "mateIn3"
+    ],
+    "game_url": "https://lichess.org/game/ruvbd9JW/black#52"
+  },
+  {
+    "id": "001wb",
+    "fen": "r3k2r/pb1p1ppp/1b4q1/1Q2P3/8/2NP1PP1/PP4P1/R1B2R1K b kq - 0 17",
+    "moves": [
+      "g6h5"
+    ],
+    "rating": 1259,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "mate",
+      "mateIn1",
+      "middlegame",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/hNzYRMWP#33"
+  },
+  {
+    "id": "001wr",
+    "fen": "r4rk1/p3ppbp/Pp1q1np1/3PpbB1/2B5/2N2P2/1PPQ2PP/3RR1K1 b - - 0 18",
+    "moves": [
+      "d6c5",
+      "g1h1",
+      "c5c4"
+    ],
+    "rating": 977,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "advantage",
+      "fork",
+      "master",
+      "masterVsMaster",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/KnJ2mojX#35"
+  },
+  {
+    "id": "001xl",
+    "fen": "8/4R3/p4kpp/3B4/5q2/8/5P1P/6K1 w - - 6 41",
+    "moves": [
+      "e7f7",
+      "f6e5",
+      "f7f4"
+    ],
+    "rating": 1289,
+    "theme": "Endgame technique",
+    "tags": [
+      "advantage",
+      "endgame",
+      "master",
+      "masterVsMaster",
+      "short",
+      "skewer",
+      "superGM"
+    ],
+    "game_url": "https://lichess.org/game/bEQkfPQD/black#80"
+  },
+  {
+    "id": "002Ds",
+    "fen": "8/2p5/pp1p4/P2Pk2p/1PP1p2P/2n1K2P/3N4/8 w - - 0 46",
+    "moves": [
+      "b4b5",
+      "c3d1",
+      "e3e2",
+      "a6b5",
+      "a5a6"
+    ],
+    "rating": 1992,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "endgame",
+      "knightEndgame",
+      "long"
+    ],
+    "game_url": "https://lichess.org/game/2SrvOtZN/black#90"
+  },
+  {
+    "id": "002HE",
+    "fen": "1qr2rk1/1p1p1ppp/pB2p1n1/7n/2P1P3/1Q2NP1P/PP2BKPb/3R1R2 b - - 2 20",
+    "moves": [
+      "b8g3"
+    ],
+    "rating": 1119,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "master",
+      "mate",
+      "mateIn1",
+      "middlegame",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/U21EXYdv#39"
+  },
+  {
+    "id": "002Mm",
+    "fen": "rn1qrk2/ppp3pQ/3p1pP1/3Pp3/2P1P3/8/PP3PP1/R1B1K3 w Q - 3 17",
+    "moves": [
+      "h7h8",
+      "f8e7",
+      "h8g7"
+    ],
+    "rating": 915,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "deflection",
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/wAkPv4uG/black#32"
+  },
+  {
+    "id": "002Q2",
+    "fen": "7k/p4R1p/3p3B/2pN1n2/2PbB1b1/3P2P1/P3r3/5R1K b - - 0 28",
+    "moves": [
+      "f5g3"
+    ],
+    "rating": 985,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "cornerMate",
+      "mate",
+      "mateIn1",
+      "middlegame",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/yqAJ1jMv#55"
+  },
+  {
+    "id": "002Tf",
+    "fen": "r3kbnr/ppp1qppp/2n5/1B1pP3/5B2/4PQ2/PPP2PPP/RN2K2R b KQkq - 2 7",
+    "moves": [
+      "e7b4",
+      "b1c3",
+      "b4b2"
+    ],
+    "rating": 1561,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "advantage",
+      "fork",
+      "opening",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/Zq56PwHK#13"
+  },
+  {
+    "id": "002Uy",
+    "fen": "8/8/1p6/k7/P7/1KR4r/8/8 b - - 27 64",
+    "moves": [
+      "h3c3",
+      "b3c3",
+      "a5a4",
+      "c3b2",
+      "a4b4"
+    ],
+    "rating": 1573,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "long",
+      "rookEndgame"
+    ],
+    "game_url": "https://lichess.org/game/sLU7YN1A#127"
+  },
+  {
+    "id": "002X3",
+    "fen": "6k1/2q2p1p/4pPp1/4P3/p1pP1P2/r1P5/6QP/4B1K1 w - - 0 34",
+    "moves": [
+      "g2a8",
+      "c7b8",
+      "a8b8"
+    ],
+    "rating": 936,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "endgame",
+      "mate",
+      "mateIn2",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/yshS3bLB/black#66"
+  },
+  {
+    "id": "002bK",
+    "fen": "8/7p/4k3/pb1p1pPB/1n1P3P/N1p1P3/4K3/8 w - - 2 43",
+    "moves": [
+      "a3b5",
+      "c3c2",
+      "e2d2"
+    ],
+    "rating": 1080,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "endgame",
+      "hangingPiece",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/IFGj8W5s/black#84"
+  },
+  {
+    "id": "002p5",
+    "fen": "r1bqr1k1/pp1nbpp1/2p5/3n2P1/2BP4/P7/1PQNNPP1/R3K2R w KQ - 1 14",
+    "moves": [
+      "c2h7",
+      "g8f8",
+      "h7h8"
+    ],
+    "rating": 908,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "kingsideAttack",
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/meSoQkhU/black#26"
+  },
+  {
+    "id": "0039T",
+    "fen": "1r5r/p3kp2/4p2p/4P3/R4Pp1/6P1/P1P4P/4K2R b K - 2 25",
+    "moves": [
+      "b8b1",
+      "e1f2",
+      "b1h1",
+      "a4a7",
+      "e7f8"
+    ],
+    "rating": 1111,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "long",
+      "rookEndgame",
+      "skewer"
+    ],
+    "game_url": "https://lichess.org/game/BrtVeJlj#49"
+  },
+  {
+    "id": "003AX",
+    "fen": "2r2rk1/5ppp/bq2p3/p2pP1N1/Pb1p2P1/1P2P2P/2QN4/2R1K2R w K - 0 19",
+    "moves": [
+      "c2h7"
+    ],
+    "rating": 1055,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "kingsideAttack",
+      "mate",
+      "mateIn1",
+      "middlegame",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/kRgejRSt/black#36"
+  },
+  {
+    "id": "003IX",
+    "fen": "8/3pk3/R7/1R2PK1p/2PPn1r1/8/8/8 b - - 0 43",
+    "moves": [
+      "e4g3"
+    ],
+    "rating": 1699,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "endgame",
+      "mate",
+      "mateIn1",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/576Btq56#85"
+  },
+  {
+    "id": "003Jb",
+    "fen": "6k1/Q2bqr1p/2rpp1pR/p7/Pp2P3/1B3P2/1PP3P1/2KR4 b - - 7 22",
+    "moves": [
+      "e7g5",
+      "c1b1",
+      "g5h6"
+    ],
+    "rating": 993,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "advantage",
+      "fork",
+      "master",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/8RvK0idj#43"
+  },
+  {
+    "id": "003S3",
+    "fen": "1r3k1r/pNqnppb1/6pn/2p3Np/7P/2P2Q2/PP3PP1/R1B1K2R w KQ - 3 16",
+    "moves": [
+      "g5e6",
+      "f8g8",
+      "e6c7"
+    ],
+    "rating": 1415,
+    "theme": "Pins",
+    "tags": [
+      "advantage",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/Eu6S0GPA/black#30"
+  },
+  {
+    "id": "003Tx",
+    "fen": "2r5/pR5p/5p1k/4p3/4R3/B4nPP/PP3P2/1K6 b - - 0 27",
+    "moves": [
+      "f3d2",
+      "b1a1",
+      "c8c1"
+    ],
+    "rating": 1510,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "backRankMate",
+      "endgame",
+      "fork",
+      "mate",
+      "mateIn2",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/A7j9VEC0#53"
+  },
+  {
+    "id": "003UW",
+    "fen": "8/6pk/7p/2pq4/3p4/5PP1/P3QK1P/8 w - - 2 41",
+    "moves": [
+      "e2e4",
+      "d5e4",
+      "f3e4"
+    ],
+    "rating": 1492,
+    "theme": "Endgame technique",
+    "tags": [
+      "advantage",
+      "endgame",
+      "queenEndgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/cXMga3rb/black#80"
+  },
+  {
+    "id": "003aS",
+    "fen": "8/8/5k1p/6pP/1R4P1/1p2KP2/8/1r6 b - - 0 43",
+    "moves": [
+      "b3b2",
+      "b4b6",
+      "f6e5",
+      "f3f4",
+      "g5f4"
+    ],
+    "rating": 2095,
+    "theme": "Endgame technique",
+    "tags": [
+      "advancedPawn",
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "long",
+      "rookEndgame"
+    ],
+    "game_url": "https://lichess.org/game/I7ZktFeR#85"
+  },
+  {
+    "id": "003jH",
+    "fen": "rn3rk1/p5pp/3N4/4np1q/5Q2/1P6/PB1P1KP1/2R4R b - - 1 25",
+    "moves": [
+      "e5d3",
+      "f2e3",
+      "d3f4",
+      "h1h5",
+      "f4h5"
+    ],
+    "rating": 1137,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "fork",
+      "long",
+      "middlegame"
+    ],
+    "game_url": "https://lichess.org/game/3CQGofXT#49"
+  },
+  {
+    "id": "003jb",
+    "fen": "r3kb1r/p4ppp/b3p3/2pq4/3Q4/4BN2/PPP2PPP/R3K2R w KQkq - 0 12",
+    "moves": [
+      "d4a4",
+      "a6b5",
+      "a4b5"
+    ],
+    "rating": 982,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "fork",
+      "master",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/960EzUS0/black#22"
+  },
+  {
+    "id": "003jv",
+    "fen": "7R/1p2k2p/p2n2p1/4K3/8/6P1/P6P/8 b - - 11 37",
+    "moves": [
+      "d6f7",
+      "e5e4",
+      "f7h8"
+    ],
+    "rating": 1001,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "endgame",
+      "fork",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/n0UvwK36#73"
+  },
+  {
+    "id": "003mh",
+    "fen": "4rk1r/1pp2p2/p2p3p/3N4/3P2q1/8/PPP5/1K2Q1NR w - - 2 24",
+    "moves": [
+      "e1e8",
+      "f8e8",
+      "d5f6",
+      "e8e7",
+      "f6g4"
+    ],
+    "rating": 1329,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "advantage",
+      "attraction",
+      "fork",
+      "long",
+      "middlegame",
+      "sacrifice"
+    ],
+    "game_url": "https://lichess.org/game/HSa4keKZ/black#46"
+  },
+  {
+    "id": "003o0",
+    "fen": "r1bqk2r/pp1nbppp/3p4/1B1p4/3P1B2/5N2/PPP2PPP/R2QK2R b KQkq - 3 9",
+    "moves": [
+      "d8a5",
+      "d1d2",
+      "a5b5"
+    ],
+    "rating": 1020,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "advantage",
+      "fork",
+      "master",
+      "opening",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/Ae0t9V1Z#17"
+  },
+  {
+    "id": "003r5",
+    "fen": "r2qr1k1/ppp2ppp/4P3/8/1nP2Q2/2N2N1P/PP3KP1/R4R2 b - - 0 15",
+    "moves": [
+      "b4d3",
+      "f2g1",
+      "d3f4"
+    ],
+    "rating": 1112,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "fork",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/JPN97v7j#29"
+  },
+  {
+    "id": "003wQ",
+    "fen": "2r2rk1/6pp/3Q1q2/8/3N1B2/6P1/PP1K3P/5R2 b - - 0 24",
+    "moves": [
+      "f6d6",
+      "f4d6",
+      "f8f1"
+    ],
+    "rating": 1877,
+    "theme": "Pins",
+    "tags": [
+      "advantage",
+      "discoveredAttack",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/W3wvnzlo#47"
+  },
+  {
+    "id": "0040n",
+    "fen": "r7/p2k1pp1/p1p1pn2/3p4/3P4/P3PQp1/1PP2P1R/2K5 b - - 0 20",
+    "moves": [
+      "g3h2",
+      "f3h3",
+      "f6g4"
+    ],
+    "rating": 1270,
+    "theme": "Endgame technique",
+    "tags": [
+      "advancedPawn",
+      "advantage",
+      "endgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/WIUWcrdG#39"
+  },
+  {
+    "id": "0047P",
+    "fen": "8/1N3k2/6p1/8/2P3P1/pr6/R7/5K2 b - - 2 56",
+    "moves": [
+      "b3b1",
+      "f1e2",
+      "b1b2",
+      "e2d1",
+      "b2a2"
+    ],
+    "rating": 1766,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "endgame",
+      "exposedKing",
+      "fork",
+      "long",
+      "master"
+    ],
+    "game_url": "https://lichess.org/game/Gb33KZKC#111"
+  },
+  {
+    "id": "0048h",
+    "fen": "4r3/p5k1/2R4p/2Pp4/1P1pr1P1/P6P/8/3R3K b - - 0 35",
+    "moves": [
+      "e4e1",
+      "d1e1",
+      "e8e1",
+      "h1g2",
+      "d4d3"
+    ],
+    "rating": 1173,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "endgame",
+      "exposedKing",
+      "long",
+      "rookEndgame"
+    ],
+    "game_url": "https://lichess.org/game/dq15P00L#69"
+  },
+  {
+    "id": "0048r",
+    "fen": "1r3k2/5PbQ/p2p4/1q1Pp1P1/8/3R4/2P1K3/8 w - - 1 33",
+    "moves": [
+      "h7g8",
+      "f8e7",
+      "g8g7"
+    ],
+    "rating": 1443,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "deflection",
+      "endgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/cNnX2ZPS/black#64"
+  },
+  {
+    "id": "0048x",
+    "fen": "6k1/7p/4p1p1/QP2Pp2/P1pq4/5bR1/7K/6R1 b - - 0 39",
+    "moves": [
+      "d4h4",
+      "g3h3",
+      "h4f2",
+      "g1g2",
+      "f2g2"
+    ],
+    "rating": 1433,
+    "theme": "Endgame technique",
+    "tags": [
+      "endgame",
+      "exposedKing",
+      "long",
+      "mate",
+      "mateIn3"
+    ],
+    "game_url": "https://lichess.org/game/GlWr58Ue#77"
+  },
+  {
+    "id": "004Ao",
+    "fen": "4qk2/1b3R2/p7/1p2Q3/4P2P/P2P3K/2r5/3R4 b - - 0 41",
+    "moves": [
+      "e8f7",
+      "e5h8",
+      "f8e7"
+    ],
+    "rating": 1711,
+    "theme": "Endgame technique",
+    "tags": [
+      "advantage",
+      "endgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/aFlzjb1K#81"
+  },
+  {
+    "id": "004Ax",
+    "fen": "8/5k2/4R2p/p7/5rPK/8/7P/8 w - - 3 43",
+    "moves": [
+      "e6h6",
+      "f4f6",
+      "h6h7",
+      "f7g6",
+      "h7a7"
+    ],
+    "rating": 1999,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "endgame",
+      "exposedKing",
+      "long",
+      "rookEndgame"
+    ],
+    "game_url": "https://lichess.org/game/x2mMwVJD/black#84"
+  },
+  {
+    "id": "004JD",
+    "fen": "3r4/R7/2p5/p1P2p2/1p4k1/nP2K3/P3NP2/8 b - - 4 41",
+    "moves": [
+      "a3c2"
+    ],
+    "rating": 1307,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "cornerMate",
+      "endgame",
+      "mate",
+      "mateIn1",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/6vTeEc3x#81"
+  },
+  {
+    "id": "004LZ",
+    "fen": "8/7R/5p2/p7/7P/2p5/3k2N1/1K6 b - - 0 48",
+    "moves": [
+      "c3c2",
+      "b1a2",
+      "c2c1q",
+      "h7d7",
+      "d2e2"
+    ],
+    "rating": 1208,
+    "theme": "Endgame technique",
+    "tags": [
+      "advancedPawn",
+      "crushing",
+      "defensiveMove",
+      "deflection",
+      "endgame",
+      "long",
+      "promotion"
+    ],
+    "game_url": "https://lichess.org/game/drahwNdj#95"
+  },
+  {
+    "id": "004Lu",
+    "fen": "8/p1p1k2p/4P3/2PP1p1P/1r3r2/5B2/P3RK2/8 w - - 4 39",
+    "moves": [
+      "d5d6",
+      "c7d6",
+      "c5d6",
+      "e7d6",
+      "e6e7"
+    ],
+    "rating": 1231,
+    "theme": "Endgame technique",
+    "tags": [
+      "advancedPawn",
+      "advantage",
+      "endgame",
+      "exposedKing",
+      "long",
+      "master"
+    ],
+    "game_url": "https://lichess.org/game/WMeZuWza/black#76"
+  },
+  {
+    "id": "004RF",
+    "fen": "5rk1/5ppp/1p6/1q3P1Q/2pp3P/6R1/6PK/8 w - - 0 31",
+    "moves": [
+      "g3g7",
+      "g8g7",
+      "f5f6",
+      "g7f6",
+      "h5b5"
+    ],
+    "rating": 1709,
+    "theme": "Endgame technique",
+    "tags": [
+      "attraction",
+      "crushing",
+      "discoveredAttack",
+      "endgame",
+      "long",
+      "sacrifice"
+    ],
+    "game_url": "https://lichess.org/game/2UeWcE4h/black#60"
+  },
+  {
+    "id": "004WZ",
+    "fen": "r6k/1b3pp1/p1q1pn1p/2p5/P1B5/1PN4Q/2P1RP1P/R5K1 b - - 0 26",
+    "moves": [
+      "c6h1"
+    ],
+    "rating": 866,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "mate",
+      "mateIn1",
+      "middlegame",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/BQIdXPOM#51"
+  },
+  {
+    "id": "004X6",
+    "fen": "1r4k1/p4ppp/2Q5/3pq3/8/P6P/2PR1PP1/1R4K1 b - - 0 26",
+    "moves": [
+      "b8b1",
+      "d2d1",
+      "b1d1"
+    ],
+    "rating": 1152,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "endgame",
+      "mate",
+      "mateIn2",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/wvPFkjF9#51"
+  },
+  {
+    "id": "004d8",
+    "fen": "8/4kr2/R2p4/1p1Pp3/5pp1/3K1P2/PPP5/8 w - - 0 40",
+    "moves": [
+      "a6a7",
+      "e7f6",
+      "a7f7",
+      "f6f7",
+      "f3g4"
+    ],
+    "rating": 1608,
+    "theme": "Endgame technique",
+    "tags": [
+      "crushing",
+      "endgame",
+      "long",
+      "rookEndgame"
+    ],
+    "game_url": "https://lichess.org/game/FrR3BHbW/black#78"
+  },
+  {
+    "id": "004nd",
+    "fen": "3q2k1/3r4/pp3p1Q/2b1n3/P3N3/2P5/1P4PP/R6K w - - 1 25",
+    "moves": [
+      "e4f6",
+      "d8f6",
+      "h6f6"
+    ],
+    "rating": 898,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "fork",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/IajkZZBp/black#48"
+  },
+  {
+    "id": "004yJ",
+    "fen": "r4rk1/1bp2ppp/p1q1pn2/2P1N3/8/3B4/P1P1QPPP/R4RK1 b - - 1 16",
+    "moves": [
+      "c6g2"
+    ],
+    "rating": 658,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "kingsideAttack",
+      "mate",
+      "mateIn1",
+      "middlegame",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/8N3Hfj05#31"
+  },
+  {
+    "id": "004zI",
+    "fen": "2q3k1/4br2/6pQ/1p1n2p1/7P/1P4P1/1B2PP2/6K1 w - - 0 28",
+    "moves": [
+      "h6h8"
+    ],
+    "rating": 1406,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "endgame",
+      "mate",
+      "mateIn1",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/HE33gdt4/black#54"
+  },
+  {
+    "id": "0050w",
+    "fen": "5rk1/1p2p2p/p2p4/2pPb2R/2P1P3/1P1BKPrR/8/8 w - - 5 31",
+    "moves": [
+      "h3g3",
+      "e5g3",
+      "h5g5",
+      "g8f7",
+      "g5g3"
+    ],
+    "rating": 1120,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "endgame",
+      "fork",
+      "long"
+    ],
+    "game_url": "https://lichess.org/game/QD8pUcTR/black#60"
+  },
+  {
+    "id": "0055Y",
+    "fen": "r1b2rk1/p3pp2/2B5/2Qpq3/3N2pp/4b3/2P2PPP/1R2K2R w K - 0 24",
+    "moves": [
+      "f2e3",
+      "e5e3",
+      "e1d1"
+    ],
+    "rating": 2055,
+    "theme": "King safety",
+    "tags": [
+      "advantage",
+      "defensiveMove",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/7Jpwzowt/black#46"
+  },
+  {
+    "id": "005Bm",
+    "fen": "4rk2/p4q2/1p3Q1b/8/1p5N/2P1p3/P3P3/2K5 w - - 1 44",
+    "moves": [
+      "h4g6",
+      "f8g8",
+      "f6h8"
+    ],
+    "rating": 1476,
+    "theme": "Pins",
+    "tags": [
+      "endgame",
+      "mate",
+      "mateIn2",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/KKslCMev/black#86"
+  },
+  {
+    "id": "005Ep",
+    "fen": "5kr1/ppR3p1/3R3p/1n6/1r6/8/1P3PPP/2K5 w - - 5 32",
+    "moves": [
+      "d6d8"
+    ],
+    "rating": 712,
+    "theme": "Checkmate patterns",
+    "tags": [
+      "endgame",
+      "mate",
+      "mateIn1",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/ttFEoJfQ/black#62"
+  },
+  {
+    "id": "005HG",
+    "fen": "r2q1rk1/p1p2pp1/3bbn1p/4N3/8/1P4P1/PBQPPP1P/RN2K2R b KQ - 2 12",
+    "moves": [
+      "d6e5",
+      "b2e5",
+      "d8d5",
+      "f2f3",
+      "d5e5"
+    ],
+    "rating": 1761,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "advantage",
+      "clearance",
+      "fork",
+      "long",
+      "opening"
+    ],
+    "game_url": "https://lichess.org/game/JTymzeq9#23"
+  },
+  {
+    "id": "005N7",
+    "fen": "r6k/2q3pp/8/2p5/R1np4/7P/2PB1PP1/6K1 w - - 0 33",
+    "moves": [
+      "a4a8",
+      "c7b8",
+      "a8b8"
+    ],
+    "rating": 683,
+    "theme": "Material & captures",
+    "tags": [
+      "backRankMate",
+      "endgame",
+      "hangingPiece",
+      "mate",
+      "mateIn2",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/jxZhmGhg/black#64"
+  },
+  {
+    "id": "005YX",
+    "fen": "2rr4/5pk1/p1Q1N1pp/1p4q1/3pP3/1B1P4/PPP3PP/6RK b - - 0 25",
+    "moves": [
+      "f7e6",
+      "c6b7",
+      "g7h8"
+    ],
+    "rating": 2014,
+    "theme": "King safety",
+    "tags": [
+      "defensiveMove",
+      "equality",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/zbi5w5Qy#49"
+  },
+  {
+    "id": "005nD",
+    "fen": "3rk2r/2qn2p1/p1Q1p3/3n3p/8/8/PP4PP/5R1K w k - 0 24",
+    "moves": [
+      "c6e6",
+      "d5e7",
+      "e6f7"
+    ],
+    "rating": 1151,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "fork",
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/hlgaj6lV/black#46"
+  },
+  {
+    "id": "005wJ",
+    "fen": "r3kb1r/ppqN1ppp/4pn2/1Q3b2/3P4/8/PP2PPPP/RNB1KB1R b KQkq - 0 9",
+    "moves": [
+      "c7c1"
+    ],
+    "rating": 1364,
+    "theme": "Material & captures",
+    "tags": [
+      "hangingPiece",
+      "mate",
+      "mateIn1",
+      "oneMove",
+      "opening"
+    ],
+    "game_url": "https://lichess.org/game/2mU9GJhQ#17"
+  },
+  {
+    "id": "006om",
+    "fen": "1r3k2/5p1p/2p1pp2/P2n4/r3N3/P4PK1/2R2P1P/2R5 w - - 10 30",
+    "moves": [
+      "e4c5",
+      "a4a5",
+      "c5d7",
+      "f8g7",
+      "d7b8"
+    ],
+    "rating": 1874,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "endgame",
+      "fork",
+      "long",
+      "master"
+    ],
+    "game_url": "https://lichess.org/game/BMIgw1OR/black#58"
+  },
+  {
+    "id": "006pe",
+    "fen": "r4r2/2q1Nb2/5Qpk/2n4p/pp5P/8/1PP2PP1/2KR3R w - - 0 29",
+    "moves": [
+      "e7f5",
+      "h6h7",
+      "f6g7"
+    ],
+    "rating": 1560,
+    "theme": "Pins",
+    "tags": [
+      "master",
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/gkSEAS27/black#56"
+  },
+  {
+    "id": "006wz",
+    "fen": "2r5/4ppkp/6p1/1p6/1P6/P3B3/1br2PPP/1R1R2K1 w - - 3 23",
+    "moves": [
+      "b1b2",
+      "c2b2",
+      "e3d4",
+      "f7f6",
+      "d4b2"
+    ],
+    "rating": 1426,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "attraction",
+      "crushing",
+      "endgame",
+      "fork",
+      "long",
+      "sacrifice"
+    ],
+    "game_url": "https://lichess.org/game/qT0W6o27/black#44"
+  },
+  {
+    "id": "0071K",
+    "fen": "3N1r2/R7/kp6/p2pPp1Q/2pP2P1/2q5/2P5/2K5 b - - 1 38",
+    "moves": [
+      "a6a7",
+      "h5h7",
+      "a7a6"
+    ],
+    "rating": 1162,
+    "theme": "Material & captures",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "hangingPiece",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/gY0ZkxR4#75"
+  },
+  {
+    "id": "00734",
+    "fen": "r4bk1/2rqp2p/n1p3p1/3p1p2/3P1P1B/pP1BP3/P1Q2PRP/1KR5 w - - 1 27",
+    "moves": [
+      "d3f5",
+      "e7e6",
+      "f5g6"
+    ],
+    "rating": 1692,
+    "theme": "Pins",
+    "tags": [
+      "crushing",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/jM0Jnw0u/black#52"
+  },
+  {
+    "id": "00761",
+    "fen": "3r2k1/1b4bR/p2P2p1/3p2N1/2p5/2P2N2/PP6/2K5 w - - 0 29",
+    "moves": [
+      "h7g7",
+      "g8g7",
+      "g5e6",
+      "g7g8",
+      "e6d8"
+    ],
+    "rating": 1379,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "attraction",
+      "crushing",
+      "endgame",
+      "exposedKing",
+      "fork",
+      "long",
+      "sacrifice"
+    ],
+    "game_url": "https://lichess.org/game/vu70Maig/black#56"
+  },
+  {
+    "id": "008D5",
+    "fen": "r1bqk2r/pp3ppp/4p3/3pPn2/1b1P1P2/2N5/PP4PP/R1BQKB1R w KQkq - 3 10",
+    "moves": [
+      "d1a4",
+      "c8d7",
+      "a4b4"
+    ],
+    "rating": 1446,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "advantage",
+      "fork",
+      "master",
+      "opening",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/jIGC2FuP/black#18"
+  },
+  {
+    "id": "008P4",
+    "fen": "8/4k3/1p1p4/rP2p1p1/P2nP1P1/3B4/3K4/R7 b - - 1 35",
+    "moves": [
+      "d4b3",
+      "d2c3",
+      "b3a1"
+    ],
+    "rating": 699,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "crushing",
+      "endgame",
+      "fork",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/3GoHPRp3#69"
+  },
+  {
+    "id": "008lc",
+    "fen": "7k/pb1qn1rn/1p2R2Q/2p2p2/2Pp4/3B4/PP3P1P/4RK2 w - - 2 28",
+    "moves": [
+      "h6g7",
+      "h8g7",
+      "e6e7",
+      "d7e7",
+      "e1e7"
+    ],
+    "rating": 2031,
+    "theme": "Forks & double attacks",
+    "tags": [
+      "attraction",
+      "crushing",
+      "exposedKing",
+      "fork",
+      "long",
+      "middlegame"
+    ],
+    "game_url": "https://lichess.org/game/UdZXrVA5/black#54"
+  },
+  {
+    "id": "0095W",
+    "fen": "8/pp1r2kp/q2P1ppb/4N3/4P3/1Q5P/PPR2PP1/6K1 b - - 0 32",
+    "moves": [
+      "f6e5",
+      "c2c7",
+      "a6d6"
+    ],
+    "rating": 1858,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "endgame",
+      "hangingPiece",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/CaL8Bl7F#63"
+  },
+  {
+    "id": "009BH",
+    "fen": "3r3k/6p1/4Q3/4B3/1p3P2/4PKP1/3q4/8 w - - 18 52",
+    "moves": [
+      "e6h6",
+      "h8g8",
+      "h6g7"
+    ],
+    "rating": 1507,
+    "theme": "Pins",
+    "tags": [
+      "endgame",
+      "mate",
+      "mateIn2",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/QauOOpOY/black#102"
+  },
+  {
+    "id": "00B8m",
+    "fen": "3b4/3P4/pp2Pk2/5Q2/P6p/8/8/7K b - - 0 43",
+    "moves": [
+      "f6f5",
+      "e6e7",
+      "d8e7",
+      "d7d8q",
+      "e7d8"
+    ],
+    "rating": 1275,
+    "theme": "Material & captures",
+    "tags": [
+      "crushing",
+      "endgame",
+      "hangingPiece",
+      "long"
+    ],
+    "game_url": "https://lichess.org/game/FpH6PRMC#85"
+  },
+  {
+    "id": "00BJm",
+    "fen": "r4rk1/1Q2bppp/p1N1p3/1p1q4/2pP1n2/2P5/PP3PPP/R4RK1 w - - 2 19",
+    "moves": [
+      "c6e7",
+      "g8h8",
+      "e7d5"
+    ],
+    "rating": 1002,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "fork",
+      "hangingPiece",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/Umzi5RNZ/black#36"
+  },
+  {
+    "id": "00C8e",
+    "fen": "8/5p1k/5Ppb/2p3P1/qp6/8/KB5Q/8 w - - 5 59",
+    "moves": [
+      "a2b1",
+      "a4d1",
+      "b2c1"
+    ],
+    "rating": 1559,
+    "theme": "Pins",
+    "tags": [
+      "endgame",
+      "equality",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/YqVcRoWF/black#116"
+  },
+  {
+    "id": "00CMj",
+    "fen": "7R/8/8/6p1/2p1p1k1/2Pb3p/P4K2/8 b - - 5 71",
+    "moves": [
+      "e4e3",
+      "f2e3",
+      "g4g3"
+    ],
+    "rating": 1588,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "master",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/JJZ8AIxT#141"
+  },
+  {
+    "id": "00CYP",
+    "fen": "3r1k1r/p1p2pp1/1p6/2pQ1b2/2Pn1P2/8/PP1P1KBq/R1B1R3 w - - 4 26",
+    "moves": [
+      "d5d8"
+    ],
+    "rating": 739,
+    "theme": "Material & captures",
+    "tags": [
+      "hangingPiece",
+      "mate",
+      "mateIn1",
+      "middlegame",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/LywFPEls/black#50"
+  },
+  {
+    "id": "00Cqg",
+    "fen": "3r2k1/pp4bp/4qpp1/3Pp3/8/4Q2P/4B1P1/2rR3K w - - 0 27",
+    "moves": [
+      "d5e6",
+      "d8d1",
+      "e2d1",
+      "c1d1",
+      "h1h2"
+    ],
+    "rating": 1634,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "defensiveMove",
+      "hangingPiece",
+      "long",
+      "middlegame"
+    ],
+    "game_url": "https://lichess.org/game/mXY3kzod/black#52"
+  },
+  {
+    "id": "00Er4",
+    "fen": "r3k2r/p1bN2pp/2p1Rp2/3p3b/3P1q2/2N4P/PPPQ1PP1/R5K1 b kq - 0 16",
+    "moves": [
+      "e8d7",
+      "d2f4",
+      "c7f4"
+    ],
+    "rating": 1200,
+    "theme": "Material & captures",
+    "tags": [
+      "crushing",
+      "hangingPiece",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/xukRQ21f#31"
+  },
+  {
+    "id": "00Erm",
+    "fen": "3r4/6k1/1p1pr1p1/p1p2p2/P1P1p1P1/1P1n4/3R1PBP/4R1K1 w - - 1 30",
+    "moves": [
+      "d2d3",
+      "e4d3",
+      "e1e6",
+      "d3d2",
+      "g2f3"
+    ],
+    "rating": 1402,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "long"
+    ],
+    "game_url": "https://lichess.org/game/kE9mu3xO/black#58"
+  },
+  {
+    "id": "00F5G",
+    "fen": "2rqrbk1/pp3ppp/8/3p1N2/3NnnQ1/2P4P/PP3PP1/R4RK1 w - - 0 23",
+    "moves": [
+      "f5h6",
+      "g8h8",
+      "h6f7"
+    ],
+    "rating": 1520,
+    "theme": "Pins",
+    "tags": [
+      "crushing",
+      "deflection",
+      "kingsideAttack",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/HLNR4ZJ8/black#44"
+  },
+  {
+    "id": "00G1l",
+    "fen": "5k2/1R6/3pp1P1/2p5/1p2PK2/5P2/8/2r5 w - - 1 61",
+    "moves": [
+      "f4g5",
+      "c1g1",
+      "g5f6"
+    ],
+    "rating": 1841,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "master",
+      "rookEndgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/IWYBiMcT/black#120"
+  },
+  {
+    "id": "00G81",
+    "fen": "3r4/5k2/p4Pp1/2K3Pp/2R5/P7/8/8 b - - 0 51",
+    "moves": [
+      "d8c8",
+      "c5d4",
+      "c8c4",
+      "d4c4",
+      "h5h4"
+    ],
+    "rating": 1268,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "long",
+      "rookEndgame"
+    ],
+    "game_url": "https://lichess.org/game/Q8HZlLcF#101"
+  },
+  {
+    "id": "00GiQ",
+    "fen": "5r2/5p1k/6pp/ppqp1P2/7Q/5N2/6PP/5N1K w - - 0 32",
+    "moves": [
+      "f3g5",
+      "h7g7",
+      "f5f6",
+      "g7f6",
+      "g5e4"
+    ],
+    "rating": 1838,
+    "theme": "Pins",
+    "tags": [
+      "attraction",
+      "crushing",
+      "discoveredCheck",
+      "doubleCheck",
+      "endgame",
+      "long",
+      "pin"
+    ],
+    "game_url": "https://lichess.org/game/XLwP4TgT/black#62"
+  },
+  {
+    "id": "00Gvr",
+    "fen": "8/1b4p1/1k3pPp/4K2P/4PP2/8/8/8 w - - 0 47",
+    "moves": [
+      "e5e6",
+      "b7e4",
+      "e6f7"
+    ],
+    "rating": 1224,
+    "theme": "King safety",
+    "tags": [
+      "advantage",
+      "bishopEndgame",
+      "defensiveMove",
+      "endgame",
+      "master",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/tHhRpYsL/black#92"
+  },
+  {
+    "id": "00HEx",
+    "fen": "R7/5pk1/4pn1p/8/3NP3/5P2/6PP/2rB2K1 b - - 0 31",
+    "moves": [
+      "c1d1",
+      "g1f2",
+      "d1d4"
+    ],
+    "rating": 907,
+    "theme": "Material & captures",
+    "tags": [
+      "crushing",
+      "endgame",
+      "fork",
+      "hangingPiece",
+      "master",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/Kl5pBLfs#61"
+  },
+  {
+    "id": "00HGG",
+    "fen": "8/pp6/2p1kpp1/3p2P1/3P1P1p/1P3K2/P1P4P/8 b - - 0 31",
+    "moves": [
+      "f6g5",
+      "f3g4",
+      "g5f4",
+      "g4f4",
+      "e6f6"
+    ],
+    "rating": 1682,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "long",
+      "pawnEndgame"
+    ],
+    "game_url": "https://lichess.org/game/JyqJknFl#61"
+  },
+  {
+    "id": "00IF1",
+    "fen": "1k6/p1p5/P2p4/3P4/1PK2r1p/4P3/8/4B3 w - - 0 58",
+    "moves": [
+      "e3f4",
+      "h4h3",
+      "e1g3"
+    ],
+    "rating": 1274,
+    "theme": "Material & captures",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "hangingPiece",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/bX3dAdx9/black#114"
+  },
+  {
+    "id": "00InW",
+    "fen": "8/2p5/pp1p4/3P1N2/PPP1Pp2/5n1p/5K1k/8 w - - 0 47",
+    "moves": [
+      "f2f3",
+      "h2g1",
+      "f3f4",
+      "h3h2",
+      "f5g3"
+    ],
+    "rating": 1439,
+    "theme": "Material & captures",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "hangingPiece",
+      "knightEndgame",
+      "long"
+    ],
+    "game_url": "https://lichess.org/game/CZaimWSp/black#92"
+  },
+  {
+    "id": "00JFF",
+    "fen": "4r1k1/ppqb4/6p1/3pb2Q/8/2P5/PP1B2PP/5RK1 w - - 0 21",
+    "moves": [
+      "h5g6",
+      "e5g7",
+      "f1f7",
+      "c7c5",
+      "g1h1",
+      "c5f8",
+      "f7f8"
+    ],
+    "rating": 2017,
+    "theme": "Pins",
+    "tags": [
+      "crushing",
+      "middlegame",
+      "pin",
+      "veryLong"
+    ],
+    "game_url": "https://lichess.org/game/e986oDw6/black#40"
+  },
+  {
+    "id": "00JH5",
+    "fen": "8/2Q2pk1/8/3pp2P/2q5/2P5/KP6/8 w - - 2 37",
+    "moves": [
+      "c7c4",
+      "d5c4",
+      "b2b4"
+    ],
+    "rating": 2082,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "queenEndgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/1co2FGQN/black#72"
+  },
+  {
+    "id": "00LI0",
+    "fen": "r2qk2r/pp1n1ppp/4pn2/3N2B1/1b1P4/4QN1P/PPb1BPP1/R4RK1 b kq - 0 12",
+    "moves": [
+      "f6d5",
+      "g5d8",
+      "d5e3"
+    ],
+    "rating": 1289,
+    "theme": "Material & captures",
+    "tags": [
+      "crushing",
+      "hangingPiece",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/sUoFIFQT#23"
+  },
+  {
+    "id": "00LNH",
+    "fen": "1k2r3/pp2r2p/2pqbpp1/3n4/3P1p2/1B3N1P/PPQB1PP1/1K1RR3 b - - 3 22",
+    "moves": [
+      "e6f5",
+      "c2f5",
+      "g6f5"
+    ],
+    "rating": 1622,
+    "theme": "Pins",
+    "tags": [
+      "advantage",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/gVcbpusg#43"
+  },
+  {
+    "id": "00M1q",
+    "fen": "2r3k1/2r3p1/p3pqQ1/1p1p4/nP1P4/2P4R/P4PPP/2R3K1 w - - 1 31",
+    "moves": [
+      "g6h7",
+      "g8f7",
+      "h3f3",
+      "f6f3",
+      "g2f3"
+    ],
+    "rating": 1482,
+    "theme": "Pins",
+    "tags": [
+      "advantage",
+      "long",
+      "middlegame",
+      "pin"
+    ],
+    "game_url": "https://lichess.org/game/nsAQV9mj/black#60"
+  },
+  {
+    "id": "00MTn",
+    "fen": "2rqk2r/3n4/1p2p3/p3N2R/Q1PP2p1/P2BP3/3K1Pb1/R7 b k - 0 22",
+    "moves": [
+      "h8h5",
+      "d3g6",
+      "e8e7",
+      "a4d7",
+      "d8d7"
+    ],
+    "rating": 1335,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "hangingPiece",
+      "long",
+      "middlegame"
+    ],
+    "game_url": "https://lichess.org/game/VeIaO2t7#43"
+  },
+  {
+    "id": "00NEO",
+    "fen": "4qr2/pR4pk/2b2p1p/4pPP1/3bB3/3P3Q/P1r4P/4BR1K w - - 1 25",
+    "moves": [
+      "h3h6",
+      "h7g8",
+      "h6g7"
+    ],
+    "rating": 1879,
+    "theme": "Pins",
+    "tags": [
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/43Kqr7qG/black#48"
+  },
+  {
+    "id": "00O3h",
+    "fen": "5k2/R3Rp2/6p1/1p5p/1P1r3K/2n5/7P/8 w - - 8 44",
+    "moves": [
+      "h4g5",
+      "c3e4",
+      "g5h6"
+    ],
+    "rating": 1149,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/71bhLvdU/black#86"
+  },
+  {
+    "id": "00O9Z",
+    "fen": "5Q1R/5p1p/1b3qp1/p6k/P2P4/8/1P2rPPP/5RK1 b - - 8 32",
+    "moves": [
+      "f6f2",
+      "f1f2",
+      "e2e1",
+      "f2f1",
+      "b6d4",
+      "g1h1",
+      "e1f1"
+    ],
+    "rating": 1616,
+    "theme": "Pins",
+    "tags": [
+      "backRankMate",
+      "deflection",
+      "endgame",
+      "fork",
+      "master",
+      "mate",
+      "mateIn4",
+      "pin",
+      "sacrifice",
+      "veryLong"
+    ],
+    "game_url": "https://lichess.org/game/DKnGKRmQ#63"
+  },
+  {
+    "id": "00R4l",
+    "fen": "r1b5/R4pkp/3p2p1/2pPr3/2P5/1P1B4/5PPP/R5K1 b - - 0 24",
+    "moves": [
+      "a8a7",
+      "a1a7",
+      "e5e1",
+      "d3f1",
+      "c8f5"
+    ],
+    "rating": 1563,
+    "theme": "King safety",
+    "tags": [
+      "advantage",
+      "defensiveMove",
+      "endgame",
+      "long"
+    ],
+    "game_url": "https://lichess.org/game/IQW9ts1W#47"
+  },
+  {
+    "id": "00RtC",
+    "fen": "r4k2/ppp3p1/3p3r/2q5/1PNnP3/2Q2PBp/P4R1P/5RK1 b - - 0 25",
+    "moves": [
+      "d4e2",
+      "g1h1",
+      "c5f2",
+      "c3g7",
+      "f8g7"
+    ],
+    "rating": 1948,
+    "theme": "Pins",
+    "tags": [
+      "advantage",
+      "deflection",
+      "discoveredAttack",
+      "long",
+      "middlegame",
+      "pin"
+    ],
+    "game_url": "https://lichess.org/game/cgruxBCC#49"
+  },
+  {
+    "id": "00Se9",
+    "fen": "5rk1/pp1n1r2/3p2N1/2pQ4/2P5/4P1P1/qP2KPP1/7R w - - 2 25",
+    "moves": [
+      "g6e7",
+      "g8g7",
+      "d5g5"
+    ],
+    "rating": 1803,
+    "theme": "Pins",
+    "tags": [
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/cMwUzce9/black#48"
+  },
+  {
+    "id": "00Tdk",
+    "fen": "r6r/4kppp/2pNpnq1/p1P1n3/8/B3P3/PP1Q1PPP/3R1RK1 b - - 8 20",
+    "moves": [
+      "e5f3",
+      "g1h1",
+      "f3d2"
+    ],
+    "rating": 1041,
+    "theme": "Pins",
+    "tags": [
+      "crushing",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/UgDWX5rx#39"
+  },
+  {
+    "id": "00Ueq",
+    "fen": "r1b3k1/pp4b1/n1pqprQ1/4p3/2P2PP1/P2B4/1P6/R1B1K2R w KQ - 2 20",
+    "moves": [
+      "h1h8",
+      "g8h8",
+      "g6h7"
+    ],
+    "rating": 1725,
+    "theme": "Pins",
+    "tags": [
+      "attraction",
+      "kingsideAttack",
+      "master",
+      "mate",
+      "mateIn2",
+      "middlegame",
+      "pin",
+      "sacrifice",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/CWZLKGkj/black#38"
+  },
+  {
+    "id": "00VNr",
+    "fen": "5rk1/npp3p1/p3Rr1p/2b5/3N4/4B2P/PPP2PP1/R5K1 b - - 0 22",
+    "moves": [
+      "c5d4",
+      "e6f6",
+      "d4f6",
+      "e3a7",
+      "b7b6"
+    ],
+    "rating": 1938,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "long",
+      "middlegame"
+    ],
+    "game_url": "https://lichess.org/game/fNuigLTb#43"
+  },
+  {
+    "id": "00W5B",
+    "fen": "1r4k1/p5pp/5p2/2Rb4/1P4P1/P7/3r3P/3B1RK1 w - - 0 35",
+    "moves": [
+      "c5d5",
+      "d2d5",
+      "d1b3",
+      "g8f8",
+      "b3d5"
+    ],
+    "rating": 1402,
+    "theme": "Pins",
+    "tags": [
+      "advantage",
+      "attraction",
+      "endgame",
+      "long",
+      "pin",
+      "sacrifice"
+    ],
+    "game_url": "https://lichess.org/game/6Gi4gAvw/black#68"
+  },
+  {
+    "id": "00WG3",
+    "fen": "8/pk1r1Rp1/1p2p2p/4P1bP/4N3/8/PP6/1K1r1R2 w - - 5 34",
+    "moves": [
+      "f1d1",
+      "d7f7",
+      "e4d6",
+      "b7c7",
+      "d6f7"
+    ],
+    "rating": 1044,
+    "theme": "Pins",
+    "tags": [
+      "crushing",
+      "endgame",
+      "fork",
+      "long",
+      "pin"
+    ],
+    "game_url": "https://lichess.org/game/Pwj0MKtJ/black#66"
+  },
+  {
+    "id": "00WzS",
+    "fen": "r2qk2r/2pn1p1n/pp1p2Bp/3Pp1b1/PPP1P3/2N1B3/3N2PP/R2Q1RK1 b kq - 0 17",
+    "moves": [
+      "g5e3",
+      "g1h1",
+      "f7g6"
+    ],
+    "rating": 1459,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "hangingPiece",
+      "intermezzo",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/pGUj7Dyu#33"
+  },
+  {
+    "id": "00X1l",
+    "fen": "5r1k/Q6p/1pb3p1/4q3/4p3/1BP4P/PP4p1/5RK1 w - - 0 31",
+    "moves": [
+      "f1f8"
+    ],
+    "rating": 848,
+    "theme": "Material & captures",
+    "tags": [
+      "endgame",
+      "hangingPiece",
+      "mate",
+      "mateIn1",
+      "oneMove"
+    ],
+    "game_url": "https://lichess.org/game/IPGWdtue/black#60"
+  },
+  {
+    "id": "00XGg",
+    "fen": "2k4r/ppp2ppr/2n5/3b1N2/3p1bP1/5NP1/PPP1QPK1/R3R3 b - - 2 20",
+    "moves": [
+      "h7h2",
+      "g2f1",
+      "h2h1",
+      "f3g1",
+      "h1g1",
+      "f1g1",
+      "h8h1"
+    ],
+    "rating": 1804,
+    "theme": "Pins",
+    "tags": [
+      "attraction",
+      "mate",
+      "mateIn4",
+      "middlegame",
+      "operaMate",
+      "pin",
+      "sacrifice",
+      "veryLong"
+    ],
+    "game_url": "https://lichess.org/game/HyzlukP8#39"
+  },
+  {
+    "id": "00XL2",
+    "fen": "2kr3r/ppp3pp/6q1/3Pnp2/1PPQp3/7P/P3NPP1/R4RK1 b - - 2 17",
+    "moves": [
+      "e5f3",
+      "g1h1",
+      "f3d4"
+    ],
+    "rating": 995,
+    "theme": "Pins",
+    "tags": [
+      "crushing",
+      "middlegame",
+      "pin",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/WEWuNMx5#33"
+  },
+  {
+    "id": "00XXM",
+    "fen": "3r2r1/Qpqkbp2/p1p1p2p/3nP3/8/2P1NP1N/PP6/1K1R3R w - - 4 26",
+    "moves": [
+      "c3c4",
+      "b7b6",
+      "a7c7",
+      "d7c7",
+      "c4d5"
+    ],
+    "rating": 1725,
+    "theme": "Pins",
+    "tags": [
+      "advantage",
+      "long",
+      "middlegame",
+      "pin"
+    ],
+    "game_url": "https://lichess.org/game/Pd55n9kL/black#50"
+  },
+  {
+    "id": "00XZR",
+    "fen": "8/2p5/p1n5/1pP1p2k/1P1p4/P2P3q/5P2/R4KR1 w - - 0 35",
+    "moves": [
+      "f1e2",
+      "e5e4",
+      "g1h1",
+      "e4d3",
+      "e2d2"
+    ],
+    "rating": 1678,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "long",
+      "pin"
+    ],
+    "game_url": "https://lichess.org/game/cvl7Zq2b/black#68"
+  },
+  {
+    "id": "00ZAn",
+    "fen": "rnbqk1nr/ppp1b1pp/3p4/4N3/2B1P3/8/PPPP2PP/RNBQK2R b KQkq - 0 6",
+    "moves": [
+      "d6e5",
+      "d1h5",
+      "g7g6",
+      "h5e5",
+      "g8f6"
+    ],
+    "rating": 1794,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "hangingPiece",
+      "long",
+      "opening"
+    ],
+    "game_url": "https://lichess.org/game/uS929Njx#11"
+  },
+  {
+    "id": "00ZSZ",
+    "fen": "3r4/6pp/pNnNpk2/1p6/3p1R2/8/PPP2PPK/8 b - - 5 32",
+    "moves": [
+      "f6e5",
+      "d6f7",
+      "e5f4",
+      "f7d8",
+      "c6d8"
+    ],
+    "rating": 1046,
+    "theme": "King safety",
+    "tags": [
+      "advantage",
+      "defensiveMove",
+      "endgame",
+      "fork",
+      "long"
+    ],
+    "game_url": "https://lichess.org/game/66DBsV70#63"
+  },
+  {
+    "id": "00Zks",
+    "fen": "8/P1q4p/5pk1/6p1/5P2/6KP/5QP1/7r w - - 0 52",
+    "moves": [
+      "a7a8q",
+      "c7c3",
+      "a8f3"
+    ],
+    "rating": 1800,
+    "theme": "King safety",
+    "tags": [
+      "advancedPawn",
+      "advantage",
+      "defensiveMove",
+      "endgame",
+      "promotion",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/CPhnVb98/black#102"
+  },
+  {
+    "id": "00ZsF",
+    "fen": "r2qk2r/bpp5/p5n1/3P4/4P3/6Bb/PP4BK/R2Q1R2 w kq - 0 21",
+    "moves": [
+      "g2h3",
+      "d8d7",
+      "f1f5"
+    ],
+    "rating": 1645,
+    "theme": "King safety",
+    "tags": [
+      "advantage",
+      "defensiveMove",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/s4b05ozr/black#40"
+  },
+  {
+    "id": "00aZ3",
+    "fen": "8/6k1/8/1K1np1p1/P5P1/1B3r2/1PP5/8 w - - 2 37",
+    "moves": [
+      "b3d5",
+      "f3f4",
+      "a4a5",
+      "e5e4",
+      "a5a6",
+      "e4e3",
+      "a6a7"
+    ],
+    "rating": 2078,
+    "theme": "Material & captures",
+    "tags": [
+      "advancedPawn",
+      "crushing",
+      "endgame",
+      "hangingPiece",
+      "quietMove",
+      "veryLong"
+    ],
+    "game_url": "https://lichess.org/game/0yMvFk5C/black#72"
+  },
+  {
+    "id": "00d6g",
+    "fen": "r7/1p4pk/2p1n3/p2p1nPp/7P/3P1P1B/PP6/2K4R w - - 0 24",
+    "moves": [
+      "h3f5",
+      "g7g6",
+      "f5e6"
+    ],
+    "rating": 960,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "endgame",
+      "fork",
+      "hangingPiece",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/Fsjwwt2F/black#46"
+  },
+  {
+    "id": "00dTd",
+    "fen": "3r4/ppp1Q3/1b3P2/3k4/4qp2/P1Pr4/1P3P2/1K2N3 w - - 6 32",
+    "moves": [
+      "e7d8",
+      "d5c6",
+      "e1d3"
+    ],
+    "rating": 1998,
+    "theme": "Material & captures",
+    "tags": [
+      "advantage",
+      "endgame",
+      "hangingPiece",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/UVi7iEcB/black#62"
+  },
+  {
+    "id": "00dwJ",
+    "fen": "2r5/2r3k1/p3b1pp/3pn3/3R4/4P1N1/PQ4PP/R1q3K1 w - - 8 33",
+    "moves": [
+      "a1c1",
+      "c7c1",
+      "g3f1"
+    ],
+    "rating": 1852,
+    "theme": "King safety",
+    "tags": [
+      "advantage",
+      "defensiveMove",
+      "middlegame",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/jAiL6A2t/black#64"
+  },
+  {
+    "id": "00eTD",
+    "fen": "r1bq1r2/2p2B1k/pb1p1pnp/1p2p2Q/1P2P2N/P1PP1N2/5PPP/R4RK1 b - - 0 17",
+    "moves": [
+      "g6f4",
+      "f7g6",
+      "h7g7",
+      "h4f5",
+      "c8f5"
+    ],
+    "rating": 1977,
+    "theme": "King safety",
+    "tags": [
+      "advantage",
+      "defensiveMove",
+      "long",
+      "middlegame"
+    ],
+    "game_url": "https://lichess.org/game/KMvmskSd#33"
+  },
+  {
+    "id": "00gS7",
+    "fen": "8/1r3pkp/1b4p1/2RpQ3/7P/1qP3P1/1P3P2/2B3K1 b - - 6 33",
+    "moves": [
+      "f7f6",
+      "c1h6",
+      "g7h6",
+      "e5f4",
+      "h6g7"
+    ],
+    "rating": 1656,
+    "theme": "King safety",
+    "tags": [
+      "advantage",
+      "defensiveMove",
+      "endgame",
+      "long"
+    ],
+    "game_url": "https://lichess.org/game/kCNSStnU#65"
+  },
+  {
+    "id": "00hA5",
+    "fen": "8/2p3k1/1p1p2Pn/p2P1K1P/P1P5/1P6/8/8 w - - 3 54",
+    "moves": [
+      "f5e6",
+      "h6g8",
+      "e6d7"
+    ],
+    "rating": 1637,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "knightEndgame",
+      "master",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/JOwIOHIj/black#106"
+  },
+  {
+    "id": "00kWx",
+    "fen": "8/8/1p2pk2/p1p3P1/P1Pp3K/1P1P4/8/8 b - - 0 42",
+    "moves": [
+      "f6g6",
+      "h4g4",
+      "e6e5"
+    ],
+    "rating": 1278,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "pawnEndgame",
+      "short",
+      "zugzwang"
+    ],
+    "game_url": "https://lichess.org/game/ikCxx1tP#83"
+  },
+  {
+    "id": "00m6L",
+    "fen": "8/8/k6p/p4p1P/K1p1pP2/2P1P3/1P6/8 b - - 0 49",
+    "moves": [
+      "a6b6",
+      "a4a3",
+      "b6b5",
+      "a3a2",
+      "b5a4"
+    ],
+    "rating": 1353,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "long",
+      "pawnEndgame",
+      "zugzwang"
+    ],
+    "game_url": "https://lichess.org/game/q1f1ucic#97"
+  },
+  {
+    "id": "00nAo",
+    "fen": "8/p2k4/2p5/8/Q7/2BK1p2/PP3q2/8 b - - 1 40",
+    "moves": [
+      "f2e2",
+      "d3d4",
+      "f3f2",
+      "a4a7",
+      "d7e6"
+    ],
+    "rating": 1909,
+    "theme": "King safety",
+    "tags": [
+      "advancedPawn",
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "long"
+    ],
+    "game_url": "https://lichess.org/game/r4wGrlgZ#79"
+  },
+  {
+    "id": "00rFc",
+    "fen": "8/1p6/6K1/2k4p/7P/5P2/8/8 w - - 1 51",
+    "moves": [
+      "f3f4",
+      "c5d6",
+      "f4f5"
+    ],
+    "rating": 1733,
+    "theme": "King safety",
+    "tags": [
+      "crushing",
+      "defensiveMove",
+      "endgame",
+      "pawnEndgame",
+      "quietMove",
+      "short"
+    ],
+    "game_url": "https://lichess.org/game/evWDUDoX/black#100"
+  }
+]

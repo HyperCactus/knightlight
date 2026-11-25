@@ -1,0 +1,29 @@
+# How the learning experience teaches
+
+The app combines active practice, worked examples, immediate feedback, and delayed review. These are evidence-informed design choices; the app itself has not undergone a study measuring chess improvement.
+
+The US Institute of Education Sciences practice guide recommends spacing study, alternating worked examples with independent problems, combining graphics with verbal explanation, and asking learners to retrieve and explain ideas. These recommendations provide the basis for the learning flow. [IES practice guide](https://ies.ed.gov/ncee/wwc/PracticeGuide/1)
+
+| Teaching principle | Concrete behavior in Chess Study |
+|---|---|
+| Retrieve before being shown | The board starts without solution arrows. You choose a move before requesting progressive hints or a worked explanation. |
+| Anticipate consequences | In daily sessions, “Pause to predict replies” asks you to consider a defensive candidate before the engine reply appears. Hover/focus previews the candidate on the board. Other legal choices are not falsely labeled bad simply because the engine selected a different reply. |
+| Tie words to evidence | Visual lessons show one diagram per spoken idea. Pieces outside the focus dim; the source, targets, arrows, and pin lines remain clear. The same structured facts supply the diagram, caption, and narration. Pause, advance, return, or mute at any point. |
+| Give specific feedback | A move-quality strip shows the grade and evaluation change; board badges identify the move. Explanations connect to legal continuations and concrete targets instead of only presenting a score. |
+| Explain the rule | After an exercise, a short recall question asks what to check next time. Feedback supplies the rule and a route back to the visual example. Only the first answer affects recall statistics. A missed question schedules an earlier revisit. |
+| Space successful retrieval | Independent success advances to 1/3/7/14/30-day intervals. Guidance, retries, or missed recall bring the card back tomorrow. Repeating the same board on one day cannot repeatedly advance its schedule. These intervals are a practical heuristic, not a validated optimal chess schedule. |
+| Vary and transfer | Daily sessions mix personal mistakes with fresh public examples of the same motifs. This offers a check on recognizing a pattern in an unfamiliar board. |
+
+Retrieval practice has experimental support for delayed retention, including comparisons with repeated study. The cited experiments concern learning and memory generally; they do not establish the effect size of these particular chess exercises. [Roediger and Karpicke, 2006](https://pubmed.ncbi.nlm.nih.gov/16507066/)
+
+The local practice rating is a moving average of dated game-history rating samples, with a 14-day exponential half-life. Imported games use player ratings where available; completed bot results create FOCALORS-style Elo samples against estimated opponent ratings. Recent games contribute more than older games, independent of import order. It does not measure mastery of a motif. Training records distinguish independent moves, guided work, retries, reveals, and recall answers. An immediate correct replay after seeing a solution does not earn the same scheduled progress as independent success on a later day.
+
+Visual narration is synchronized at the level of an idea/clip, not individual words. Narration can use “the highlighted knight” or “the two targets” while the matching pieces are emphasized. Exact moves and squares remain available in the text and move list. Positional observations remain qualified when a searched line does not establish a tactical consequence.
+
+The redesigned learning journey adds a configurable daily goal, XP, and milestones. These are feedback and motivation tools, not evidence that the learner has mastered a chess concept. Rewards for completion and recall are limited per position per day; mastery still depends on independent spaced retrieval. Assisted practice earns progress without being recorded as unaided mastery. Learning levels are distinct from the rating calculated from game history. Guided game review follows every move from the starting position and focuses explanations on personal turning points, then offers a path into practice. Review playback pauses the clock along with narration and animation; configurable reading time follows each move. Seeking to a distant move first shows its starting position and then animates it, so a diagram change has visible context.
+
+Automatic spoken lessons are enabled by default after the browser permits audio. They restore the live board on completion and can be interrupted by selecting a piece. This makes explanation a part of playing, while retaining learner control. Settings expose voice, pitch-preserving speed, volume, diagram narration, prediction pauses, text size, and reduced motion.
+
+Quiet-position explanations use observed changes in attacks, central control, development, or piece relocation. They omit repeated generic advice when the position does not support a more concrete claim. The explanations remain rule-based; geometrical attacks do not by themselves prove a material win.
+
+Review reading time adapts to the position using a backend heuristic, bounded to half–twice the chosen base pause. Routine opening development, uncomplicated recaptures and sole legal replies move quickly. Evaluation swings, tactical relationships, promotions, quiet strategic plans and consequences that take multiple moves receive extra time. Move quality alone does not determine reading effort: a strong, subtle idea can deserve more time than a mistake. Speech and movement finish before this pause; pausing playback preserves the remaining reading time. The heuristic reuses existing engine results and legal board facts, with no additional searches.

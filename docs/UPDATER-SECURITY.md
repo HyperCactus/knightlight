@@ -1,0 +1,17 @@
+# Desktop updater security review
+
+Scope: native update checks, downloaded/cached packages, release signing and source publication.
+
+The web interface has no Tauri IPC permissions (`src-tauri/tauri.conf.json`, `app.security.capabilities`). Only native menu handlers and the background timer can initiate checks. The production endpoint is a fixed HTTPS GitHub Releases URL. Download URLs must be HTTPS on this repository's GitHub release path (`src-tauri/src/updates.rs`, `check`). Release notes are never evaluated as JavaScript; notifications use JSON-encoded text.
+
+Package integrity and replay protection use Tauri's updater verifier with `requireSignedVersion`. A package must match the embedded Minisign public key and the version in its signed trusted comment. Downloads are verified before caching and again by `install()` when quitting. Changing a cache file cannot bypass installation checks. Regression tests exercise valid signatures, changed payloads, version inflation, and downgrade/current-version rejection without network or installation.
+
+The updater only installs during an intentional successful quit. Backend failure exits do not trigger updates. It downloads in the background with a timeout and a single concurrent check, and retains only package metadata in memory after caching. Automatic updates can be disabled persistently; manual checks are still available. DEB packages use the package manager rather than attempting privileged self-modification.
+
+Release publication waits for all four native jobs, model parity checks, package smoke tests and Rust checks. Each installer step receives the signing secret; the publication job has write permission but no signing key. Before publishing, release-manifest.py verifies package signatures using the embedded production public key and verifies their signed versions. The draft release is made public only after every asset has uploaded. Canceled/failed builds do not change the latest endpoint.
+
+Publication uses an explicit source allowlist (`scripts/public-source.py`); tests assert exclusion of PGNs, private profile data, models, environments, editor/agent directories and signing keys. Git ignore rules provide a second layer. Public releases include original Apache licensing and retain GPL/AGPL component notices and corresponding sources.
+
+Residual limits: the same OS user can modify installed application code or the profile; this is not an isolation boundary against local malware. Compromising the signing private key or GitHub Actions write access can compromise future releases. Keep a separate secure key backup and protect the repository/account. Windows publisher signing and Apple notarization require separate certificates and are not implied by updater signatures. End-to-end in-place replacement on Windows/macOS must be validated on those operating systems; Linux native smoke tests do not prove their behavior.
+
+No unresolved high-severity finding was identified in this scoped review. The complete app's HTTP/input-handling audit is documented separately in SECURITY-REVIEW.md.
