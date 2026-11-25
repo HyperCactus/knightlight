@@ -18,8 +18,15 @@ release = module('release-manifest')
 prepare = module('prepare-release')
 public = module('public-source')
 setup = module('setup-desktop')
+build = module('build-desktop')
 
 class Publishing(unittest.TestCase):
+    def test_mac_update_assets_have_distinct_architecture_urls(self):
+        for machine, arch in [('arm64', 'aarch64'), ('x86_64', 'x64')]:
+            for suffix in ['.app.tar.gz', '.app.tar.gz.sig']:
+                self.assertEqual(build.release_artifact_name('Knightlight' + suffix, 'darwin', machine, '0.2.3'), f'Knightlight_0.2.3_{arch}{suffix}')
+        self.assertEqual(build.release_artifact_name('Knightlight.AppImage.sig', 'linux', 'x86_64', '0.2.3'), 'Knightlight.AppImage.sig')
+
     def test_engine_architecture_uses_apples_supported_target(self):
         self.assertEqual(setup.engine_arch('darwin', 'arm64'), 'apple-silicon')
         self.assertEqual(setup.engine_arch('darwin', 'x86_64'), 'x86-64')

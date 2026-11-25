@@ -110,6 +110,16 @@ def stage(force=False, use_exported=False, public_release=False):
     print(f"Offline resources: {sum(v['bytes'] for v in manifest.values()) / 1024**2:.0f} MiB", flush=True)
 
 
+def release_artifact_name(name, system, machine, version):
+    # Tauri names both Mac updater archives Knightlight.app.tar.gz.
+    # Give each architecture its own release asset URL (and matching .sig).
+    if system == "darwin" and (name.endswith(".app.tar.gz") or name.endswith(".app.tar.gz.sig")):
+        arch = "aarch64" if machine.lower() in ("arm64", "aarch64") else "x64"
+        suffix = ".app.tar.gz.sig" if name.endswith(".sig") else ".app.tar.gz"
+        return f"Knightlight_{version}_{arch}{suffix}"
+    return name
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--stage-only", action="store_true")
@@ -128,7 +138,9 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     for pattern in ["**/*.deb", "**/*.AppImage", "**/*.rpm", "**/*.dmg", "**/*-setup.exe", "**/*.msi", "**/*.sig", "**/*.app.tar.gz"]:
         for artifact in (ROOT / "src-tauri/target/release/bundle").glob(pattern):
-            copy(artifact, output / artifact.name)
+            machine = os.uname().machine if hasattr(os, 'uname') else os.environ.get('PROCESSOR_ARCHITECTURE', 'unknown')
+            version = json.loads((ROOT / "src-tauri/tauri.conf.json").read_text())["version"]
+            copy(artifact, output / release_artifact_name(artifact.name, sys.platform, machine, version))
     # Supply exact engine sources when setup-desktop.py built it (all clean CI builds).
     source = BUILD / "stockfish-source.tar.gz"
     if source.exists():
