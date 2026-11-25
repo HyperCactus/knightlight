@@ -25,8 +25,8 @@ engine = RESOURCES / "bin" / ("stockfish.exe" if os.name == "nt" else "stockfish
 def worker(mode, requests, directory):
     # Python/Rust are deliberately absent from PATH: these must be native frozen workers.
     env = {**os.environ, "KNIGHTLIGHT_RESOURCES": str(RESOURCES), "HF_HUB_OFFLINE": "1", "PATH": os.environ.get("SystemRoot", "") + ("\\System32" if os.name == "nt" else "/usr/bin:/bin")}
-    result = subprocess.run([str(binary), mode], input="".join(json.dumps(r) + "\n" for r in requests),
-                            text=True, capture_output=True, cwd=directory, env=env, timeout=120)
+    result = subprocess.run([str(binary), mode], input="".join(json.dumps(r, ensure_ascii=False) + "\n" for r in requests),
+                            text=True, encoding="utf-8", capture_output=True, cwd=directory, env=env, timeout=120)
     assert result.returncode == 0, result.stderr[-5000:]
     replies = []
     for line in result.stdout.splitlines():
@@ -47,7 +47,12 @@ with tempfile.TemporaryDirectory(prefix="knightlight-package-") as directory:
     voices = ["af_heart", "am_michael", "bf_emma"]
     if (RESOURCES / "vendor/voices/en/en_US/lessac/medium").exists():
         voices.append("piper")
-    voice = worker("speech", [{"text": "Your move.", "voice": v} for v in voices], directory)
+    unicode_text = "Your bishop’s diagonal is open — compare the king’s defenders."
+    requests = [{"text": "Your move.", "voice": v} for v in voices]
+    requests.append({"text": unicode_text, "voice": "af_heart"})
+    voice = worker("speech", requests, directory)
+    expected = hashlib.sha256(f"coach-v5:af_heart:{unicode_text}".encode("utf-8")).hexdigest() + ".wav"
+    assert voice[-1]["url"].split("/")[-1] == expected, "UTF-8 narration was changed in transit"
     for result in voice:
         wav = Path(directory) / "data/audio" / result["url"].split("/")[-1]
         assert wav.read_bytes()[:4] == b"RIFF" and wav.stat().st_size > 1000, result

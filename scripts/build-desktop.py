@@ -83,7 +83,7 @@ def stage(force=False, use_exported=False, public_release=False):
         copy(ROOT / "vendor/voices/en/en_US/lessac/medium", STAGE / "vendor/voices/en/en_US/lessac/medium")
     else:
         page = STAGE / "static/index.html"
-        page.write_text(page.read_text().replace('<option value="piper">Lessac · lightweight Piper</option>', ''))
+        page.write_text(page.read_text(encoding="utf-8").replace('<option value="piper">Lessac · lightweight Piper</option>', ''), encoding="utf-8")
     for item in ["LICENSE", "NOTICE", "licenses"]:
         copy(ROOT / item, STAGE / "notices" / item)
     engine = Path(os.environ.get("STOCKFISH", ROOT / ("vendor/stockfish/usr/games/stockfish.exe" if os.name == "nt" else "vendor/stockfish/usr/games/stockfish")))

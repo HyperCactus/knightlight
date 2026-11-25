@@ -22,6 +22,16 @@ build = module('build-desktop')
 linux_sources = module('collect-linux-sources')
 
 class Publishing(unittest.TestCase):
+    def test_native_library_owners_ignore_diversions_and_unrelated_sdks(self):
+        from unittest.mock import patch
+        listing = '\n'.join([
+            'diversion by libreadline8t64 from: /usr/lib/libreadline.so.8',
+            'nsight-compute: /opt/cuda/libreadline.so.8',
+            'libreadline8t64:amd64: /usr/lib/libreadline.so.8',
+        ])
+        with patch.object(Path, 'is_file', return_value=True), patch.object(linux_sources, 'build_id', side_effect=lambda p: 'sdk' if str(p).startswith('/opt/') else 'system'):
+            self.assertEqual(linux_sources.library_owners(Path('/app/libreadline.so.8'), listing), ['libreadline8t64:amd64'])
+
     def test_native_source_descriptors_reject_unsafe_paths(self):
         prefix = 'Checksums-Sha256:\n ' + 'a' * 64 + ' 10 '
         self.assertEqual(linux_sources.source_files(prefix + 'source.tar.xz\nOther: value')[0][2], 'source.tar.xz')

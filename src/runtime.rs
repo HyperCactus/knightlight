@@ -20,6 +20,8 @@ pub fn quiet_command(program: impl AsRef<std::ffi::OsStr>) -> Command {
     }
     // Keep the same function on every platform without a platform-specific warning.
     command.env("PYTHONUNBUFFERED", "1");
+    command.env("PYTHONIOENCODING", "utf-8");
+    command.env("PYTHONUTF8", "1");
     command
 }
 

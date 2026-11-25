@@ -3,6 +3,7 @@
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
+from functools import lru_cache
 import json
 from pathlib import Path
 import re
@@ -42,6 +43,29 @@ def download(url, destination):
             if attempt == 2: raise RuntimeError(f"Source download failed: {url}") from error
             time.sleep(1 + attempt)
 
+@lru_cache(maxsize=None)
+def build_id(path):
+    result = subprocess.run(['readelf', '-n', str(path)], capture_output=True, text=True)
+    match = re.search(r'Build ID: ([a-fA-F0-9]+)', result.stdout)
+    return match[1].lower() if match else None
+
+def library_owners(file, listing):
+    # A basename can occur in unrelated SDKs (CUDA, Qt, other architectures).
+    # Match ELF build IDs; relocating RUNPATH does not alter this note.
+    expected = build_id(str(file))
+    matches = []
+    for line in listing.splitlines():
+        if ': ' not in line: continue
+        owners, candidate = line.split(': ', 1)
+        owners = owners.split(', ')
+        if not all(re.fullmatch(r'[a-z0-9][a-z0-9+.-]*(?::[a-z0-9-]+)?', owner) for owner in owners):
+            continue  # dpkg-query also prints diversion descriptions, not owners.
+        if not Path(candidate).is_file(): continue
+        if expected is not None and build_id(candidate) == expected:
+            priority = 0 if candidate.startswith(('/usr/lib/', '/lib/')) else 1
+            matches.append((priority, candidate, owners))
+    return min(matches)[2] if matches else []
+
 def collect(appdir):
     libraries = {}
     worker_libraries = []
@@ -51,8 +75,7 @@ def collect(appdir):
         if '.so' not in file.name or not file.is_file() or 'resources' in file.parts: continue
         if file.name in libraries: continue
         result = subprocess.run(['dpkg-query', '-S', '*/' + file.name], capture_output=True, text=True)
-        owners = sorted({owner for line in result.stdout.splitlines() if ': ' in line
-                         for owner in line.split(': ', 1)[0].split(', ')})
+        owners = library_owners(file, result.stdout)
         if not owners:
             if file.name in worker_names:
                 # linuxdeploy also copies wheel-provided libraries to usr/lib.
