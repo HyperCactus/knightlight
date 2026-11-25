@@ -205,7 +205,7 @@ pub fn install_on_exit(app: &AppHandle) -> bool {
     let app = app.clone();
     tauri::async_runtime::spawn_blocking(move || {
         let state = app.state::<Updates>();
-        chess_study::runtime::shutdown_workers();
+        crate::backend::shutdown(&app);
         let result = std::fs::read(&pending.path)
             .map_err(|e| e.to_string())
             .and_then(|bytes| {

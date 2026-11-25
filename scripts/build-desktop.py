@@ -139,6 +139,12 @@ def main():
     if bundle.exists():
         shutil.rmtree(bundle)
     run(npm, "exec", "--", "tauri", "build", "--ci", *options)
+    toolkit_source = None
+    if args.public_release and sys.platform == "linux":
+        appdirs = list(bundle.glob("appimage/*.AppDir"))
+        if appdirs:
+            run(sys.executable, ROOT / "scripts/collect-linux-sources.py", appdirs[0])
+            toolkit_source = BUILD / "linux-toolkit-sources.tar.gz"
     output = ROOT / "dist" / f"{sys.platform}-{os.uname().machine if hasattr(os, 'uname') else os.environ.get('PROCESSOR_ARCHITECTURE', 'unknown')}"
     if output.exists():
         shutil.rmtree(output)
@@ -157,6 +163,8 @@ def main():
         if not components.is_file():
             raise SystemExit("Public releases require scripts/collect-release-sources.py first")
         copy(components, output / f"copyleft-component-sources-{output.name}.tar.gz")
+    if toolkit_source is not None:
+        copy(toolkit_source, output / toolkit_source.name)
     copy(ROOT / "docs/DESKTOP.md", output / "INSTALL.md")
     files = [p for p in output.iterdir() if p.is_file() and p.name != "SHA256SUMS"]
     (output / "SHA256SUMS").write_text("".join(f"{hashlib.file_digest(p.open('rb'), 'sha256').hexdigest()}  {p.name}\n" for p in sorted(files)))

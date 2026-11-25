@@ -1,5 +1,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod backend;
 mod updates;
 
 use tauri::{
@@ -9,6 +10,13 @@ use tauri::{
 };
 
 fn main() {
+    if backend::worker_mode() {
+        if let Err(error) = backend::run_worker() {
+            eprintln!("Knightlight backend: {error}");
+            std::process::exit(1);
+        }
+        return;
+    }
     tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, _, _| {
             if let Some(window) = app.get_webview_window("main") {
@@ -35,38 +43,8 @@ fn main() {
                 );
             }
             std::env::set_var("KNIGHTLIGHT_RESOURCES", resources);
-            chess_study::runtime::prepare_profile(&profile)?;
-
-            // Reserve an ephemeral loopback port; never attach to another process
-            // or the separately running browser edition on port 3000.
-            let port_file = profile.join("desktop-port");
-            let port = std::fs::read_to_string(&port_file)
-                .ok()
-                .and_then(|s| s.trim().parse::<u16>().ok())
-                .filter(|p| *p >= 1024)
-                .unwrap_or(0);
-            let listener = std::net::TcpListener::bind((std::net::Ipv4Addr::LOCALHOST, port))
-                .or_else(|_| std::net::TcpListener::bind("127.0.0.1:0"))?;
-            listener.set_nonblocking(true)?;
-            let address = listener.local_addr()?;
-            std::fs::write(port_file, address.port().to_string())?;
-            let url = format!("http://{address}");
-            let handle = app.handle().clone();
-            let error_log = profile.join("desktop-errors.log");
-            tauri::async_runtime::spawn(async move {
-                let task = tauri::async_runtime::spawn(async move {
-                    let listener = tokio::net::TcpListener::from_std(listener)?;
-                    chess_study::serve(listener).await
-                });
-                match task.await {
-                    Ok(Ok(())) => {}
-                    result => {
-                        eprintln!("Knightlight backend stopped: {result:?}");
-                        let _ = std::fs::write(error_log, format!("Knightlight backend stopped: {result:?}\n"));
-                        handle.exit(1);
-                    }
-                }
-            });
+            let url = backend::start(&profile, app.handle())?;
+            let address: std::net::SocketAddr = url.trim_start_matches("http://").parse()?;
 
             let browser = MenuItem::with_id(app, "browser", "Open in browser", true, None::<&str>)?;
             let data = MenuItem::with_id(app, "data", "Open data folder", true, None::<&str>)?;
@@ -206,7 +184,7 @@ fn main() {
                 if (code.is_none() || code == Some(0)) && updates::install_on_exit(app) {
                     api.prevent_exit();
                 } else {
-                    chess_study::runtime::shutdown_workers();
+                    backend::shutdown(app);
                 }
             }
         });

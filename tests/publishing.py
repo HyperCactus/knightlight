@@ -19,8 +19,15 @@ prepare = module('prepare-release')
 public = module('public-source')
 setup = module('setup-desktop')
 build = module('build-desktop')
+linux_sources = module('collect-linux-sources')
 
 class Publishing(unittest.TestCase):
+    def test_native_source_descriptors_reject_unsafe_paths(self):
+        prefix = 'Checksums-Sha256:\n ' + 'a' * 64 + ' 10 '
+        self.assertEqual(linux_sources.source_files(prefix + 'source.tar.xz\nOther: value')[0][2], 'source.tar.xz')
+        for name in ['../private', '/absolute', '.hidden']:
+            with self.assertRaises(ValueError): linux_sources.source_files(prefix + name)
+
     def test_mac_update_assets_have_distinct_architecture_urls(self):
         for machine, arch in [('arm64', 'aarch64'), ('x86_64', 'x64')]:
             for suffix in ['.app.tar.gz', '.app.tar.gz.sig']:

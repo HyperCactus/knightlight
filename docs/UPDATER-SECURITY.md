@@ -14,4 +14,6 @@ Publication uses an explicit source allowlist (`scripts/public-source.py`); test
 
 Residual limits: the same OS user can modify installed application code or the profile; this is not an isolation boundary against local malware. Compromising the signing private key or GitHub Actions write access can compromise future releases. Keep a separate secure key backup and protect the repository/account. Windows publisher signing and Apple notarization require separate certificates and are not implied by updater signatures. End-to-end in-place replacement on Windows/macOS must be validated on those operating systems; Linux native smoke tests do not prove their behavior.
 
+AppImage keeps its UI process in the read-only application directory so relocated WebKit helpers can start. Its Rust backend uses the same executable in a child process with a separate writable working directory. The parent receives its port through an owned pipe, monitors failure, and requests shutdown before applying updates. Parent death closes the pipe and causes the backend to reap its workers and exit. Native tests verify both explicit quit and parent-EOF shutdown with a disposable profile.
+
 No unresolved high-severity finding was identified in this scoped review. The complete app's HTTP/input-handling audit is documented separately in SECURITY-REVIEW.md.

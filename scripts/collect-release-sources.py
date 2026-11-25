@@ -19,7 +19,7 @@ def collect():
         raise RuntimeError('Update the pinned native source revisions before changing the speech runtime')
     OUT.mkdir(parents=True, exist_ok=True)
     records = []
-    for name in ['chess', 'python-chess', 'piper-tts', 'phonemizer-fork']:
+    for name in ['chess', 'python-chess', 'piper-tts', 'phonemizer-fork', 'numpy']:
         dist = metadata.distribution(name)
         with urllib.request.urlopen(f'https://pypi.org/pypi/{name}/{dist.version}/json', timeout=60) as response:
             info = json.load(response)

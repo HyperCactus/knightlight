@@ -58,7 +58,7 @@ python scripts/build-desktop.py
 
 Setup downloads pinned model revisions and compiles Stockfish 16 for the current architecture. The CI workflow exports and verifies the portable opponent once on Linux, then each OS checks 99 reference positions before packaging it. This avoids requiring PyTorch on Intel Macs, where recent PyTorch wheels are unavailable.
 
-For a local **Intel Mac** build, download the **Knightlight-opponent-model** artifact from a successful workflow run and extract its three files into `vendor/maia-model/`. Then use:
+For a local **Intel Mac** build, download **Knightlight-opponent-model.tar.gz** from [Releases](https://github.com/HyperCactus/knightlight/releases/latest) and extract it into `vendor/maia-model/`. Then use:
 
 ```bash
 python scripts/setup-desktop.py --use-exported-model

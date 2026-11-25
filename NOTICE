@@ -33,3 +33,8 @@ Chess piece SVGs under static/pieces/ are third-party artwork. Their original
 license and attribution are retained in that directory.
 Lichess puzzles and opening names are CC0; data/PUBLIC-PUZZLES.md and
  data/openings/ retain their source attribution. No personal games are included.
+
+Linux AppImage GTK/WebKit and other native shared libraries retain their own
+GPL/LGPL/permissive licenses and copyright notices under usr/share/doc/.
+Matching Ubuntu source archives, distribution patches, build rules and source
+version index are supplied in linux-toolkit-sources.tar.gz beside installers.
