@@ -18,6 +18,9 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
+      - uses: actions/checkout@v7
+      - run: python -m pip install cryptography==46.0.7
+      - run: python tests/publishing.py
       - id: version
         run: echo "version=0.2.${{ github.run_number }}" >> "$GITHUB_OUTPUT"
   model:
