@@ -133,11 +133,18 @@ def main():
         return
     npm = "npm.cmd" if os.name == "nt" else "npm"
     options = ["--bundles", args.bundles] if args.bundles else []
+    # Restored Rust caches can contain installers from a previous version.
+    # Never mix them into this release's manifest or checksums.
+    bundle = ROOT / "src-tauri/target/release/bundle"
+    if bundle.exists():
+        shutil.rmtree(bundle)
     run(npm, "exec", "--", "tauri", "build", "--ci", *options)
     output = ROOT / "dist" / f"{sys.platform}-{os.uname().machine if hasattr(os, 'uname') else os.environ.get('PROCESSOR_ARCHITECTURE', 'unknown')}"
+    if output.exists():
+        shutil.rmtree(output)
     output.mkdir(parents=True, exist_ok=True)
     for pattern in ["**/*.deb", "**/*.AppImage", "**/*.rpm", "**/*.dmg", "**/*-setup.exe", "**/*.msi", "**/*.sig", "**/*.app.tar.gz"]:
-        for artifact in (ROOT / "src-tauri/target/release/bundle").glob(pattern):
+        for artifact in bundle.glob(pattern):
             machine = os.uname().machine if hasattr(os, 'uname') else os.environ.get('PROCESSOR_ARCHITECTURE', 'unknown')
             version = json.loads((ROOT / "src-tauri/tauri.conf.json").read_text())["version"]
             copy(artifact, output / release_artifact_name(artifact.name, sys.platform, machine, version))

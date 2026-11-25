@@ -92,6 +92,7 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git/db
             src-tauri/target/release
+            !src-tauri/target/release/bundle
           key: ${{ runner.os }}-${{ runner.arch }}-rust-${{ hashFiles('Cargo.lock', 'src-tauri/Cargo.lock') }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-${{ runner.arch }}-rust-${{ hashFiles('Cargo.lock', 'src-tauri/Cargo.lock') }}-
