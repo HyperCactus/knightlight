@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+# Signature verification requires these exact bytes on every platform.
+tests/fixtures/updater/payload -text

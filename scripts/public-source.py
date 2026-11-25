@@ -5,7 +5,7 @@ from pathlib import Path
 import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
-FILES = ["Cargo.toml", "Cargo.lock", "package.json", "package-lock.json", "README.md", "LICENSE", "NOTICE", ".gitignore",
+FILES = ["Cargo.toml", "Cargo.lock", "package.json", "package-lock.json", "README.md", "LICENSE", "NOTICE", ".gitignore", ".gitattributes",
          "src-tauri/Cargo.toml", "src-tauri/Cargo.lock", "src-tauri/build.rs", "src-tauri/tauri.conf.json",
          "data/puzzle-bank.json", "data/public-puzzles.json", "data/bot-openings.json", "data/PUBLIC-PUZZLES.md"]
 DIRECTORIES = ["src", "static", "scripts", "tests", "docs", "licenses", ".github", "data/openings", "src-tauri/src", "src-tauri/icons", "src-tauri/loading"]

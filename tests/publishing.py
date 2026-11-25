@@ -95,6 +95,7 @@ class Publishing(unittest.TestCase):
             self.assertTrue(all(p.endswith('-NOTICE.md') for p in files if p.startswith('vendor/')))
             self.assertIn('src-tauri/src/updates.rs', files)
             self.assertIn('LICENSE', files)
+            self.assertIn('tests/fixtures/updater/payload -text', (path / '.gitattributes').read_text())
             prepare.prepare(path, '0.2.123')
             for f in ['Cargo.toml', 'src-tauri/Cargo.toml']:
                 self.assertIn('version = "0.2.123"', (path / f).read_text())
