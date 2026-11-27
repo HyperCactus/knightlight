@@ -4,14 +4,21 @@ setTimeout(async () => {
     if (!response.ok) throw Error('Backend unavailable');
     const data = await response.json();
     if (data.games.length) throw Error('Test profile contains personal games');
-    for (const page of ['puzzles', 'play', 'games', 'overview', 'puzzles']) {
+    // Each transition must reach the compositor. A synchronous series of
+    // click() calls ends on one frame and misses per-frame native resource leaks.
+    const pages = ['puzzles', 'play', 'games', 'settings', 'overview'];
+    for (let n = 0; n < 100; n++) {
+      const page = pages[n % pages.length];
       const control = document.querySelector(`[data-page="${page}"]`);
       control.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
       control.click();
       const section = document.getElementById(page);
       if (!section.classList.contains('active') || section.getBoundingClientRect().height <= 0)
         throw Error(`${page} navigation left a blank page`);
+      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise(requestAnimationFrame);
     }
+    navigate('puzzles');
     if (document.querySelectorAll('#puzzle-board .square').length !== 64)
       throw Error('Training board missing');
     if (window.__nativeAudioMuted) {

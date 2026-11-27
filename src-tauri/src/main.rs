@@ -10,29 +10,18 @@ use tauri::{
 };
 
 fn main() {
-    // Bundled WebKit's DMABUF path can abort before a window opens on NVIDIA
-    // desktops (EGL_NOT_INITIALIZED). Keep the compatible rendering path for
-    // AppImages; system packages and explicit user overrides remain unchanged.
+    // Bundled WebKit's NVIDIA DMABUF path both fails EGL initialization on
+    // some desktops and leaks sync_file descriptors on others. A successful
+    // launch does not establish safety: repeated repaints exhaust the usual
+    // 1024-descriptor desktop limit and permanently freeze the renderer.
+    // Keep AppImages on the compatible path; explicit WebKit overrides remain
+    // available for driver diagnostics, but never opt in automatically.
     // Set this before starting GTK, Tauri, or backend threads.
     #[cfg(target_os = "linux")]
-    if std::env::var_os("APPDIR").is_some() {
-        // Opt in only on machines where the native-driver path was verified.
-        // GLVND may otherwise choose Mesa for an NVIDIA GBM device and abort.
-        let nvidia = std::env::var("KNIGHTLIGHT_GPU_RENDERER").as_deref() == Ok("nvidia")
-            && std::path::Path::new("/usr/share/glvnd/egl_vendor.d/10_nvidia.json").is_file();
-        if nvidia {
-            for (key, value) in [
-                ("GBM_BACKEND", "nvidia-drm"),
-                ("__EGL_VENDOR_LIBRARY_FILENAMES", "/usr/share/glvnd/egl_vendor.d/10_nvidia.json"),
-            ] {
-                if std::env::var_os(key).is_none() {
-                    std::env::set_var(key, value);
-                }
-            }
-        }
-        if std::env::var_os("WEBKIT_DISABLE_DMABUF_RENDERER").is_none() {
-            std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", if nvidia { "0" } else { "1" });
-        }
+    if std::env::var_os("APPDIR").is_some()
+        && std::env::var_os("WEBKIT_DISABLE_DMABUF_RENDERER").is_none()
+    {
+        std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
     }
     if backend::worker_mode() {
         if let Err(error) = backend::run_worker() {
