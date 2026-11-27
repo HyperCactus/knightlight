@@ -166,6 +166,18 @@ async function wrong(page, revision) {
       { width: 1440, height: 1100 },
       { width: 390, height: 844 },
     ]) {
+      // The disposable server persists preferences across browser contexts.
+      // Start each viewport from its own initial state after the prior one
+      // deliberately verified that Assist survives a reload.
+      const reset = await fetch(base + "/api/preferences", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          values: { voice: false, predict: false, coach: false, assist: false },
+          updated_at: Date.now(),
+        }),
+      });
+      assert(reset.ok);
       const page = await browser.newPage({ viewport });
       const errors = [];
       page.on("pageerror", (e) => errors.push(e.message));

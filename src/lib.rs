@@ -99,7 +99,7 @@ struct App {
     perspectives: Mutex<HashMap<usize, Vec<perspective::Challenge>>>,
     learner: Mutex<Learner>,
     openings: Vec<Opening>,
-    puzzle_bank: Vec<Puzzle>,
+    puzzle_bank: puzzles::Bank,
     speech: Mutex<Option<speech::Speech>>,
     compute: Arc<tokio::sync::Semaphore>,
     practice: Mutex<practice::Practice>,
@@ -926,8 +926,8 @@ pub async fn serve(listener: tokio::net::TcpListener) -> std::io::Result<()> {
     learner.rating_seeded = true;
     learner.initial_rating = weighted.history.first().map_or(1000, |p| p.rating);
     learner.rating_origin = "Date-weighted game history".into();
-    let puzzle_bank = puzzles::load_bank();
-    let bootstrap = puzzle_bank.iter().take(24).cloned().collect();
+    let puzzle_bank = puzzles::Bank::bootstrap();
+    let bootstrap = puzzle_bank.snapshot().iter().take(24).cloned().collect();
     let app = Arc::new(App {
         preferences: Mutex::new(
             preferences::Store::load(std::path::Path::new("data/preferences.json"))
@@ -955,6 +955,25 @@ pub async fn serve(listener: tokio::net::TcpListener) -> std::io::Result<()> {
         opponent_status: std::sync::atomic::AtomicU8::new(0),
         review_jobs: Mutex::new(std::collections::HashSet::new()),
         history_write: Arc::new(tokio::sync::Mutex::new(())),
+    });
+    let bank_app = app.clone();
+    tokio::task::spawn_blocking(move || {
+        let started = std::time::Instant::now();
+        match puzzles::load_bank() {
+            Ok(bank) => {
+                let count = bank.len();
+                bank_app.puzzle_bank.publish(bank);
+                eprintln!(
+                    "Offline puzzle collection ready: {count} positions in {} ms",
+                    started.elapsed().as_millis()
+                );
+            }
+            Err(error) => eprintln!(
+                "Full puzzle collection unavailable; starter collection remains playable: {error}"
+            ),
+        }
+        // Stop UI loading polls even if only the embedded starter pack is available.
+        bank_app.puzzle_bank.finish_loading();
     });
     speech::warm(&app);
     opponent::warm(&app);

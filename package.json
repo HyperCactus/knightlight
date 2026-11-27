@@ -29,7 +29,8 @@
     "desktop:build": "python3 scripts/build-desktop.py",
     "desktop:dev": "tauri dev",
     "test:desktop": "python3 tests/desktop-package.py",
-    "test:publishing": "python3 tests/publishing.py"
+    "test:publishing": "python3 tests/publishing.py",
+    "test:ui-performance": "node tests/ui-performance.cjs"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.12.6",

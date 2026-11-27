@@ -13,29 +13,39 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--binary", type=Path, default=ROOT / "src-tauri/target/release/knightlight-desktop")
+parser.add_argument("--display", action="store_true",
+                    help="Use the current DISPLAY to check the real graphics driver (verified-muted test windows)")
 args = parser.parse_args()
 xvfb = os.environ.get("CHESS_TEST_XVFB") or shutil.which("Xvfb")
-assert xvfb, "Install xvfb or set CHESS_TEST_XVFB"
+assert args.display or xvfb, "Install xvfb, set CHESS_TEST_XVFB, or use --display"
+assert not args.display or os.environ.get("DISPLAY"), "--display requires DISPLAY"
 
 with tempfile.TemporaryDirectory(prefix="knightlight-native-") as directory:
     profile = Path(directory) / "profile"
     with (Path(directory) / "display").open("w+") as display_file:
-        display = subprocess.Popen([xvfb, "-displayfd", str(display_file.fileno()), "-screen", "0", "1440x1000x24", "-nolisten", "tcp"],
-                                   pass_fds=(display_file.fileno(),), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        display = None if args.display else subprocess.Popen(
+            [xvfb, "-displayfd", str(display_file.fileno()), "-screen", "0", "1440x1000x24", "-nolisten", "tcp"],
+            pass_fds=(display_file.fileno(),), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         try:
-            for _ in range(100):
-                display_file.seek(0)
-                number = display_file.read().strip()
-                if number: break
-                assert display.poll() is None, "Xvfb exited"
-                time.sleep(.05)
-            assert number, "Xvfb failed to start"
+            target_display = os.environ.get("DISPLAY") if args.display else None
+            if display:
+                for _ in range(100):
+                    display_file.seek(0)
+                    number = display_file.read().strip()
+                    if number: break
+                    assert display.poll() is None, "Xvfb exited"
+                    time.sleep(.05)
+                assert number, "Xvfb failed to start"
+                target_display = ":" + number
             ports = []
             for iteration in range(2):
-                env = {**os.environ, "DISPLAY": ":" + number, "KNIGHTLIGHT_PROFILE": str(profile),
+                env = {**os.environ, "DISPLAY": target_display, "KNIGHTLIGHT_PROFILE": str(profile),
                        "XDG_DATA_HOME": str(Path(directory) / "xdg-data"),
                        "XDG_CACHE_HOME": str(Path(directory) / "xdg-cache"),
-                       "KNIGHTLIGHT_DESKTOP_SMOKE": "1", "WEBKIT_DISABLE_DMABUF_RENDERER": "1"}
+                       "KNIGHTLIGHT_DESKTOP_SMOKE": "1"}
+                # Exercise production startup defaults, not a workaround
+                # supplied by the test that could hide real graphics crashes.
+                env.pop("WEBKIT_DISABLE_DMABUF_RENDERER", None)
                 with (Path(directory) / f"run-{iteration}.log").open("w+") as log:
                     app = subprocess.Popen(["dbus-run-session", "--", str(args.binary.resolve())],
                                            env=env, stdout=log, stderr=log)
@@ -68,7 +78,10 @@ with tempfile.TemporaryDirectory(prefix="knightlight-native-") as directory:
                             app.terminate()
                             app.wait(timeout=10)
             assert ports[0] == ports[1], "Local storage origin changed on normal relaunch"
+            if "Native UI timings:" in output:
+                print(next(line for line in output.splitlines() if "Native UI timings:" in line))
             print("PASS: native Training navigation, 64-square board, Web Audio and coach playback twice; audio mute verified; settings and origin survive relaunch; disposable profile only")
         finally:
-            display.terminate()
-            display.wait(timeout=5)
+            if display:
+                display.terminate()
+                display.wait(timeout=5)

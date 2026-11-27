@@ -86,6 +86,9 @@ function coordinates(sq, flip) {
     y = 8 - Number(sq[1]);
   return flip ? [7 - x, 7 - y] : [x, y];
 }
+function setAttributeIfChanged(node, name, value) {
+  if (node.getAttribute(name) !== value) node.setAttribute(name, value);
+}
 function renderBoard(name) {
   if (name === "play" && typeof syncPlayActions === "function") syncPlayActions();
   const s = boards[name],
@@ -115,7 +118,7 @@ function renderBoard(name) {
     );
   }
   const previousFen = el.dataset.fen;
-  el.dataset.fen = s.fen;
+  if (previousFen !== s.fen) el.dataset.fen = s.fen;
   const squares = new Map(
     [...el.querySelectorAll(":scope > .square")].map((node) => [
       node.dataset.square,
@@ -125,7 +128,7 @@ function renderBoard(name) {
   el.querySelectorAll(":scope > svg").forEach((node) => node.remove());
   let squareIndex = 0;
   el.classList.toggle("is-busy", s.busy || (name === "play" && botBusy));
-  el.setAttribute("aria-busy", String(s.busy));
+  setAttributeIfChanged(el, "aria-busy", String(s.busy));
   el.classList.toggle("narrating", Boolean(s.narrating));
   const ranks = s.flip ? [1, 2, 3, 4, 5, 6, 7, 8] : [8, 7, 6, 5, 4, 3, 2, 1];
   const files = s.flip ? "hgfedcba" : "abcdefgh";
@@ -135,21 +138,28 @@ function renderBoard(name) {
         p = map[sq],
         button = squares.get(sq) || document.createElement("button");
       const oldPiece = button.querySelector(".piece");
-      button
-        .querySelectorAll(":scope > :not(.piece)")
-        .forEach((node) => node.remove());
+      // Coordinates and piece nodes survive selection/highlight updates.
+      // Replacing them on every redraw needlessly invalidates layout and paint.
+      const rankLabel = button.querySelector(".rank");
+      const fileLabel = button.querySelector(".file");
+      if (f !== files[0]) rankLabel?.remove();
+      if (r !== ranks[7]) fileLabel?.remove();
+      const oldBadge = button.querySelector(".move-badge");
+      const badgeClass =
+        s.badge?.square === sq ? "move-badge " + s.badge.grade : null;
+      if (oldBadge && oldBadge.className !== badgeClass) oldBadge.remove();
       if (!p || button.dataset.piece !== p) oldPiece?.remove();
       const keepPiece = p && button.dataset.piece === p && oldPiece;
       if (!keepPiece) button.style.zIndex = "";
-      button.dataset.piece = p || "";
+      if (button.dataset.piece !== (p || "")) button.dataset.piece = p || "";
       const legal =
         s.selected &&
         s.legal.some(
           (m) => m.slice(0, 2) === s.selected && m.slice(2, 4) === sq,
         );
-      button.type = "button";
-      button.dataset.square = sq;
-      button.className =
+      if (button.type !== "button") button.type = "button";
+      if (button.dataset.square !== sq) button.dataset.square = sq;
+      const squareClass =
         "square " +
         (("abcdefgh".indexOf(f) + r) % 2 ? "dark" : "light") +
         (s.selected === sq ? " selected" : "") +
@@ -167,23 +177,29 @@ function renderBoard(name) {
         (p === p.toUpperCase()) === (s.turn === "white")
           ? " in-check"
           : "");
-      button.setAttribute(
+      if (button.className !== squareClass) button.className = squareClass;
+      const assistDescription = button
+        .getAttribute("aria-label")
+        ?.split("; controlled by ")[1];
+      setAttributeIfChanged(
+        button,
         "aria-label",
         sq +
           (p
             ? " " +
               (p === p.toUpperCase() ? "white " : "black ") +
               pieceNames[p.toLowerCase()]
-            : ""),
+            : "") +
+          (assistDescription ? "; controlled by " + assistDescription : ""),
       );
-      button.setAttribute("aria-pressed", String(s.selected === sq));
-      if (f === files[0]) {
+      setAttributeIfChanged(button, "aria-pressed", String(s.selected === sq));
+      if (f === files[0] && !rankLabel) {
         const label = document.createElement("span");
         label.className = "coord rank";
         label.textContent = r;
         button.append(label);
       }
-      if (r === ranks[7]) {
+      if (r === ranks[7] && !fileLabel) {
         const label = document.createElement("span");
         label.className = "coord file";
         label.textContent = f;
@@ -204,9 +220,9 @@ function renderBoard(name) {
         span.append(img);
         button.append(span);
       }
-      if (s.badge?.square === sq) {
+      if (badgeClass && (!oldBadge || oldBadge.className !== badgeClass)) {
         const badge = document.createElement("span");
-        badge.className = "move-badge " + s.badge.grade;
+        badge.className = badgeClass;
         badge.textContent = gradeSymbol(s.badge.grade);
         button.append(badge);
       }
@@ -648,6 +664,7 @@ function navigate(page) {
     );
   stopSpeech();
   if (page !== "puzzles") cancelPrediction();
+  if (typeof syncPracticePoolRefresh === "function") syncPracticePoolRefresh();
   if (page === "puzzles") {
     refreshPractice();
     if (typeof announcePuzzle === "function") announcePuzzle();

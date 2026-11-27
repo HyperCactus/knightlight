@@ -87,7 +87,14 @@ async function until(fn, timeout = 30000) {
       { timeout: 60000 },
     );
     await page.locator('[data-page="puzzles"]').click();
-    assert((await get("practice")).pool_size >= 100000);
+    let collection;
+    for (let n = 0; n < 300; n++) {
+      collection = await get("practice");
+      if (collection.pool_ready) break;
+      await page.waitForTimeout(50);
+    }
+    assert(collection.pool_ready, "Offline collection did not finish loading");
+    assert(collection.pool_size >= 100000);
     const seen = new Set();
     for (let n = 0; n < 10; n++) {
       const board = await page.evaluate(() =>

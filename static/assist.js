@@ -55,12 +55,14 @@ function renderAssist(name) {
       opponent = theirs.has(sq);
     const kind =
       own && opponent ? "both" : own ? "you" : opponent ? "opponent" : "";
-    if (kind) square.dataset.assist = kind;
-    else delete square.dataset.assist;
+    if (kind) {
+      if (square.dataset.assist !== kind) square.dataset.assist = kind;
+    } else if (square.dataset.assist) delete square.dataset.assist;
     const label = square
       .getAttribute("aria-label")
       .split("; controlled by ")[0];
-    square.setAttribute(
+    setAttributeIfChanged(
+      square,
       "aria-label",
       label +
         (kind
@@ -73,9 +75,11 @@ function renderAssist(name) {
           : ""),
     );
   }
-  board.dataset.assistStatus = !enabled ? "off" : map ? "ready" : "loading";
-  if (map) board.dataset.assistFen = key;
-  else delete board.dataset.assistFen;
+  const status = !enabled ? "off" : map ? "ready" : "loading";
+  if (board.dataset.assistStatus !== status) board.dataset.assistStatus = status;
+  if (map) {
+    if (board.dataset.assistFen !== key) board.dataset.assistFen = key;
+  } else if (board.dataset.assistFen) delete board.dataset.assistFen;
   if (!enabled || map || assistRequests.has(key)) return;
   const request = api("board", { fen: state.fen })
     .then((result) => {

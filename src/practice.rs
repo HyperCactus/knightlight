@@ -280,9 +280,11 @@ pub async fn summary(
     };
     let p = app.practice.lock().unwrap().selection_snapshot();
     let out = tokio::task::spawn_blocking(move || {
+    let pool_ready = app.puzzle_bank.ready();
+    let bank = app.puzzle_bank.snapshot();
     let day = today();
     let candidates = crate::puzzles::recommend(
-        &app.puzzle_bank,
+        &bank,
         &personal,
         &crate::puzzles::Selection {
             practice: &p,
@@ -297,14 +299,15 @@ pub async fn summary(
         },
     );
     let mut out = overview(&p, &candidates);
-    out["pool_size"] = json!(app.puzzle_bank.len() + personal.len());
+    out["pool_size"] = json!(bank.len() + personal.len());
+    out["pool_ready"] = json!(pool_ready);
     out["fresh_mode"] = json!(req.mode != "review");
     out["seen_count"] = json!(p.seen_positions.len());
     out["candidates"] = json!(candidates);
     out["weaknesses"] = json!(weaknesses);
     let mut themes = BTreeMap::<String, (usize, usize, usize)>::new();
     let mut positions = std::collections::HashSet::new();
-    for puzzle in personal.iter().chain(&app.puzzle_bank) {
+    for puzzle in personal.iter().chain(bank.iter()) {
         if !positions.insert(&puzzle.position_key)
             || p.excluded_positions.contains(&puzzle.position_key)
         {
@@ -344,7 +347,13 @@ pub async fn start(
         .iter()
         .find(|p| p.id == req.id)
         .cloned()
-        .or_else(|| app.puzzle_bank.iter().find(|p| p.id == req.id).cloned())
+        .or_else(|| {
+            app.puzzle_bank
+                .snapshot()
+                .iter()
+                .find(|p| p.id == req.id)
+                .cloned()
+        })
         .ok_or_else(|| error(StatusCode::NOT_FOUND, "Position not found"))?;
     let fresh = req.fresh;
     if fresh {

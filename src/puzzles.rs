@@ -8,12 +8,58 @@ use shakmaty::{Chess, Position};
 use std::{
     cmp::{Ordering, Reverse},
     collections::{BTreeMap, BinaryHeap, HashMap, HashSet},
+    sync::{
+        atomic::{AtomicBool, Ordering as AtomicOrdering},
+        Arc, RwLock,
+    },
 };
 
 pub fn position_key(fen: &str) -> String {
     training::key(&fen.split_whitespace().take(4).collect::<Vec<_>>())
 }
-pub fn load_bank() -> Vec<Puzzle> {
+/// Readers keep an immutable snapshot while the full offline collection loads.
+/// Publishing never invalidates an in-flight puzzle or holds a lock during ranking.
+pub(crate) struct Bank(RwLock<Arc<Vec<Puzzle>>>, AtomicBool);
+impl Bank {
+    pub(crate) fn bootstrap() -> Self {
+        let bytes = std::fs::read(crate::runtime::resource("data/public-puzzles.json"))
+            .unwrap_or_else(|_| include_bytes!("../data/public-puzzles.json").to_vec());
+        let starter = decode_bank(&bytes).unwrap_or_else(|error| {
+            eprintln!("Starter puzzle collection unavailable; using embedded collection: {error}");
+            decode_bank(include_bytes!("../data/public-puzzles.json"))
+                .expect("Bundled starter puzzles must be valid")
+        });
+        Self(RwLock::new(Arc::new(starter)), AtomicBool::new(false))
+    }
+    pub(crate) fn snapshot(&self) -> Arc<Vec<Puzzle>> {
+        self.0.read().unwrap().clone()
+    }
+    pub(crate) fn ready(&self) -> bool {
+        self.1.load(AtomicOrdering::Acquire)
+    }
+    pub(crate) fn finish_loading(&self) {
+        self.1.store(true, AtomicOrdering::Release);
+    }
+    pub(crate) fn publish(&self, mut full: Vec<Puzzle>) {
+        let starter = self.snapshot();
+        let ids: HashSet<_> = starter.iter().map(|p| &p.id).collect();
+        let positions: HashSet<_> = starter.iter().map(|p| &p.position_key).collect();
+        // Keep starter identities available to already displayed queues and drills.
+        full.retain(|p| !ids.contains(&p.id) && !positions.contains(&p.position_key));
+        full.extend(starter.iter().cloned());
+        *self.0.write().unwrap() = Arc::new(full);
+        self.finish_loading();
+    }
+}
+
+pub fn load_bank() -> Result<Vec<Puzzle>, String> {
+    let bytes = std::fs::read(crate::runtime::resource("data/puzzle-bank.json"))
+        .or_else(|_| std::fs::read(crate::runtime::resource("data/public-puzzles.json")))
+        .map_err(|error| format!("Could not read full puzzle collection: {error}"))?;
+    decode_bank(&bytes)
+}
+
+fn decode_bank(bytes: &[u8]) -> Result<Vec<Puzzle>, String> {
     #[derive(Deserialize)]
     struct Entry {
         id: String,
@@ -25,12 +71,10 @@ pub fn load_bank() -> Vec<Puzzle> {
         #[serde(default)]
         tags: Vec<String>,
     }
-    let bytes = std::fs::read(crate::runtime::resource("data/puzzle-bank.json"))
-        .or_else(|_| std::fs::read(crate::runtime::resource("data/public-puzzles.json")))
-        .unwrap_or_else(|_| include_bytes!("../data/public-puzzles.json").to_vec());
-    let entries: Vec<Entry> = serde_json::from_slice(&bytes).unwrap_or_default();
+    let entries: Vec<Entry> = serde_json::from_slice(bytes)
+        .map_err(|error| format!("Could not decode puzzle collection: {error}"))?;
     let mut seen = HashSet::new();
-    entries
+    Ok(entries
         .into_iter()
         .filter_map(|e| {
             let mut p = position(&e.fen).ok()?;
@@ -61,7 +105,7 @@ pub fn load_bank() -> Vec<Puzzle> {
                 reason: String::new(),
             })
         })
-        .collect()
+        .collect())
 }
 
 pub struct Selection<'a> {
@@ -287,6 +331,36 @@ pub fn verify(engine: &mut Engine, puzzle: &Puzzle) -> Result<Plan, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn publishing_collection_keeps_starter_ids_and_in_flight_snapshots() {
+        let starter = puzzle(1, "Pins");
+        let bank = Bank(
+            RwLock::new(Arc::new(vec![starter.clone()])),
+            AtomicBool::new(false),
+        );
+        assert!(!bank.ready());
+        let in_flight = bank.snapshot();
+        let mut duplicate_position = puzzle(2, "Pins");
+        duplicate_position.position_key = starter.position_key.clone();
+        bank.publish(vec![duplicate_position, puzzle(3, "King safety")]);
+        let loaded = bank.snapshot();
+        assert!(bank.ready());
+        assert_eq!(in_flight.len(), 1);
+        assert_eq!(in_flight[0].id, starter.id);
+        assert_eq!(loaded.len(), 2);
+        assert!(loaded.iter().any(|p| p.id == starter.id));
+        assert!(loaded.iter().any(|p| p.id == "test-3"));
+        assert!(!loaded.iter().any(|p| p.id == "test-2"));
+    }
+
+    #[test]
+    fn bootstrap_is_playable_and_corrupt_collection_is_reported() {
+        let bank = Bank::bootstrap().snapshot();
+        assert!(bank.len() >= 100);
+        assert!(bank.iter().all(|p| !p.solution.is_empty()));
+        assert!(matches!(decode_bank(b"broken JSON"), Err(error) if error.contains("decode")));
+    }
+
     fn eval(score: i32) -> Evaluation {
         Evaluation {
             score,

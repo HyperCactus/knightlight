@@ -2,13 +2,19 @@
 
 The desktop edition opens in its own window. Stockfish, Kokoro voices, the human opponent, and the offline puzzle bank are included. You do not need Rust, Node, Python, or a running browser to use an installer. It works offline after installation.
 
-## Choose your installer
+## Install in a few clicks
+
+1. Open the [latest release](https://github.com/HyperCactus/knightlight/releases/latest).
+2. Download the installer below for your operating system. Ignore `.sig`, `.tar.gz`, and source archives; those are for automatic updates and developers.
+3. Install it and open **Knightlight** from Start, Applications, or your app menu.
+
+### Choose your installer
 
 | System | File | Installation |
 | --- | --- | --- |
 | Windows 10/11, x64 | `Knightlight_*_x64-setup.exe` | Run the installer, then find **Knightlight** in Start. Installation is per user. If WebView2 is missing, its bundled bootstrapper needs internet once to install Microsoft's runtime. |
-| macOS 14+, Apple Silicon | `Knightlight_*_aarch64.dmg` | Open the disk image and drag **Knightlight** to **Applications**. |
-| macOS 14+, Intel | `Knightlight_*_x64.dmg` | Open the disk image and drag **Knightlight** to **Applications**. |
+| macOS 14+, Apple Silicon | `Knightlight_*_aarch64.dmg` | Open the disk image and drag **Knightlight** to **Applications**. Eject the disk image, then launch it from Applications. |
+| macOS 14+, Intel | `Knightlight_*_x64.dmg` | Open the disk image and drag **Knightlight** to **Applications**. Eject the disk image, then launch it from Applications. |
 | Ubuntu 24.04+/Zorin 18+/Debian 13+, x64 | `Knightlight_*_amd64.deb` | Open it in your software installer, or run `sudo apt install ./Knightlight_*_amd64.deb`. Launch **Knightlight** from system search. |
 | Other Linux, x64 | `Knightlight_*.AppImage` | Make it executable (`chmod +x Knightlight_*.AppImage`) and double-click it. Requires a compatible desktop Linux installation with GTK/WebKitGTK 4.1. |
 
@@ -18,7 +24,9 @@ Automatic updates are enabled by default. Windows, macOS and Linux AppImage edit
 
 Updates follow successfully built releases from `origin/main`; installed applications do not need Git or compile source. Every updater package must have a valid signature from Knightlight's embedded public key, with a matching signed version. Release metadata uses HTTPS. Updates replace application files and retain the separate profile.
 
-Updater signatures are enabled, but installers do not yet have Windows publisher certificates or Apple notarization. Windows may display its unknown-publisher prompt. For a macOS build you trust, use **System Settings → Privacy & Security → Open Anyway** after attempting to open it. Public distribution with normal trusted installation needs the publisher's signing certificates and Apple notarization.
+## First launch
+
+Updater signatures are enabled, but installers do not yet have Windows publisher certificates or Apple notarization. Windows may display its unknown-publisher prompt. For a macOS build you trust, use **System Settings → Privacy & Security → Open Anyway** after attempting to open it. On Windows, an unknown-publisher prompt may offer **More info → Run anyway**; check that you downloaded the file from this repository. On macOS, if your system refuses the app and does not offer **Open Anyway**, see [Apple’s guidance](https://support.apple.com/102445). Do not disable system-wide security settings. Removing these first-launch prompts requires the publisher’s signing certificates and Apple notarization.
 
 The shell uses your OS webview rather than shipping Chromium. Desktop Maia inference uses the same unchanged weights exported to ONNX; packaging checks its legal move probabilities against the original PyTorch model across 99 varied positions. PyTorch is used only during the build, and is excluded from the installer. Speech retains the existing Kokoro model and voices. The optional Lessac voice is omitted from public installers because its redistribution terms are unclear; existing local installations are untouched. The full offline package is substantially larger than the shell because it includes the unchanged neural voice and opponent model. CPU inference avoids CUDA downloads and does not require a GPU. Models stay on disk until needed; familiar opening replies work while the opponent warms up.
 
@@ -31,6 +39,8 @@ Use **Game review → Import PGN** to import your games. Exports are saved in **
 - Linux: `~/.local/share/app.knightlight.desktop/` (or `$XDG_DATA_HOME/app.knightlight.desktop/`).
 
 If startup fails, check `desktop-errors.log` in the profile before changing or deleting any data.
+
+Linux AppImage builds default to the compatible WebKit renderer to avoid an early `EGL_NOT_INITIALIZED` crash on affected NVIDIA desktops. This affects rendering only; games, speech, and opponent inference are unchanged. On a verified NVIDIA setup, `KNIGHTLIGHT_GPU_RENDERER=nvidia` selects NVIDIA’s GBM backend and EGL vendor explicitly, enabling the faster renderer. Keep the compatibility default on unverified systems. Explicit graphics environment settings take precedence. Maintainers can run `python tests/desktop-window.py --display --binary /path/to/Knightlight.AppImage` to check startup on the real graphics driver with disposable data and verified-muted test windows; Xvfb tests alone cannot reproduce every driver failure.
 
 Your history, settings, progress, and audio cache are inside the profile's `data/` folder. Replacing/upgrading the application preserves this folder. Back it up separately. Uninstalling the application does not intentionally remove your profile.
 

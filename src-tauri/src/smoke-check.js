@@ -44,7 +44,24 @@ setTimeout(async () => {
       } finally { audio.pause(); URL.revokeObjectURL(url); }
     }
     if (__nativeErrors.length) throw Error(__nativeErrors.join('; '));
-    location.href = 'knightlight-smoke://passed';
+    // Record real WebKit frame pacing without asserting hardware-dependent
+    // thresholds on shared CI runners. Mute remains verified throughout.
+    const frames = [], originalScroll = scrollY;
+    let previous;
+    for (let n = 0; n < 36; n++) {
+      const now = await new Promise(requestAnimationFrame);
+      if (previous !== undefined) frames.push(now - previous);
+      previous = now;
+      scrollTo(0, Math.min(400, n * 12));
+    }
+    scrollTo(0, originalScroll);
+    const sorted = frames.sort((a, b) => a - b);
+    const navigation = performance.getEntriesByType('navigation')[0];
+    const metrics = new URLSearchParams({
+      dom_ready_ms: Math.round(navigation?.domContentLoadedEventEnd || 0),
+      scroll_frame_p95_ms: sorted[Math.floor(sorted.length * 0.95)].toFixed(1),
+    });
+    location.href = 'knightlight-smoke://passed?' + metrics;
   } catch (error) {
     location.href = 'knightlight-smoke://failed/' + encodeURIComponent(error.message);
   }

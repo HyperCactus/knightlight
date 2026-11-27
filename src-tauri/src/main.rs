@@ -10,6 +10,30 @@ use tauri::{
 };
 
 fn main() {
+    // Bundled WebKit's DMABUF path can abort before a window opens on NVIDIA
+    // desktops (EGL_NOT_INITIALIZED). Keep the compatible rendering path for
+    // AppImages; system packages and explicit user overrides remain unchanged.
+    // Set this before starting GTK, Tauri, or backend threads.
+    #[cfg(target_os = "linux")]
+    if std::env::var_os("APPDIR").is_some() {
+        // Opt in only on machines where the native-driver path was verified.
+        // GLVND may otherwise choose Mesa for an NVIDIA GBM device and abort.
+        let nvidia = std::env::var("KNIGHTLIGHT_GPU_RENDERER").as_deref() == Ok("nvidia")
+            && std::path::Path::new("/usr/share/glvnd/egl_vendor.d/10_nvidia.json").is_file();
+        if nvidia {
+            for (key, value) in [
+                ("GBM_BACKEND", "nvidia-drm"),
+                ("__EGL_VENDOR_LIBRARY_FILENAMES", "/usr/share/glvnd/egl_vendor.d/10_nvidia.json"),
+            ] {
+                if std::env::var_os(key).is_none() {
+                    std::env::set_var(key, value);
+                }
+            }
+        }
+        if std::env::var_os("WEBKIT_DISABLE_DMABUF_RENDERER").is_none() {
+            std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", if nvidia { "0" } else { "1" });
+        }
+    }
     if backend::worker_mode() {
         if let Err(error) = backend::run_worker() {
             eprintln!("Knightlight backend: {error}");
@@ -155,6 +179,9 @@ fn main() {
                     if smoke && target.scheme() == "knightlight-smoke" {
                         if target.host_str() == Some("passed") {
                             println!("PASS: native webview loaded app, board, backend, disposable profile; audio muted");
+                            if let Some(metrics) = target.query() {
+                                println!("Native UI timings: {metrics}");
+                            }
                             smoke_handle.exit(0);
                         } else {
                             eprintln!("Native smoke test failed: {target}");

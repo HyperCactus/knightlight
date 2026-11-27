@@ -89,6 +89,9 @@ class Publishing(unittest.TestCase):
             public.copy_source(path)
             files = [str(p.relative_to(path)) for p in path.rglob('*') if p.is_file()]
             self.assertFalse(any(p.endswith('.pgn') for p in files))
+            # Public source must be able to reproduce the installer artwork and docs.
+            for required in ['CONTRIBUTING.md', 'src-tauri/installer/macos-background.png', 'src-tauri/installer/windows-sidebar.bmp', 'docs/screenshots/training.png']:
+                self.assertIn(required, files)
             self.assertFalse(any(p.startswith(('.secrets/', 'build/', '.aws/', '.codex/', '.agents/')) for p in files))
             allowed = {'data/puzzle-bank.json', 'data/public-puzzles.json', 'data/bot-openings.json', 'data/PUBLIC-PUZZLES.md'}
             self.assertTrue(all(p in allowed or p.startswith('data/openings/') for p in files if p.startswith('data/')))

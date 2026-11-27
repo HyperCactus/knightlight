@@ -189,6 +189,7 @@ async function races() {
       currentPuzzle: null,
       practiceData: null,
       renderPractice() {},
+      syncPracticePoolRefresh() {},
     });
     c.fetch = async (url) => {
       urls.push(url);

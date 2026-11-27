@@ -74,6 +74,14 @@ async function fixture(options, run) {
       await sleep(100);
     }
     assert(ready, "Performance fixture startup timed out: " + logs);
+    if (options.bank) {
+      let loaded = false;
+      for (let n = 0; n < 300; n++) {
+        if ((await request("practice")).pool_ready) { loaded = true; break; }
+        await sleep(50);
+      }
+      assert(loaded, "Offline puzzle collection did not finish loading");
+    }
     await run({ dir, request });
   } finally {
     if (server.exitCode === null) {

@@ -38,3 +38,7 @@ Linux AppImage GTK/WebKit and other native shared libraries retain their own
 GPL/LGPL/permissive licenses and copyright notices under usr/share/doc/.
 Matching Ubuntu source archives, distribution patches, build rules and source
 version index are supplied in linux-toolkit-sources.tar.gz beside installers.
+
+DM Sans and DM Serif Display font subsets under static/fonts/ are distributed
+under the SIL Open Font License 1.1. Original copyright notices and license
+texts are retained beside the fonts; the interface loads them locally.

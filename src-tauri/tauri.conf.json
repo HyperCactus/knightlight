@@ -42,7 +42,8 @@
           "libstdc++6",
           "gstreamer1.0-plugins-base",
           "gstreamer1.0-plugins-good"
-        ]
+        ],
+        "section": "games"
       }
     },
     "windows": {
@@ -52,12 +53,32 @@
       },
       "nsis": {
         "installMode": "currentUser",
-        "displayLanguageSelector": false
+        "displayLanguageSelector": false,
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico",
+        "sidebarImage": "installer/windows-sidebar.bmp"
       }
     },
     "macOS": {
-      "minimumSystemVersion": "14.0"
-    }
+      "minimumSystemVersion": "14.0",
+      "dmg": {
+        "background": "installer/macos-background.png",
+        "windowSize": {
+          "width": 660,
+          "height": 400
+        },
+        "appPosition": {
+          "x": 180,
+          "y": 170
+        },
+        "applicationFolderPosition": {
+          "x": 480,
+          "y": 170
+        }
+      }
+    },
+    "publisher": "HyperCactus",
+    "homepage": "https://github.com/HyperCactus/knightlight"
   },
   "plugins": {
     "updater": {

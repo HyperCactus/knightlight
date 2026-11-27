@@ -1,4 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap");
+/* Bundled OFL fonts: typography is available immediately, including offline. */
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url("/fonts/dm-sans.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-serif-display.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-serif-display-italic.woff2") format("woff2");
+}
 :root {
   color-scheme: dark;
   --bg: #111715;

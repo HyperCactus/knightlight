@@ -79,7 +79,7 @@ async function start(player) {
   const until = Date.now() + 60000;
   while (Date.now() < until) {
     try {
-      if ((await api("data")).ready) return;
+      if ((await api("data")).ready && (await api("practice")).pool_ready) return;
     } catch {}
     if (server.exitCode !== null) throw Error(logs);
     await new Promise((resolve) => setTimeout(resolve, 80));

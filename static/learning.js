@@ -12,6 +12,20 @@ let trainingReview = false;
 const rejectedPuzzles = new Set();
 const puzzleMetadata = new Map();
 const practiceRequests = new Map();
+let practicePoolTimer = null;
+function syncPracticePoolRefresh() {
+  clearTimeout(practicePoolTimer);
+  practicePoolTimer = null;
+  if (
+    practiceData?.pool_ready !== false ||
+    !$("#puzzles").classList.contains("active")
+  )
+    return;
+  practicePoolTimer = setTimeout(() => {
+    practicePoolTimer = null;
+    if ($("#puzzles").classList.contains("active")) refreshPractice(true);
+  }, 500);
+}
 let practiceFetchedAt = 0,
   practiceFetchedKey = "",
   gameOpponentRating = null;
@@ -222,8 +236,10 @@ async function refreshPractice(force = false) {
     !force &&
     key === practiceFetchedKey &&
     Date.now() - practiceFetchedAt < 5000
-  )
+  ) {
+    syncPracticePoolRefresh();
     return;
+  }
   if (!practiceRequests.has(key)) {
     const request = (async () => {
       try {
@@ -248,6 +264,7 @@ async function refreshPractice(force = false) {
         practiceFetchedAt = Date.now();
         practiceFetchedKey = key;
         renderPractice();
+        syncPracticePoolRefresh();
       } catch (error) {
         console.warn(error.message);
       } finally {

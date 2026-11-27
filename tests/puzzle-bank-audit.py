@@ -28,7 +28,7 @@ with tempfile.TemporaryDirectory(prefix='chess-puzzle-audit-') as tmp:
     def ready():
         for _ in range(300):
             try:
-                if api(base,'data')[1]['ready']:return
+                if api(base,'data')[1]['ready'] and api(base,'practice')[1].get('pool_ready'):return
             except OSError:pass
             time.sleep(.1)
         raise AssertionError('Server did not become ready')

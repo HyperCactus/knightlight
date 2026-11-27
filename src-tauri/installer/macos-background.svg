@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="400" viewBox="0 0 660 400">
+<rect width="660" height="400" fill="#f2f1e9"/>
+<text x="330" y="52" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-size="28" fill="#183c31">knightlight</text>
+<text x="330" y="80" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#54655b">Your personal chess training room</text>
+<path d="M292 170h74m-15-15 15 15-15 15" stroke="#557d66" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="330" y="292" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-size="18" fill="#183c31">Drag Knightlight into Applications</text>
+<text x="330" y="322" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#54655b">Then open it from Applications and eject this disk.</text>
+</svg>
